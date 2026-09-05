@@ -253,9 +253,29 @@ Clínicos Gerais: -1
 
 ### Resultado esperado
 
-O valor deverá ser rejeitado ou sinalizado como inválido.
+Uma quantidade negativa deverá ser considerada inválida.
 
-Quantidades negativas de profissionais não devem ser aceitas.
+Ao identificar esse valor, o sistema deverá:
+
+1. informar claramente que a quantidade é inválida;
+2. impedir que o valor seja utilizado na análise;
+3. encerrar a análise atual.
+
+Exemplo de mensagem:
+
+```text
+ERRO: quantidade inválida.
+
+A quantidade de profissionais não pode ser negativa.
+
+Análise encerrada.
+```
+
+Não é obrigatório solicitar uma nova digitação durante a mesma execução.
+
+Para realizar uma nova análise após esse erro, o usuário poderá executar novamente o programa.
+
+A quantidade `0` não deverá ser tratada como entrada inválida, pois pode representar a ausência de profissionais disponíveis em determinada especialidade.
 
 ---
 
