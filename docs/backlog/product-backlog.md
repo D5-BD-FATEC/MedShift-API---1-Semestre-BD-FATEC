@@ -92,7 +92,7 @@ Então os cenários devem ser demonstráveis sem qualquer alteração no código
 
 ---
 
-## US03 — Validar as quantidades informadas
+## US03 — Validar as quantidades de profissionais
 
 Como coordenador de escala,
 quero que o sistema valide as quantidades de profissionais informadas,
