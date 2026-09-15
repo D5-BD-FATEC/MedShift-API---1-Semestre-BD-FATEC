@@ -15,7 +15,7 @@ apresentadas ao cliente para que ele determine sua ordem de prioridade.
 | US04 | Verificar a cobertura mínima do plantão | A definir pelo cliente/P2 | Sprint 1 |
 | US05 | Informar se o plantão pode ser publicado | A definir pelo cliente/P2 | Sprint 1 |
 | US06 | Informar o motivo da reprovação do plantão | A definir pelo cliente/P2 | Sprint 1 |
-| US07 | Tratar escolhas inválidas | A definir pelo cliente/P2 | Sprint 1 |
+
 
 ### Critério de Priorização
 
@@ -452,8 +452,7 @@ estruturas de repetição ser trabalhado na disciplina.
 Após os esclarecimentos realizados com o cliente/P2, permanecem pendentes os seguintes pontos:
 
 - definição da ordem de prioridade das sete User Stories da Sprint 1 pelo cliente/P2;
-- definição interna, pela equipe, de um valor máximo plausível de profissionais por especialidade, atualmente representado por **X**;
-- validação desse limite máximo pelo cliente/P2 após a equipe apresentar sua proposta;
+
 - validação da versão revisada dos critérios de aceitação das User Stories.
 
 Os seguintes pontos já foram esclarecidos pelo cliente/P2:
@@ -466,6 +465,7 @@ Os seguintes pontos já foram esclarecidos pelo cliente/P2:
 - entradas inválidas nunca podem ser utilizadas como dados válidos;
 - a forma de tratamento da entrada inválida é uma decisão técnica da equipe;
 - realizar uma nova análise sem reiniciar o programa não é requisito obrigatório da Sprint 1.
+- o número máximo de médicos por turno
 
 ---
 
