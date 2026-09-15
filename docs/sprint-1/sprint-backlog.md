@@ -44,7 +44,6 @@ Nenhuma prioridade será atribuída pela equipe antes da definição do cliente/
 | US04 | Verificar a cobertura mínima do plantão | A definir pelo cliente/P2 | Pendente |
 | US05 | Informar se o plantão pode ser publicado | A definir pelo cliente/P2 | Pendente |
 | US06 | Informar o motivo da reprovação do plantão | A definir pelo cliente/P2 | Pendente |
-| US07 | Tratar escolhas inválidas | A definir pelo cliente/P2 | Pendente |
 
 A tabela será atualizada após a definição da ordem de prioridade pelo cliente/P2.
 
@@ -170,22 +169,6 @@ O símbolo **X não representa um valor numérico definitivo**.
 
 - US04 — Verificar a cobertura mínima do plantão.
 - US05 — Informar se o plantão pode ser publicado.
-
----
-
-### US07 — Tratar escolhas inválidas
-
-#### Tarefas
-
-- [ ] Identificar uma opção de turno inexistente.
-- [ ] Apresentar uma mensagem clara de erro.
-- [ ] Impedir que a opção inválida seja utilizada na análise.
-- [ ] Encerrar a análise atual após a escolha inválida.
-- [ ] Testar pelo menos uma opção inválida.
-
-#### Dependências
-
-- US01 — Selecionar o turno do plantão.
 
 ---
 
@@ -324,7 +307,6 @@ Antes que o Sprint Backlog seja considerado definitivo, permanecem as seguintes 
 - [ ] equipe revisar a decomposição das histórias em tarefas;
 - [ ] equipe realizar as estimativas das tarefas;
 - [ ] equipe confirmar que as histórias selecionadas atendem ao DoR;
-- [ ] equipe definir internamente um valor máximo plausível de profissionais;
 - [ ] equipe justificar o valor máximo escolhido;
 - [ ] proposta do limite máximo ser apresentada ao cliente/P2;
 - [ ] cliente/P2 validar ou solicitar alteração do limite máximo.
@@ -348,7 +330,6 @@ A ordem deverá refletir a priorização realizada pelo cliente/P2.
 | 4 | A definir | A definir | A definir | Pendente |
 | 5 | A definir | A definir | A definir | Pendente |
 | 6 | A definir | A definir | A definir | Pendente |
-| 7 | A definir | A definir | A definir | Pendente |
 
 Após a definição do cliente/P2, a equipe deverá atualizar:
 
