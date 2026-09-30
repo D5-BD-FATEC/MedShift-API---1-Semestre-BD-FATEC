@@ -180,7 +180,7 @@ O usuário deverá conseguir escolher o turno pelo teclado sem qualquer alteraç
 
 ### Decisão
 
-O limite máximo permitido será de **11 médicos por turno**.
+O limite máximo permitido será de **11 médicos por especialidade**.
 
 O limite considera o total de profissionais informados para o plantão,
 independentemente da especialidade.
@@ -192,11 +192,11 @@ quantidades de:
 - Pediatras;
 - Cirurgiões.
 
-A soma dessas quantidades não poderá ultrapassar **11 profissionais**.
+A soma dessas quantidades não poderá ultrapassar **33 profissionais**.
 
 ### Justificativa
 
-O limite de 11 médicos por turno foi proposto pela equipe com o objetivo de
+O limite de 11 médicos por especialidade foi proposto pela equipe com o objetivo de
 garantir a cobertura mínima das especialidades e permitir uma margem adicional
 de profissionais para aumentar a segurança da escala e lidar com eventuais
 indisponibilidades.
@@ -207,17 +207,17 @@ A cobertura mínima exigida é de:
 - 1 Pediatra;
 - 1 Cirurgião.
 
-O cliente/P2 avaliou a proposta e validou o limite máximo de 11 médicos por turno.
+O cliente/P2 avaliou a proposta e validou o limite máximo de 11 médicos por especialidade.
 
 ### Impactos
 
 A partir desta validação:
 
 - o valor máximo deixa de ser representado por `X`;
-- o limite de 11 médicos passa a ser uma regra confirmada da Sprint 1;
+- o limite de 33 médicos por turno, sendo 11 por especialidade passa a ser uma regra confirmada da Sprint 1;
 - o total de profissionais das três especialidades deverá ser calculado;
 - totais entre 0 e 11 poderão prosseguir para as demais validações;
-- totais superiores a 11 deverão ser considerados inválidos;
+- totais superiores a 33 por turno deverão ser considerados inválidos;
 - uma entrada inválida não deverá ser utilizada na análise do plantão.
 
 
@@ -234,11 +234,11 @@ Resultado: dentro do limite máximo.
 
 ### Exemplo inválido
 Clínicos Gerais: 5
-Pediatras: 4
+Pediatras: 12
 Cirurgiões: 3
 
-Total: 12 médicos
-Resultado: quantidade total inválida.
+Total: 20 médicos
+Resultado: quantidade total inválida. Possuem 12 pediatras
 
 
 
@@ -260,13 +260,14 @@ Nesta Sprint, o sistema não será obrigado a solicitar uma nova digitação ap�
 ### Exemplos de entradas inválidas
 
 - quantidade negativa de profissionais;
-- total de profissionais superior a 11 médicos no plantão;
+- total de profissionais superior a 33 médicos no plantão;
 - opção de turno inexistente.
 
 A quantidade **0 não é inválida**.
 
 Ela pode representar a ausência de profissionais disponíveis em determinada
 especialidade e deverá participar normalmente da análise de cobertura.
+
 ### Justificativa
 
 O cliente/P2 determinou que nenhum dado inválido pode ser aceito como válido e que a coordenação precisa compreender claramente o que foi informado de forma incorreta.
@@ -425,7 +426,7 @@ A lógica do sistema deverá seguir, de forma conceitual, esta sequência:
 
 O limite máximo de profissionais não constitui mais uma pendência.
 
-A equipe definiu o limite de **11 médicos por turno**, e a proposta foi
+A equipe definiu o limite de **33 médicos por turno**, e a proposta foi
 validada pelo cliente/P2.
 
 Dessa forma, a **DEC06 está confirmada** e deve ser utilizada como referência
