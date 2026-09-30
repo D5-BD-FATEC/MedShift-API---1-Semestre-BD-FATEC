@@ -172,22 +172,7 @@ erros de digitação.
 **Limite máximo proposto:** 11 médicos por turno.
 
 
-#### Justificativa
 
-O Hospital Santa Aurora é apresentado como uma instituição de médio porte e,
-na Sprint 1, a cobertura mínima exigida por plantão é de:
-
-- 2 Clínicos Gerais;
-- 1 Pediatra;
-- 1 Cirurgião.
-
-Quantidades excessivamente altas podem representar erros de digitação.
-
-Por esse motivo, a equipe deverá definir um valor máximo plausível, com uma
-justificativa baseada no contexto do hospital e nas quantidades mínimas exigidas.
-
-Após a definição interna da equipe, o valor proposto será apresentado ao
-cliente/P2 para validação antes de ser considerado uma regra definitiva do sistema.
 
 ---
 
@@ -361,7 +346,6 @@ independentemente da especialidade.
 Quantidades que façam o total do plantão ultrapassar esse limite deverão ser
 tratadas como possíveis erros de entrada.
 
-**Limite máximo proposto:** 11 médicos por turno.
 
 ---
 
