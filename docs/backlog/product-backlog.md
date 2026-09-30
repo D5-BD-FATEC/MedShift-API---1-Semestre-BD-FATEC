@@ -47,6 +47,11 @@ Como coordenador de escala,
 quero selecionar o turno que desejo analisar,
 para verificar a cobertura do plantão correspondente.
 
+### Valor de Negócio
+
+Permitir que a coordenação identifique corretamente qual turno está sendo
+analisado, evitando que a validação da cobertura seja associada ao período errado.
+
 **Prioridade:** A definir pelo cliente/P2
 
 ### Critérios de Aceitação
@@ -77,6 +82,12 @@ Como coordenador de escala,
 quero informar a quantidade de profissionais disponíveis em cada especialidade,
 para que o sistema consiga analisar a cobertura do plantão.
 
+### Valor de Negócio
+
+Permitir que a coordenação forneça os dados necessários sobre a disponibilidade
+de profissionais para que o sistema possa avaliar corretamente a cobertura
+do plantão.
+
 **Prioridade:** A definir pelo cliente/P2
 
 ### Critérios de Aceitação
@@ -106,6 +117,11 @@ Então os cenários devem ser demonstráveis sem qualquer alteração no código
 Como coordenador de escala,
 quero que o sistema valide as quantidades de profissionais informadas,
 para evitar que dados impossíveis sejam utilizados na análise do plantão.
+
+### Valor de Negócio
+
+Evitar que dados impossíveis ou incorretos sejam utilizados na análise,
+aumentando a confiabilidade do resultado apresentado à coordenação hospitalar.
 
 **Prioridade:** A definir pelo cliente/P2
 
@@ -164,6 +180,11 @@ Como coordenador de escala,
 quero que o sistema compare a quantidade de profissionais disponíveis com a cobertura mínima exigida,
 para saber se o plantão possui cobertura adequada.
 
+### Valor de Negócio
+
+Permitir que a coordenação identifique rapidamente se o plantão atende à
+cobertura mínima obrigatória de profissionais de cada especialidade.
+
 **Prioridade:** A definir pelo cliente/P2
 
 ### Critérios de Aceitação
@@ -194,6 +215,11 @@ Como coordenador de escala,
 quero receber uma conclusão sobre a possibilidade de publicação do plantão,
 para saber se a escala está apta para publicação.
 
+### Valor de Negócio
+
+Apoiar a decisão da coordenação sobre a publicação do plantão, evitando
+que uma escala com cobertura insuficiente seja disponibilizada.
+
 **Prioridade:** A definir pelo cliente/P2
 
 ### Critérios de Aceitação
@@ -223,6 +249,11 @@ Então ambas as conclusões devem ser demonstráveis sem alteração do código.
 Como coordenador de escala,
 quero saber o motivo pelo qual um plantão não pode ser publicado,
 para identificar qual especialidade apresenta cobertura insuficiente.
+
+### Valor de Negócio
+
+Permitir que a coordenação identifique rapidamente o problema responsável
+pela reprovação do plantão, facilitando a correção da escala antes da publicação.
 
 **Prioridade:** A definir pelo cliente/P2
 
