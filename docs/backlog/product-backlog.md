@@ -149,7 +149,7 @@ Então os dois comportamentos devem ser demonstráveis apenas pela alteração d
 
 ### Definição do limite máximo
 
-A equipe propõe o limite máximo de **11 médicos por turno**.
+A equipe propõe o limite máximo de **33 médicos por turno**.
 
 #### Justificativa
 
@@ -168,11 +168,6 @@ plantão e ainda manter uma margem adicional de profissionais.
 
 Quantidades acima desse limite também poderão ser tratadas como possíveis
 erros de digitação.
-
-**Limite máximo proposto:** 11 médicos por turno.
-
-
-
 
 ---
 
@@ -338,7 +333,7 @@ disponíveis em determinada especialidade.
 
 ## RN07 — Quantidade máxima
 
-Foi validado com o cliente o limite máximo de **11 médicos por turno**.
+Foi validado com o cliente o limite máximo de **33 médicos por turno**.
 
 O limite considera o total de profissionais informados para o plantão,
 independentemente da especialidade.
