@@ -46,21 +46,24 @@ A quantidade **0 é considerada uma entrada válida**, pois pode representar a a
 
 Nesse caso, o valor deverá ser utilizado normalmente na análise da cobertura.
 
-### Limite máximo em definição
+### Limite máximo validado
 
-A equipe ainda está definindo internamente um valor máximo plausível de profissionais por especialidade em um único plantão.
+O limite máximo permitido é de **11 médicos por turno**.
 
-Enquanto esse valor não for definido, ele será representado temporariamente por **X** na documentação.
+Esse limite considera o total de profissionais informados para o plantão,
+somando as três especialidades:
 
-O símbolo **X não representa um valor numérico definitivo**.
+- Clínicos Gerais;
+- Pediatras;
+- Cirurgiões.
 
-Depois que a equipe definir um valor máximo e elaborar sua justificativa, a proposta será apresentada ao cliente/P2 para validação.
+A soma total não poderá ultrapassar **11 profissionais**.
 
-Somente após essa validação o limite poderá ser considerado uma regra definitiva do sistema.
+O limite de 11 médicos por turno foi proposto pela equipe e validado pelo cliente/P2.
 
-**Valor máximo atual:** X profissionais por especialidade.
+**Valor máximo:** 11 médicos por turno.
 
-**Status do limite máximo:** Em definição pela equipe.
+**Status:** Validado pelo cliente/P2.
 
 ### Tratamento de entradas inválidas
 
@@ -76,7 +79,7 @@ São consideradas entradas inválidas:
 
 - quantidades negativas;
 - opções de turno inexistentes;
-- futuramente, quantidades superiores ao limite máximo, após esse limite ser definido pela equipe e validado pelo cliente/P2.
+
 
 A quantidade **0 não é inválida**.
 
@@ -89,6 +92,7 @@ Quando a análise for concluída normalmente, o sistema deverá informar:
 - a especialidade ou as especialidades insuficientes, quando houver;
 - a quantidade necessária e a quantidade informada para cada especialidade insuficiente;
 - se o plantão pode ou não ser publicado.
+- total de profissionais superior a 11 médicos no plantão.
 
 ---
 
@@ -362,80 +366,70 @@ O teste será aprovado se o sistema identificar corretamente a insuficiência de
 
 **Objetivo:**
 
-Verificar se o próprio limite máximo continua sendo aceito como entrada válida.
+Verificar se um plantão com exatamente 11 médicos é aceito como válido quando
+também atende à cobertura mínima das especialidades.
 
-**Observação:**
-
-Este cenário ainda não pode ser executado de forma definitiva porque o valor máximo permanece **em definição pela equipe**.
-
-Enquanto não houver um número definido, o limite continuará sendo representado por **X**.
-
-Após a definição da equipe, o valor deverá ser apresentado ao cliente/P2 para validação.
-
-**Dados de entrada futuros:**
+**Dados de entrada:**
 
 | Campo | Valor |
 |---|---:|
 | Turno | Manhã |
-| Clínicos Gerais | X |
-| Pediatras | 1 |
-| Cirurgiões | 1 |
+| Clínicos Gerais | 7 |
+| Pediatras | 2 |
+| Cirurgiões | 2 |
+| Total de médicos | 11 |
 
-**Resultado esperado após a definição e validação do limite:**
+**Resultado esperado:**
 
 ```text
 ===== RESULTADO DA ANÁLISE =====
 
 Turno analisado: MANHÃ
 
+Total de médicos: 11
+
 Cobertura mínima: ATINGIDA
 
 Conclusão:
 Plantão PODE ser publicado.
-```
-
 **Critério de sucesso:**
-
-Depois que o limite máximo for definido pela equipe e validado pelo cliente/P2, o teste será aprovado se a quantidade exatamente igual ao limite for aceita normalmente.
-
-**Status:** Aguardando definição da equipe e validação do cliente/P2
-
+````
 ---
 
 ## CT09 — Quantidade superior ao limite máximo
 
 **Objetivo:**
 
-Verificar se o sistema rejeita uma quantidade superior ao limite máximo.
+Verificar se o sistema rejeita um plantão cujo total de profissionais
+ultrapasse o limite máximo de 11 médicos.
 
-**Observação:**
-
-Este cenário ainda não pode ser executado de forma definitiva porque o valor máximo permanece **em definição pela equipe**.
-
-Enquanto não houver um número definido, será utilizada apenas a representação conceitual **X+1**.
-
-**Dados de entrada futuros:**
+**Dados de entrada:**
 
 | Campo | Valor |
 |---|---:|
 | Turno | Manhã |
-| Clínicos Gerais | X+1 |
+| Clínicos Gerais | 8 |
+| Pediatras | 2 |
+| Cirurgiões | 2 |
+| Total de médicos | 12 |
 
-**Resultado esperado após a definição e validação do limite:**
+**Resultado esperado:**
 
 ```text
-ERRO: quantidade inválida.
+ERRO: quantidade total de profissionais inválida.
 
-A quantidade informada está acima do limite máximo permitido.
+O limite máximo permitido é de 11 médicos por turno.
+
+Total informado: 12 médicos.
 
 Análise encerrada.
 ```
 
 **Critério de sucesso:**
 
-Depois que o limite máximo for definido pela equipe e validado pelo cliente/P2, o teste será aprovado se o sistema rejeitar uma quantidade superior ao limite, informar claramente o erro e encerrar a análise sem utilizar o valor informado.
+ O teste será aprovado se o sistema rejeitar uma quantidade superior ao limite, informar claramente o erro e encerrar a análise sem utilizar o valor informado.
 
-**Status:** Aguardando definição da equipe e validação do cliente/P2
+
 
 ---
 
@@ -516,7 +510,9 @@ Durante a Sprint Review, a equipe deverá demonstrar obrigatoriamente pelo menos
 4. **Seleção de uma opção inválida**  
    Sugestão: CT04.
 
-Caso o limite máximo seja definido pela equipe e validado pelo cliente/P2 antes da Sprint Review, a equipe também poderá demonstrar os cenários CT08 e CT09.
+Como o limite máximo de 11 médicos por turno já foi validado pelo cliente/P2,
+os cenários CT08 e CT09 também poderão ser utilizados durante a Sprint Review
+para demonstrar o comportamento do sistema no limite máximo e acima dele.
 
 Enquanto o limite máximo não estiver definido e validado, os cenários CT08 e CT09 deverão permanecer pendentes.
 
@@ -537,8 +533,8 @@ Os diferentes cenários deverão ser executados por meio da alteração dos dado
 | CT05 | Cobertura acima do mínimo | A executar |
 | CT06 | Falta de Clínico Geral | A executar |
 | CT07 | Falta de Cirurgião | A executar |
-| CT08 | Quantidade exatamente no limite máximo | Aguardando definição e validação |
-| CT09 | Quantidade acima do limite máximo | Aguardando definição e validação |
+| CT08 | Quantidade exatamente no limite máximo | A executar |
+| CT09 | Quantidade acima do limite máximo | A executar |
 | CT10 | Mais de uma especialidade insuficiente | A executar |
 
 ---
@@ -554,12 +550,3 @@ Uma funcionalidade somente poderá ser considerada concluída quando:
 - impedir que entradas inválidas sejam utilizadas;
 - apresentar ao usuário informações claras sobre o resultado da análise;
 - puder ser demonstrada no VisuAlg sem alteração do código entre os diferentes cenários.
-
-Os testes CT08 e CT09 somente poderão ser considerados definitivos depois que:
-
-1. a equipe definir internamente um valor máximo plausível;
-2. a equipe justificar a escolha desse valor;
-3. a proposta for apresentada ao cliente/P2;
-4. o cliente/P2 validar o limite máximo.
-
-Até que essas etapas sejam concluídas, os cenários CT08 e CT09 permanecerão com o status **Aguardando definição e validação**.
