@@ -1,33 +1,43 @@
-# Product Backlog
+# Product Backlog — MedShift
 
 ## Priorização do Product Backlog
 
-A ordem de prioridade das User Stories será definida pelo cliente/P2.
+O Product Backlog reúne as necessidades identificadas para o desenvolvimento
+do MedShift e será ordenado de acordo com o valor de negócio definido em
+conjunto com o cliente/P2.
 
-Durante a reunião de validação, as sete histórias da Sprint 1 serão
-apresentadas ao cliente para que ele determine sua ordem de prioridade.
+As prioridades e o Rank definitivo deverão refletir a validação realizada
+com o cliente/P2.
 
-| ID | User Story | Prioridade | Sprint |
-|---|---|---|---|
-| US01 | Selecionar o turno do plantão | A definir pelo cliente/P2 | Sprint 1 |
-| US02 | Informar a quantidade de profissionais | A definir pelo cliente/P2 | Sprint 1 |
-| US03 | Validar as quantidades informadas | A definir pelo cliente/P2 | Sprint 1 |
-| US04 | Verificar a cobertura mínima do plantão | A definir pelo cliente/P2 | Sprint 1 |
-| US05 | Informar se o plantão pode ser publicado | A definir pelo cliente/P2 | Sprint 1 |
-| US06 | Informar o motivo da reprovação do plantão | A definir pelo cliente/P2 | Sprint 1 |
+As estimativas serão definidas pela equipe durante o planejamento, utilizando
+Story Points.
 
+| Rank | ID | Prioridade | User Story | Estimativa | Sprint |
+|---:|---|---|---|---:|---|
+| - | US01 | A definir pelo cliente/P2 | Selecionar o turno do plantão | A estimar | Sprint 1 |
+| - | US02 | A definir pelo cliente/P2 | Informar a quantidade de profissionais | A estimar | Sprint 1 |
+| - | US03 | A definir pelo cliente/P2 | Validar as quantidades de profissionais | A estimar | Sprint 1 |
+| - | US04 | A definir pelo cliente/P2 | Verificar a cobertura mínima do plantão | A estimar | Sprint 1 |
+| - | US05 | A definir pelo cliente/P2 | Informar se o plantão pode ser publicado | A estimar | Sprint 1 |
+| - | US06 | A definir pelo cliente/P2 | Informar o motivo da reprovação do plantão | A estimar | Sprint 1 |
+| - | US07 | A definir pelo cliente/P2 | Tratar escolhas inválidas | A estimar | Sprint 1 |
 
 ### Critério de Priorização
 
-A priorização das User Stories ainda não foi definida.
+A ordem das User Stories será definida considerando o valor de negócio
+de cada necessidade para o cliente.
 
-Conforme orientação do cliente/P2, as sete histórias da Sprint 1 serão
-apresentadas para que ele determine a ordem de prioridade de acordo com
-o valor de negócio.
+O Rank representa a ordem de importância das histórias dentro do Product
+Backlog, sendo o Rank 1 o item de maior prioridade.
 
-Até essa definição, todas as User Stories permanecerão com a prioridade
-indicada como **"A definir pelo cliente/P2"**.
+A priorização definitiva será registrada após a validação com o cliente/P2.
 
+As estimativas serão realizadas pela equipe e representam o esforço relativo
+necessário para desenvolver cada User Story.
+
+> **Importante:** Rank, prioridade e estimativa não devem ser preenchidos
+> arbitrariamente. Esses campos serão atualizados após a priorização com o
+> cliente/P2 e a estimativa realizada pela equipe.
 ---
 
 # User Stories da Sprint 1
