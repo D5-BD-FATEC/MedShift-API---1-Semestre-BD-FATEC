@@ -374,10 +374,10 @@ também atende à cobertura mínima das especialidades.
 | Campo | Valor |
 |---|---:|
 | Turno | Manhã |
-| Clínicos Gerais | 7 |
-| Pediatras | 2 |
-| Cirurgiões | 2 |
-| Total de médicos | 11 |
+| Clínicos Gerais | 11 |
+| Pediatras | 11 |
+| Cirurgiões | 11 |
+| Total de médicos | 33 |
 
 **Resultado esperado:**
 
@@ -386,7 +386,7 @@ também atende à cobertura mínima das especialidades.
 
 Turno analisado: MANHÃ
 
-Total de médicos: 11
+Total de médicos: 33
 
 Cobertura mínima: ATINGIDA
 
@@ -408,19 +408,19 @@ ultrapasse o limite máximo de 11 médicos.
 | Campo | Valor |
 |---|---:|
 | Turno | Manhã |
-| Clínicos Gerais | 8 |
+| Clínicos Gerais | 12 |
 | Pediatras | 2 |
 | Cirurgiões | 2 |
-| Total de médicos | 12 |
+| Total de médicos | 16 |
 
 **Resultado esperado:**
 
 ```text
 ERRO: quantidade total de profissionais inválida.
 
-O limite máximo permitido é de 11 médicos por turno.
+O limite máximo permitido é de 11 médicos por especialidade.
 
-Total informado: 12 médicos.
+Total informado: 14 médicos.
 
 Análise encerrada.
 ```
