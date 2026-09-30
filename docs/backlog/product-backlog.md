@@ -20,7 +20,6 @@ Story Points.
 | - | US04 | A definir pelo cliente/P2 | Verificar a cobertura mínima do plantão | A estimar | Sprint 1 |
 | - | US05 | A definir pelo cliente/P2 | Informar se o plantão pode ser publicado | A estimar | Sprint 1 |
 | - | US06 | A definir pelo cliente/P2 | Informar o motivo da reprovação do plantão | A estimar | Sprint 1 |
-| - | US07 | A definir pelo cliente/P2 | Tratar escolhas inválidas | A estimar | Sprint 1 |
 
 ### Critério de Priorização
 
