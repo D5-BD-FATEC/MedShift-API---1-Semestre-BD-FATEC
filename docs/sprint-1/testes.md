@@ -514,8 +514,6 @@ Como o limite máximo de 11 médicos por turno já foi validado pelo cliente/P2,
 os cenários CT08 e CT09 também poderão ser utilizados durante a Sprint Review
 para demonstrar o comportamento do sistema no limite máximo e acima dele.
 
-Enquanto o limite máximo não estiver definido e validado, os cenários CT08 e CT09 deverão permanecer pendentes.
-
 A demonstração deverá ser realizada diretamente no VisuAlg.
 
 Os diferentes cenários deverão ser executados por meio da alteração dos dados de entrada, sem necessidade de modificar o código-fonte entre as demonstrações.
