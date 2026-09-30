@@ -249,36 +249,6 @@ Então os resultados e seus respectivos motivos devem ser demonstráveis sem alt
 
 ---
 
-## US07 — Tratar escolhas inválidas
-
-Como coordenador de escala,
-quero ser informado quando realizar uma escolha inválida,
-para evitar que o sistema faça uma análise utilizando uma opção incorreta.
-
-**Prioridade:** A definir pelo cliente/P2
-
-### Critérios de Aceitação
-
-**Cenário válido**
-
-Dado que o sistema apresente as opções disponíveis,  
-Quando o coordenador selecionar uma opção válida,  
-Então o sistema deve aceitar a escolha e continuar normalmente a execução.
-
-**Cenário inválido**
-
-Dado que o sistema apresente as opções disponíveis,  
-Quando o coordenador selecionar uma opção inexistente,  
-Então o sistema deve informar claramente que a escolha é inválida e impedir que ela seja utilizada na análise.
-
-**Demonstração no VisuAlg**
-
-Dado que o programa esteja sendo executado no VisuAlg,  
-Quando forem realizadas uma escolha válida e uma escolha inválida,  
-Então ambos os comportamentos devem ser demonstráveis sem modificar o código.
-
----
-
 # Regras de Negócio da Sprint 1
 
 ## RN01 — Turnos
@@ -456,26 +426,54 @@ Porém, essa funcionalidade não é obrigatória antes de o conteúdo de
 estruturas de repetição ser trabalhado na disciplina.
 
 ---
+# Interação e Validação com o Cliente/P2
 
-# Itens pendentes de validação com o cliente/P2
+Esta seção registra os principais esclarecimentos, validações e pendências
+identificados durante a interação da equipe com o cliente/P2.
 
-Após os esclarecimentos realizados com o cliente/P2, permanecem pendentes os seguintes pontos:
+O objetivo é manter a rastreabilidade entre as necessidades apresentadas
+pelo cliente e as decisões registradas no Product Backlog.
 
-- definição da ordem de prioridade das sete User Stories da Sprint 1 pelo cliente/P2;
+---
 
-- validação da versão revisada dos critérios de aceitação das User Stories.
+## Pontos esclarecidos com o cliente/P2
 
-Os seguintes pontos já foram esclarecidos pelo cliente/P2:
+| ID | Assunto | Definição |
+|---|---|---|
+| VAL01 | Resultado final | O sistema deve informar o turno analisado. |
+| VAL02 | Cobertura mínima | O sistema deve informar se a cobertura mínima foi atingida ou não. |
+| VAL03 | Especialidade insuficiente | Quando houver cobertura insuficiente, o sistema deve informar qual especialidade apresenta o problema. |
+| VAL04 | Publicação do plantão | A conclusão deve indicar claramente se o plantão pode ou não ser publicado. |
+| VAL05 | Quantidade de profissionais faltantes | Informar exatamente quantos profissionais faltam é opcional. |
+| VAL06 | Entradas inválidas | Dados inválidos não podem ser utilizados como dados válidos na análise. |
+| VAL07 | Tratamento de entrada inválida | A forma de tratamento da entrada inválida é uma decisão técnica da equipe. |
+| VAL08 | Nova análise | Realizar uma nova análise sem reiniciar o programa não é requisito obrigatório da Sprint 1. |
 
-- o resultado final deve informar o turno analisado;
-- o sistema deve informar se a cobertura mínima foi atingida ou não;
-- quando houver cobertura insuficiente, deve ser informada a especialidade responsável;
-- a conclusão deve indicar claramente se o plantão pode ou não ser publicado;
-- informar exatamente quantos profissionais faltam é opcional;
-- entradas inválidas nunca podem ser utilizadas como dados válidos;
-- a forma de tratamento da entrada inválida é uma decisão técnica da equipe;
-- realizar uma nova análise sem reiniciar o programa não é requisito obrigatório da Sprint 1.
-- o número máximo de médicos por turno
+---
+
+## Pendências de Validação
+
+| ID | Pendência | Responsável pela definição | Status |
+|---|---|---|---|
+| PEN01 | Definir a ordem de prioridade das User Stories da Sprint 1 | Cliente/P2 | Pendente |
+| PEN02 | Validar a versão revisada dos critérios de aceitação | Cliente/P2 | Pendente |
+---
+
+## Atualização do Product Backlog
+
+Após cada interação com o cliente/P2, este Product Backlog deverá ser
+atualizado para registrar:
+
+- alterações de prioridade;
+- novos esclarecimentos;
+- critérios de aceitação revisados;
+- regras de negócio validadas;
+- novas necessidades identificadas;
+- decisões que impactem as User Stories.
+
+Nenhuma necessidade será registrada como requisito confirmado sem que sua
+origem ou validação esteja claramente identificada.
+
 
 ---
 
