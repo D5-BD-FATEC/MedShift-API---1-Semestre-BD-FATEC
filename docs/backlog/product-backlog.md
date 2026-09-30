@@ -135,9 +135,11 @@ Então ele deve ser aceito e utilizado na análise do plantão.
 
 **Cenário inválido**
 
-Dado que o coordenador informe uma quantidade negativa ou, após a definição e validação do limite máximo, uma quantidade superior a esse limite,  
-Quando o sistema realizar a validação,  
-Então deve informar claramente que o valor é inválido e impedir que ele seja utilizado na análise.
+Dado que o coordenador informe uma quantidade negativa ou que o total de médicos
+informados para o plantão ultrapasse o limite máximo validado,
+Quando o sistema realizar a validação,
+Então deve informar claramente que o valor é inválido e impedir que ele seja
+utilizado na análise.
 
 **Demonstração no VisuAlg**
 
@@ -147,9 +149,28 @@ Então os dois comportamentos devem ser demonstráveis apenas pela alteração d
 
 ### Definição do limite máximo
 
-A equipe ainda está definindo internamente um valor máximo plausível de profissionais por especialidade em um único plantão.
+A equipe propõe o limite máximo de **11 médicos por turno**.
 
-Enquanto esse valor não for definido, ele será representado temporariamente por **X** na documentação.
+#### Justificativa
+
+O limite foi definido com o objetivo de garantir a cobertura mínima das
+especialidades, permitindo uma margem adicional de médicos para aumentar
+a segurança da escala e lidar com eventuais indisponibilidades.
+
+A cobertura mínima exigida por plantão é de:
+
+- 2 Clínicos Gerais;
+- 1 Pediatra;
+- 1 Cirurgião.
+
+Assim, o limite máximo proposto permite atender às necessidades mínimas do
+plantão e ainda manter uma margem adicional de profissionais.
+
+Quantidades acima desse limite também poderão ser tratadas como possíveis
+erros de digitação.
+
+**Limite máximo proposto:** 11 médicos por turno.
+
 
 #### Justificativa
 
@@ -336,21 +357,17 @@ disponíveis em determinada especialidade.
 
 ## RN07 — Quantidade máxima
 
-Quantidades excessivamente altas também devem ser tratadas como possíveis
-erros de digitação.
+## RN07 — Quantidade máxima
 
-A equipe ainda está definindo internamente um valor máximo plausível de
-profissionais por especialidade.
+A equipe propõe o limite máximo de **11 médicos por turno**.
 
-Enquanto esse valor não for definido, ele será representado temporariamente
-por **X**.
+O limite considera o total de profissionais informados para o plantão,
+independentemente da especialidade.
 
-Após a definição interna, a proposta deverá ser apresentada ao cliente/P2
-para validação.
+Quantidades que façam o total do plantão ultrapassar esse limite deverão ser
+tratadas como possíveis erros de entrada.
 
-**Valor máximo:** X profissionais por especialidade.
-
-**Status:** Em definição pela equipe e posteriormente sujeito à validação do cliente/P2.
+**Limite máximo proposto:** 11 médicos por turno.
 
 ---
 
