@@ -189,10 +189,6 @@ justificativa baseada no contexto do hospital e nas quantidades mínimas exigida
 Após a definição interna da equipe, o valor proposto será apresentado ao
 cliente/P2 para validação antes de ser considerado uma regra definitiva do sistema.
 
-**Valor máximo atual:** X profissionais por especialidade.
-
-**Status:** Em definição pela equipe.
-
 ---
 
 ## US04 — Verificar a cobertura mínima do plantão
@@ -357,9 +353,7 @@ disponíveis em determinada especialidade.
 
 ## RN07 — Quantidade máxima
 
-## RN07 — Quantidade máxima
-
-A equipe propõe o limite máximo de **11 médicos por turno**.
+Foi validado com o cliente o limite máximo de **11 médicos por turno**.
 
 O limite considera o total de profissionais informados para o plantão,
 independentemente da especialidade.
