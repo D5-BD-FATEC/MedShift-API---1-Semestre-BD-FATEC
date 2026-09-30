@@ -60,9 +60,7 @@ ser publicado.
 | --- | --- |
 | **Lucas Augusto** | Product Owner |
 | **Fernanda Martins** | Scrum Master |
-| **Augusto** | Desenvolvedor |
-| **Sara Andrade** | Desenvolvedor |
-| **Karina** | Desenvolvedor |
+| **Augusto Rocha** | Desenvolvedor |
 | **Allan Almeida** | Desenvolvedor |
 | **Arthur Peres** | Desenvolvedor |
 
