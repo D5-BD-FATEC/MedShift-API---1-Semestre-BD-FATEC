@@ -149,7 +149,7 @@ Então os dois comportamentos devem ser demonstráveis apenas pela alteração d
 
 ### Definição do limite máximo
 
-A equipe propõe o limite máximo de **33 médicos por turno**.
+A equipe propõe o limite máximo de **33 médicos por turno, sendo 11 por especialidade**.
 
 #### Justificativa
 
@@ -333,14 +333,23 @@ disponíveis em determinada especialidade.
 
 ## RN07 — Quantidade máxima
 
-Foi validado com o cliente o limite máximo de **33 médicos por turno**.
+Foi validado com o cliente/P2 o limite máximo de **11 médicos por especialidade em cada turno**.
 
-O limite considera o total de profissionais informados para o plantão,
-independentemente da especialidade.
+O limite se aplica individualmente a:
 
-Quantidades que façam o total do plantão ultrapassar esse limite deverão ser
-tratadas como possíveis erros de entrada.
+- Clínico Geral;
+- Pediatra;
+- Cirurgião.
 
+Portanto, considerando as três especialidades, o plantão poderá possuir
+no máximo **33 médicos no total**, sendo até 11 de cada especialidade.
+
+Caso qualquer especialidade possua mais de 11 profissionais,
+a quantidade deverá ser considerada inválida.
+
+**Máximo por especialidade:** 11 médicos.  
+**Máximo total possível por turno:** 33 médicos.  
+**Status:** Validado pelo cliente/P2.
 
 ---
 
@@ -468,6 +477,7 @@ pelo cliente e as decisões registradas no Product Backlog.
 | VAL06 | Entradas inválidas | Dados inválidos não podem ser utilizados como dados válidos na análise. |
 | VAL07 | Tratamento de entrada inválida | A forma de tratamento da entrada inválida é uma decisão técnica da equipe. |
 | VAL08 | Nova análise | Realizar uma nova análise sem reiniciar o programa não é requisito obrigatório da Sprint 1. |
+| VAL09 | Limite máximo de profissionais | Validado o máximo de 11 médicos por especialidade, totalizando até 33 médicos por turno. |
 
 ---
 
