@@ -172,37 +172,72 @@ O usuário deverá conseguir escolher o turno pelo teclado sem qualquer alteraç
 
 ---
 
-## DEC06 — Definição do limite máximo de profissionais
+## DEC06 — Limite máximo de profissionais por turno
 
-**Categoria:** Regra em definição  
-**Origem:** Equipe, com posterior validação do cliente/P2  
-**Status:** Em definição
+**Categoria:** Regra de negócio  
+**Origem:** Proposta da equipe validada pelo cliente/P2  
+**Status:** Confirmada
 
 ### Decisão
 
-A equipe deverá definir um valor máximo plausível de profissionais por especialidade em um único plantão.
+O limite máximo permitido será de **11 médicos por turno**.
 
-Enquanto o valor não for definido internamente, ele será representado temporariamente por **X** na documentação.
+O limite considera o total de profissionais informados para o plantão,
+independentemente da especialidade.
 
-Após a definição da equipe, a proposta será apresentada ao cliente/P2 para validação antes de ser considerada uma regra definitiva do sistema.
+Para verificar o limite máximo, deverão ser consideradas conjuntamente as
+quantidades de:
+
+- Clínicos Gerais;
+- Pediatras;
+- Cirurgiões.
+
+A soma dessas quantidades não poderá ultrapassar **11 profissionais**.
 
 ### Justificativa
 
-Quantidades absurdamente altas podem representar erros de digitação e não devem ser aceitas automaticamente como dados válidos.
+O limite de 11 médicos por turno foi proposto pela equipe com o objetivo de
+garantir a cobertura mínima das especialidades e permitir uma margem adicional
+de profissionais para aumentar a segurança da escala e lidar com eventuais
+indisponibilidades.
 
-O cliente/P2 determinou que a equipe deve propor um limite plausível e justificar essa escolha.
+A cobertura mínima exigida é de:
+
+- 2 Clínicos Gerais;
+- 1 Pediatra;
+- 1 Cirurgião.
+
+O cliente/P2 avaliou a proposta e validou o limite máximo de 11 médicos por turno.
 
 ### Impactos
 
-Até a definição e validação do valor:
+A partir desta validação:
 
-- **X** não representa um número definitivo;
-- o limite não deverá ser tratado como regra aprovada;
-- os documentos deverão deixar claro que o valor está em definição.
+- o valor máximo deixa de ser representado por `X`;
+- o limite de 11 médicos passa a ser uma regra confirmada da Sprint 1;
+- o total de profissionais das três especialidades deverá ser calculado;
+- totais entre 0 e 11 poderão prosseguir para as demais validações;
+- totais superiores a 11 deverão ser considerados inválidos;
+- uma entrada inválida não deverá ser utilizada na análise do plantão.
 
-Depois que a equipe definir a proposta, esta decisão deverá ser atualizada para **Pendente de validação**.
+### Exemplo válido
 
-Após a aprovação do cliente/P2, deverá ser atualizada para **Confirmada**.
+```text
+Clínicos Gerais: 4
+Pediatras: 3
+Cirurgiões: 2
+
+Total: 9 médicos
+Resultado: dentro do limite máximo.
+Clínicos Gerais: 5
+Pediatras: 4
+Cirurgiões: 3
+
+Total: 12 médicos
+Resultado: quantidade total inválida.
+```
+
+
 
 ---
 
@@ -221,13 +256,13 @@ Nesta Sprint, o sistema não será obrigado a solicitar uma nova digitação ap�
 ### Exemplos de entradas inválidas
 
 - quantidade negativa de profissionais;
-- quantidade superior ao limite máximo, após esse limite ser definido e validado;
+- total de profissionais superior a 11 médicos no plantão;
 - opção de turno inexistente.
 
 A quantidade **0 não é inválida**.
 
-Ela pode representar a ausência de profissionais disponíveis em determinada especialidade e deverá participar normalmente da análise de cobertura.
-
+Ela pode representar a ausência de profissionais disponíveis em determinada
+especialidade e deverá participar normalmente da análise de cobertura.
 ### Justificativa
 
 O cliente/P2 determinou que nenhum dado inválido pode ser aceito como válido e que a coordenação precisa compreender claramente o que foi informado de forma incorreta.
