@@ -43,7 +43,7 @@ Nenhuma prioridade será atribuída pela equipe antes da definição do cliente/
 | US03 | Validar as quantidades informadas | A definir pelo cliente/P2 | Pendente |
 | US04 | Verificar a cobertura mínima do plantão | A definir pelo cliente/P2 | Pendente |
 | US05 | Informar se o plantão pode ser publicado | A definir pelo cliente/P2 | Pendente |
-| US06 | Informar o motivo da reprovação do plantão | A definir pelo cliente/P2 | Pendente |
+| US06 | Informar o motivo da reprovação do plantão | A definir pelo cliente/P2 | Pendente 
 
 A tabela será atualizada após a definição da ordem de prioridade pelo cliente/P2.
 
@@ -108,15 +108,6 @@ Nenhuma dependência funcional obrigatória.
 - US02 — Informar a quantidade de profissionais.
 - Definição interna do limite máximo de profissionais.
 - Validação posterior do limite máximo pelo cliente/P2.
-
-#### Observação
-
-O limite máximo de profissionais ainda está em definição pela equipe.
-
-Enquanto não houver um valor definido e validado, ele será representado
-por **X** na documentação.
-
-O símbolo **X não representa um valor numérico definitivo**.
 
 ---
 
@@ -183,7 +174,7 @@ Durante o desenvolvimento da Sprint 1 deverão ser respeitadas as seguintes regr
 - quantidades negativas são inválidas;
 - a quantidade 0 é válida;
 - opções de turno inexistentes são inválidas;
-- o limite máximo de profissionais ainda está em definição;
+- o limite máximo de profissionais por especialidade é 11;
 - entradas inválidas não podem ser utilizadas na análise;
 - quando o plantão não puder ser publicado, o motivo deverá ser informado;
 - uma única análise por execução é suficiente para atender ao escopo obrigatório da Sprint 1.
