@@ -220,6 +220,7 @@ A partir desta validação:
 - totais superiores a 11 deverão ser considerados inválidos;
 - uma entrada inválida não deverá ser utilizada na análise do plantão.
 
+
 ### Exemplo válido
 
 ```text
@@ -229,13 +230,16 @@ Cirurgiões: 2
 
 Total: 9 médicos
 Resultado: dentro do limite máximo.
+```
+
+### Exemplo inválido
 Clínicos Gerais: 5
 Pediatras: 4
 Cirurgiões: 3
 
 Total: 12 médicos
 Resultado: quantidade total inválida.
-```
+
 
 
 
@@ -419,11 +423,13 @@ A lógica do sistema deverá seguir, de forma conceitual, esta sequência:
 
 # 4. Pendências relacionadas às decisões
 
-No momento, permanece pendente:
+O limite máximo de profissionais não constitui mais uma pendência.
 
-- definição interna do valor máximo plausível de profissionais por especialidade, representado temporariamente por **X**;
-- posterior validação desse valor com o cliente/P2.
+A equipe definiu o limite de **11 médicos por turno**, e a proposta foi
+validada pelo cliente/P2.
 
-Após a equipe definir o valor máximo, a DEC06 deverá ser atualizada para registrar a proposta concreta.
+Dessa forma, a **DEC06 está confirmada** e deve ser utilizada como referência
+no Product Backlog, Sprint Backlog, cenários de teste e implementação do sistema.
 
-Depois que o cliente/P2 validar ou solicitar alteração da proposta, o status da decisão deverá ser atualizado.
+Novas decisões ou pendências identificadas durante o desenvolvimento deverão
+ser registradas nesta seção.
