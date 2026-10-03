@@ -294,9 +294,9 @@ Para cada profissional, deverão ser apresentados pelo menos:
 
 ---
 
-# 9. US09 — Localizar profissional pelo identificador
+## 9. US09 — Localizar profissional pelo identificador
 
-## User Story
+### User Story
 
 Como coordenador de escala,  
 quero localizar um profissional pelo identificador numérico,  
@@ -304,7 +304,7 @@ para consultar rapidamente seus dados.
 
 ---
 
-## Critérios de Aceitação
+### Critérios de Aceitação
 
 ### Cenário válido
 
@@ -330,7 +330,7 @@ As informações apresentadas deverão incluir:
 
 ---
 
-## Observação
+### Observação
 
 A busca por identificador numérico é obrigatória.
 
@@ -338,7 +338,7 @@ A busca por nome não faz parte do escopo obrigatório da Sprint 2 e poderá ser
 
 ---
 
-## Tarefas
+### Tarefas
 
 - [ ] Criar opção de consulta individual no menu.
 - [ ] Solicitar o identificador.
@@ -350,7 +350,7 @@ A busca por nome não faz parte do escopo obrigatório da Sprint 2 e poderá ser
 
 ---
 
-## Dependências
+### Dependências
 
 - US07 — Cadastrar profissionais da equipe médica.
 
