@@ -238,9 +238,9 @@ Nenhuma dependência funcional obrigatória.
 
 ---
 
-# 8. US08 — Consultar a lista completa de profissionais cadastrados
+## 8. US08 — Consultar a lista completa de profissionais cadastrados
 
-## User Story
+### User Story
 
 Como coordenador de escala,  
 quero visualizar a lista de todos os profissionais cadastrados,  
@@ -248,7 +248,7 @@ para ter uma visão geral da equipe médica disponível.
 
 ---
 
-## Critérios de Aceitação
+### Critérios de Aceitação
 
 ### Cenário válido
 
@@ -275,7 +275,7 @@ Para cada profissional, deverão ser apresentados pelo menos:
 
 ---
 
-## Tarefas
+### Tarefas
 
 - [ ] Criar opção específica no menu.
 - [ ] Verificar se existem profissionais cadastrados.
@@ -288,7 +288,7 @@ Para cada profissional, deverão ser apresentados pelo menos:
 
 ---
 
-## Dependências
+### Dependências
 
 - US07 — Cadastrar profissionais da equipe médica.
 
