@@ -34,7 +34,7 @@ Nenhuma prioridade será atribuída pela equipe antes da definição do cliente/
 
 ---
 
-## 4. User Stories candidatas à Sprint 1
+## 4. User Stories da Sprint 1
 
 | ID | User Story | Prioridade | Seleção definitiva |
 |---|---|---|---|
