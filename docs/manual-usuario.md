@@ -2,7 +2,8 @@
 
 ## 1. Objetivo
 
-Este documento apresenta as instruções de utilização do sistema MedShift durante a Sprint 1.
+Este documento apresenta as instruções de utilização do sistema MedShift,
+considerando as funcionalidades desenvolvidas ao longo das Sprints do projeto.
 
 O MedShift é um sistema de apoio à análise e validação de plantões médicos, desenvolvido para auxiliar a coordenação do Hospital Santa Aurora na verificação da cobertura mínima de profissionais.
 
