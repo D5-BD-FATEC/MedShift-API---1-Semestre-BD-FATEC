@@ -212,6 +212,7 @@ A prioridade não foi formalmente definida pelo cliente/P2 durante a Sprint 1.
 
 As demais condições de preparação das User Stories foram consideradas
 durante o desenvolvimento da Sprint.
+---
 
 ## 8. Definition of Done
 
