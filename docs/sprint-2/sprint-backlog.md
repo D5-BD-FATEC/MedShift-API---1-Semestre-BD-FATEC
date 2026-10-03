@@ -124,9 +124,9 @@ Entretanto, deverão existir opções separadas para:
 
 ---
 
-# 7. US07 — Cadastrar profissionais da equipe médica
+## 7. US07 — Cadastrar profissionais da equipe médica
 
-## User Story
+### User Story
 
 Como coordenador de escala,  
 quero cadastrar os profissionais da equipe médica,  
@@ -134,7 +134,7 @@ para que eles possam ser utilizados na construção da escala do dia.
 
 ---
 
-## Dados obrigatórios
+### Dados obrigatórios
 
 Para cada profissional deverão ser registrados:
 
