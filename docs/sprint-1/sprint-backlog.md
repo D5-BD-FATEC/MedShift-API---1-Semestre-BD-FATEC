@@ -300,32 +300,23 @@ Ao final da Sprint 1, permaneceram registradas as seguintes pendências:
 
 ---
 
-## 11. Atualização após a Sprint Planning
+## 11. Composição final da Sprint 1
 
-Após a Sprint Planning, esta seção deverá registrar a composição definitiva
-do Sprint Backlog.
+A Sprint 1 foi composta pelas User Stories **US01 a US06**.
 
-A tabela abaixo não deverá ser preenchida com prioridades presumidas pela equipe.
+Todas as seis histórias foram selecionadas para compor o escopo da Sprint.
 
-A ordem deverá refletir a priorização realizada pelo cliente/P2.
+A ordem de prioridade não foi formalmente definida pelo cliente/P2 durante
+a Sprint 1 e, por isso, permanece registrada como "A definir pelo cliente/P2".
 
-| Ordem | ID | User Story | Prioridade definida pelo cliente/P2 | Status |
-|---:|---|---|---|---|
-| 1 | A definir | A definir | A definir | Pendente |
-| 2 | A definir | A definir | A definir | Pendente |
-| 3 | A definir | A definir | A definir | Pendente |
-| 4 | A definir | A definir | A definir | Pendente |
-| 5 | A definir | A definir | A definir | Pendente |
-| 6 | A definir | A definir | A definir | Pendente |
-
-Após a definição do cliente/P2, a equipe deverá atualizar:
-
-- a ordem das User Stories;
-- a seleção definitiva;
-- as tarefas da Sprint;
-- as estimativas;
-- o status dos itens.
-
+| ID | User Story | Prioridade | Seleção na Sprint |
+|---|---|---|---|
+| US01 | Selecionar o turno do plantão | A definir pelo cliente/P2 | Selecionada |
+| US02 | Informar a quantidade de profissionais | A definir pelo cliente/P2 | Selecionada |
+| US03 | Validar as quantidades informadas | A definir pelo cliente/P2 | Selecionada |
+| US04 | Verificar a cobertura mínima do plantão | A definir pelo cliente/P2 | Selecionada |
+| US05 | Informar se o plantão pode ser publicado | A definir pelo cliente/P2 | Selecionada |
+| US06 | Informar o motivo da reprovação do plantão | A definir pelo cliente/P2 | Selecionada |
 ---
 
 ## 12. Relação com outros documentos
