@@ -271,14 +271,14 @@ máximo pela equipe e da posterior validação pelo cliente/P2.
 
 ### Demonstração na Sprint Review
 
-A equipe deverá estar preparada para demonstrar pelo menos:
+Durante a Sprint Review, a equipe preparou os seguintes cenários para demonstração:
 
 1. um plantão que atende à cobertura mínima;
 2. um plantão com falta de profissional de uma especialidade;
 3. uma entrada de quantidade impossível;
 4. uma escolha de turno inválida.
 
-Os cenários deverão ser executados diretamente no VisuAlg por meio da alteração
+Os cenários foram preparados para execução diretamente no VisuAlg, por meio da alteração
 dos dados de entrada, sem necessidade de modificar o código-fonte entre as demonstrações.
 
 ---
