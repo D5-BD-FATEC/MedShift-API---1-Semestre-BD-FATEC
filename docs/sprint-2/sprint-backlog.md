@@ -79,7 +79,7 @@ A escalação deverá respeitar:
 
 ---
 
-# 5. User Stories da Sprint 2
+## 5. User Stories da Sprint 2
 
 | ID | User Story | Status |
 |---|---|---|
@@ -97,7 +97,7 @@ A ordem técnica de desenvolvimento poderá ser organizada durante a Sprint Plan
 
 ---
 
-# 6. Menu principal previsto
+## 6. Menu principal previsto
 
 O sistema deverá possuir um menu textual que permita acessar as principais funcionalidades sem necessidade de alterar o código-fonte.
 
