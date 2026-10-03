@@ -159,9 +159,9 @@ Não deve ser necessário modificar o código-fonte para realizar uma análise.
 
 ---
 
-## 11. Dados utilizados na Sprint 1
+## 11. Dados utilizados no MedShift
 
-Durante a Sprint 1, o MedShift analisa um plantão por vez.
+Na Sprint 1, o MedShift realiza a análise de um plantão por vez.
 
 O sistema trabalha com três turnos:
 
