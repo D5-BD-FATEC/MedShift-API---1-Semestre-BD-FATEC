@@ -48,7 +48,6 @@ A prioridade permanece registrada como "A definir pelo cliente/P2", pois não ho
 uma definição formal de priorização durante a Sprint 1.
 ---
 
-## 5. Tarefas preliminares
 
 ## 5. Tarefas da Sprint 1
 
