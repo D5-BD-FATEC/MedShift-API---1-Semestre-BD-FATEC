@@ -110,7 +110,7 @@ O conteúdo do projeto estará disponível localmente.
 
 ## 8. Localização do código-fonte
 
-Após obter o projeto, localize o arquivo que contém o algoritmo correspondente à Sprint 1.
+Após obter o projeto, localize o arquivo que contém o algoritmo correspondente à Sprint que deseja executar.
 
 A estrutura do repositório poderá ser atualizada durante o desenvolvimento do projeto.
 
