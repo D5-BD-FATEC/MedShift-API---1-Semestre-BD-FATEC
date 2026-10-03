@@ -469,13 +469,16 @@ docs/backlog/product-backlog.md
 
 Contém as necessidades, User Stories, prioridades e critérios relacionados ao produto.
 
-### Sprint Backlog
+
+Troque esse bloco inteiro por:
+
+
+### Sprint Backlogs
 
 ```text
 docs/sprint-1/sprint-backlog.md
-```
-
-Contém os itens e tarefas selecionados para desenvolvimento durante a Sprint 1.
+docs/sprint-2/sprint-backlog.md
+````
 
 ### Definition of Ready
 
