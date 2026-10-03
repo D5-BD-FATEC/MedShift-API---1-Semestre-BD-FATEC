@@ -50,11 +50,10 @@ uma definição formal de priorização durante a Sprint 1.
 
 ## 5. Tarefas preliminares
 
-As tarefas abaixo representam uma decomposição inicial das User Stories.
+## 5. Tarefas da Sprint 1
 
-Elas poderão ser revisadas durante a Sprint Planning após a definição
-das prioridades.
-
+As tarefas abaixo representam a decomposição das User Stories utilizada
+durante o desenvolvimento da Sprint 1.
 ---
 
 ### US01 — Selecionar o turno do plantão
