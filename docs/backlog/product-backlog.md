@@ -516,7 +516,7 @@ origem ou validação esteja claramente identificada.
 
 ---
 
-# Sprint 2
+# User Stories da Sprint 2
 
 As necessidades da Sprint 2 foram definidas a partir dos feedbacks apresentados
 pelo cliente/P2 durante a Sprint Review da Sprint 1.
