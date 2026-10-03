@@ -383,11 +383,9 @@ Contém as principais decisões de negócio e decisões técnicas da Sprint.
 
 ### Motivo
 
-A estrutura inicial, as User Stories candidatas e as tarefas preliminares já estão documentadas.
+A Sprint 1 foi concluída com as User Stories US01 a US06 compondo
+o escopo desenvolvido.
 
-Entretanto, a composição definitiva depende da priorização das User Stories pelo cliente/P2 e da realização da Sprint Planning.
-
-Nenhuma prioridade deverá ser inventada ou presumida pela equipe.
-
-Após a definição do cliente/P2, este documento deverá ser atualizado para representar
-o Sprint Backlog definitivo da Sprint 1.
+A ordem de prioridade não foi formalmente definida pelo cliente/P2
+durante a Sprint 1 e, por isso, permanece registrada como
+"A definir pelo cliente/P2".
