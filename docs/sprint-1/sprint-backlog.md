@@ -283,9 +283,9 @@ dos dados de entrada, sem necessidade de modificar o código-fonte entre as demo
 
 ---
 
-## 10. Pendências antes da finalização do Sprint Backlog
+## 10. Pendências registradas na Sprint 1
 
-Antes que o Sprint Backlog seja considerado definitivo, permanecem as seguintes pendências:
+Ao final da Sprint 1, permaneceram registradas as seguintes pendências:
 
 - [ ] cliente/P2 definir a ordem de prioridade das User Stories;
 - [ ] equipe registrar no Product Backlog a ordem definida pelo cliente/P2;
