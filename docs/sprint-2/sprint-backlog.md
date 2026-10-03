@@ -238,7 +238,7 @@ Nenhuma dependência funcional obrigatória.
 
 ---
 
-# 8. US07 — Consultar a lista completa de profissionais cadastrados
+# 8. US08 — Consultar a lista completa de profissionais cadastrados
 
 ## User Story
 
@@ -290,7 +290,7 @@ Para cada profissional, deverão ser apresentados pelo menos:
 
 ## Dependências
 
-- US08 — Cadastrar profissionais da equipe médica.
+- US07 — Cadastrar profissionais da equipe médica.
 
 ---
 
