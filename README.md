@@ -54,6 +54,20 @@ ser publicado.
 - [Manual de Instalação](docs/manual-instalacao.md)
 - [Manual do Usuário](docs/manual-usuario.md)
 
+## Sprint 2
+
+### Meta da Sprint
+
+Permitir o cadastro da equipe médica, a consulta dos profissionais cadastrados
+e a distribuição dos profissionais entre os três turnos de um único dia,
+respeitando as regras de disponibilidade, especialidade e quantidade de plantões.
+
+### Documentação
+
+- [Sprint Backlog — Sprint 2](docs/sprint-2/sprint-backlog.md)
+
+---
+
 ## Equipe
 
 | Integrante | Papel |
