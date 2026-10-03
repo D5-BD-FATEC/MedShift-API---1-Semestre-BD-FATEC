@@ -63,7 +63,7 @@ feat: US03 - adiciona validação de quantidades
 feat: US04 - adiciona verificação de cobertura mínima
 feat: US05 - adiciona conclusão de publicação do plantão
 feat: US06 - adiciona motivo da reprovação
-feat: US07 - adiciona tratamento de escolha inválida
+feat: US07 - adiciona cadastro de profissionais
 ```
 
 Sempre que possível, o commit deverá indicar a User Story relacionada.
@@ -86,7 +86,7 @@ fix: USXX - descrição
 fix: US03 - corrige validação de quantidade negativa
 fix: US04 - corrige comparação da cobertura mínima
 fix: US06 - corrige mensagem de especialidade insuficiente
-fix: US07 - corrige tratamento de turno inválido
+fix: US07 - corrige cadastro de profissionais
 ```
 
 Caso a correção não esteja diretamente relacionada a uma User Story, poderá ser utilizada uma referência descritiva.
@@ -343,10 +343,10 @@ feat: US06 - adiciona motivo da reprovação do plantão
 fix: US06 - corrige exibição da quantidade informada
 ```
 
-## US07 — Escolhas inválidas
+## US07 — Cadastro de profissionais
 
 ```text
-feat: US07 - adiciona tratamento de opção inválida
+feat: US07 - adiciona cadastro de profissionais
 test: CT04 - valida comportamento de turno inexistente
 ```
 
