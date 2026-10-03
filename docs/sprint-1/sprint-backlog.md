@@ -162,7 +162,7 @@ Nenhuma dependência funcional obrigatória.
 
 ## 6. Regras de negócio relacionadas
 
-Durante o desenvolvimento da Sprint 1 deverão ser respeitadas as seguintes regras:
+Durante o desenvolvimento da Sprint 1 foram consideradas as seguintes regras:
 
 - existem três turnos: Manhã, Tarde e Noite;
 - são analisadas as especialidades Clínico Geral, Pediatra e Cirurgião;
