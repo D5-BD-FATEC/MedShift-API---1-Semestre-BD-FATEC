@@ -44,8 +44,8 @@ Nenhuma prioridade será atribuída pela equipe antes da definição do cliente/
 | US05 | Informar se o plantão pode ser publicado | A definir pelo cliente/P2 | Selecionada |
 | US06 | Informar o motivo da reprovação do plantão | A definir pelo cliente/P2 | Selecionada |
 
-A tabela será atualizada após a definição da ordem de prioridade pelo cliente/P2.
-
+A prioridade permanece registrada como "A definir pelo cliente/P2", pois não houve
+uma definição formal de priorização durante a Sprint 1.
 ---
 
 ## 5. Tarefas preliminares
