@@ -24,11 +24,10 @@ ser publicado.
 As User Stories previstas para a Sprint 1 já foram levantadas e possuem
 critérios de aceitação documentados no Product Backlog.
 
-Entretanto, a ordem de prioridade das histórias ainda será definida pelo
-cliente/P2.
+A ordem de prioridade das histórias não foi formalmente definida pelo
+cliente/P2 durante a Sprint 1.
 
-Por esse motivo, a seleção definitiva e a ordenação dos itens deste
-Sprint Backlog permanecem pendentes.
+As User Stories US01 a US06 compuseram o escopo desenvolvido na Sprint 1.
 
 Nenhuma prioridade será atribuída pela equipe antes da definição do cliente/P2.
 
