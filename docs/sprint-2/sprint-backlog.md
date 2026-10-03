@@ -159,7 +159,7 @@ Cirurgião
 
 ---
 
-### Capacidade máxima proposta
+### Critérios de Aceitação
 
 ### Cenário válido — cadastro realizado
 
