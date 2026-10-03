@@ -35,14 +35,14 @@ Nenhuma prioridade será atribuída pela equipe antes da definição do cliente/
 
 ## 4. User Stories da Sprint 1
 
-| ID | User Story | Prioridade | Seleção definitiva |
+| ID | User Story | Prioridade | Seleção na Sprint |
 |---|---|---|---|
-| US01 | Selecionar o turno do plantão | A definir pelo cliente/P2 | Pendente |
-| US02 | Informar a quantidade de profissionais | A definir pelo cliente/P2 | Pendente |
-| US03 | Validar as quantidades informadas | A definir pelo cliente/P2 | Pendente |
-| US04 | Verificar a cobertura mínima do plantão | A definir pelo cliente/P2 | Pendente |
-| US05 | Informar se o plantão pode ser publicado | A definir pelo cliente/P2 | Pendente |
-| US06 | Informar o motivo da reprovação do plantão | A definir pelo cliente/P2 | Pendente 
+| US01 | Selecionar o turno do plantão | A definir pelo cliente/P2 | Selecionada |
+| US02 | Informar a quantidade de profissionais | A definir pelo cliente/P2 | Selecionada |
+| US03 | Validar as quantidades informadas | A definir pelo cliente/P2 | Selecionada |
+| US04 | Verificar a cobertura mínima do plantão | A definir pelo cliente/P2 | Selecionada |
+| US05 | Informar se o plantão pode ser publicado | A definir pelo cliente/P2 | Selecionada |
+| US06 | Informar o motivo da reprovação do plantão | A definir pelo cliente/P2 | Selecionada |
 
 A tabela será atualizada após a definição da ordem de prioridade pelo cliente/P2.
 
