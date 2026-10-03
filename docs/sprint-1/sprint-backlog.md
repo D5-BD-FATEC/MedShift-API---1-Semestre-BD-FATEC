@@ -6,7 +6,7 @@
 **Sprint:** Sprint 1  
 **Tecnologia principal:** VisuAlg  
 **Interface:** Console  
-**Status do Sprint Backlog:** Em preparação
+**Status do Sprint Backlog:** Concluído
 
 ---
 
@@ -380,7 +380,7 @@ Contém as principais decisões de negócio e decisões técnicas da Sprint.
 
 ## 13. Status geral
 
-**Sprint Backlog:** Em preparação.
+**Sprint Backlog:** Concluído.
 
 ### Motivo
 
