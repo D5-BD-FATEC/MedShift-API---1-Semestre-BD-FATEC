@@ -59,6 +59,8 @@ docs/manual-instalacao.md
 
 ## 5. Escopo das Sprints
 
+### Escopo da Sprint 1
+
 Durante a Sprint 1, o MedShift realiza a análise de um plantão por execução.
 
 O sistema não possui, nesta etapa:
