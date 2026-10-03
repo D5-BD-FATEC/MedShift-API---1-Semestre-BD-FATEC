@@ -37,8 +37,7 @@ A implementação principal do projeto é realizada utilizando:
 
 O sistema funciona através de interação textual em ambiente de console.
 
-Não é necessária a instalação de banco de dados, servidor web ou outras dependências externas para executar o incremento da Sprint 1.
-
+Não é necessária a instalação de banco de dados, servidor web ou outras dependências externas para executar o MedShift no escopo atual do projeto.
 ---
 
 ## 4. Instalação do VisuAlg
