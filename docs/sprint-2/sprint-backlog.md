@@ -41,9 +41,9 @@ Não haverá persistência de dados entre diferentes execuções.
 
 ---
 
-# 4. Conceitos importantes
+## 4. Conceitos importantes
 
-## 4.1 Cadastro do profissional
+### 4.1 Cadastro do profissional
 
 A disponibilidade por turno faz parte do cadastro do profissional.
 
@@ -62,7 +62,7 @@ A disponibilidade não representa uma escalação.
 
 ---
 
-## 4.2 Escalação do profissional
+### 4.2 Escalação do profissional
 
 A escalação é uma operação realizada após o cadastro.
 
