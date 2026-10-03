@@ -208,12 +208,10 @@ Entre os principais critérios estão:
 As User Stories já possuem descrição, critérios de aceitação, regras de negócio
 e cenários previstos.
 
-Entretanto, a prioridade ainda depende da definição do cliente/P2.
+A prioridade não foi formalmente definida pelo cliente/P2 durante a Sprint 1.
 
-Por esse motivo, a verificação definitiva do DoR ocorrerá durante a Sprint Planning,
-após a priorização.
-
----
+As demais condições de preparação das User Stories foram consideradas
+durante o desenvolvimento da Sprint.
 
 ## 8. Definition of Done
 
