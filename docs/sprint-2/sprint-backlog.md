@@ -87,8 +87,8 @@ A escalação deverá respeitar:
 | US08 | Consultar a lista completa de profissionais cadastrados | Planejada |
 | US09 | Localizar profissional pelo identificador | Planejada |
 | US10 | Escalar profissional em um turno | Planejada |
-| US12 | Validar regras de escalação | Planejada |
-| US13 | Validar cobertura dos três turnos | Planejada |
+| US11 | Validar regras de escalação | Planejada |
+| US12 | Validar cobertura dos três turnos | Planejada |
 | US13 | Informar turnos e especialidades com cobertura insuficiente | Planejada |
 | US14 | Apresentar quantidade de plantões por profissional | Planejada |
 | US15 | Apresentar resumo do dia | Planejada |
