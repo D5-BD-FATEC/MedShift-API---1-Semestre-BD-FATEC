@@ -304,13 +304,13 @@ O sistema deverá informar que a opção selecionada é inválida.
 
 ## 16. Persistência de dados
 
-Durante a Sprint 1, o MedShift não mantém informações entre execuções.
+No escopo atual do projeto, o MedShift não mantém informações entre execuções.
 
 Ao encerrar o algoritmo, os dados utilizados naquela execução não são armazenados como estado permanente do sistema.
 
 Para realizar uma nova análise, os dados deverão ser informados novamente.
 
-Essa característica é compatível com o escopo da Sprint 1 e com as limitações do VisuAlg.
+Essa característica é compatível com o escopo atual do projeto e com as limitações do VisuAlg.
 
 ---
 
