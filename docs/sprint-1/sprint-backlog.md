@@ -289,7 +289,6 @@ Ao final da Sprint 1, permaneceram registradas as seguintes pendências:
 
 - [ ] cliente/P2 definir a ordem de prioridade das User Stories;
 - [ ] equipe registrar no Product Backlog a ordem definida pelo cliente/P2;
-- [ ] equipe confirmar quais User Stories serão selecionadas para desenvolvimento;
 - [ ] equipe ordenar os itens selecionados de acordo com a prioridade;
 - [ ] equipe revisar a decomposição das histórias em tarefas;
 - [ ] equipe realizar as estimativas das tarefas;
