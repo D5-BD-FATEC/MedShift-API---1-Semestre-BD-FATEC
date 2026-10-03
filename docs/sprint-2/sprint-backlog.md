@@ -147,7 +147,7 @@ Para cada profissional deverão ser registrados:
 
 ---
 
-## Especialidades disponíveis
+### Especialidades disponíveis
 
 O profissional deverá possuir uma das seguintes especialidades:
 
@@ -159,7 +159,7 @@ Cirurgião
 
 ---
 
-## Critérios de Aceitação
+### Capacidade máxima proposta
 
 ### Cenário válido — cadastro realizado
 
@@ -188,7 +188,7 @@ Cirurgião
 
 ---
 
-## Capacidade máxima proposta
+### Capacidade máxima proposta
 
 **Capacidade proposta pela equipe:** 50 profissionais.
 
@@ -214,7 +214,7 @@ Esse valor oferece margem suficiente para representar uma equipe médica maior q
 
 ---
 
-## Tarefas
+### Tarefas
 
 - [ ] Definir estruturas para armazenar os profissionais.
 - [ ] Armazenar identificadores.
@@ -232,7 +232,7 @@ Esse valor oferece margem suficiente para representar uma equipe médica maior q
 
 ---
 
-## Dependências
+### Dependências
 
 Nenhuma dependência funcional obrigatória.
 
