@@ -124,7 +124,7 @@ Entretanto, deverão existir opções separadas para:
 
 ---
 
-# 7. US08 — Cadastrar profissionais da equipe médica
+# 7. US07 — Cadastrar profissionais da equipe médica
 
 ## User Story
 
@@ -238,7 +238,7 @@ Nenhuma dependência funcional obrigatória.
 
 ---
 
-# 8. US09 — Consultar a lista completa de profissionais cadastrados
+# 8. US08 — Consultar a lista completa de profissionais cadastrados
 
 ## User Story
 
@@ -294,7 +294,7 @@ Para cada profissional, deverão ser apresentados pelo menos:
 
 ---
 
-# 9. US10 — Localizar profissional pelo identificador
+# 9. US09 — Localizar profissional pelo identificador
 
 ## User Story
 
@@ -356,7 +356,7 @@ A busca por nome não faz parte do escopo obrigatório da Sprint 2 e poderá ser
 
 ---
 
-# 10. US11 — Escalar profissional em um turno
+# 10. US10 — Escalar profissional em um turno
 
 ## User Story
 
@@ -422,7 +422,7 @@ para construir a escala médica.
 
 ---
 
-# 11. US12 — Validar regras de escalação
+# 11. US11 — Validar regras de escalação
 
 ## User Story
 
@@ -534,7 +534,7 @@ desde que:
 
 ---
 
-# 12. US13 — Validar cobertura dos três turnos
+# 12. US12 — Validar cobertura dos três turnos
 
 ## User Story
 
@@ -601,7 +601,7 @@ Cada turno exige quatro postos:
 
 ---
 
-# 13. US14 — Informar turnos e especialidades com cobertura insuficiente
+# 13. US13 — Informar turnos e especialidades com cobertura insuficiente
 
 ## User Story
 
@@ -676,7 +676,7 @@ Cobertura: ATINGIDA
 
 ---
 
-# 14. US15 — Apresentar quantidade de plantões por profissional
+# 14. US14 — Apresentar quantidade de plantões por profissional
 
 ## User Story
 
@@ -735,7 +735,7 @@ Nunca poderá possuir:
 
 ---
 
-# 15. US16 — Apresentar resumo do dia
+# 15. US15 — Apresentar resumo do dia
 
 ## User Story
 
