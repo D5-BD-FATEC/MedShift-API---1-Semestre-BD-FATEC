@@ -83,15 +83,15 @@ A escalação deverá respeitar:
 
 | ID | User Story | Status |
 |---|---|---|
-| US08 | Cadastrar profissionais da equipe médica | Planejada |
-| US09 | Consultar a lista completa de profissionais cadastrados | Planejada |
-| US10 | Localizar profissional pelo identificador | Planejada |
-| US11 | Escalar profissional em um turno | Planejada |
+| US07 | Cadastrar profissionais da equipe médica | Planejada |
+| US08 | Consultar a lista completa de profissionais cadastrados | Planejada |
+| US09 | Localizar profissional pelo identificador | Planejada |
+| US10 | Escalar profissional em um turno | Planejada |
 | US12 | Validar regras de escalação | Planejada |
 | US13 | Validar cobertura dos três turnos | Planejada |
-| US14 | Informar turnos e especialidades com cobertura insuficiente | Planejada |
-| US15 | Apresentar quantidade de plantões por profissional | Planejada |
-| US16 | Apresentar resumo do dia | Planejada |
+| US13 | Informar turnos e especialidades com cobertura insuficiente | Planejada |
+| US14 | Apresentar quantidade de plantões por profissional | Planejada |
+| US15 | Apresentar resumo do dia | Planejada |
 
 A ordem técnica de desenvolvimento poderá ser organizada durante a Sprint Planning.
 
