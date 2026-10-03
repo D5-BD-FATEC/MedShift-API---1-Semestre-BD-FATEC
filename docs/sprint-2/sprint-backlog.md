@@ -238,7 +238,7 @@ Nenhuma dependência funcional obrigatória.
 
 ---
 
-# 8. US08 — Consultar a lista completa de profissionais cadastrados
+# 8. US07 — Consultar a lista completa de profissionais cadastrados
 
 ## User Story
 
@@ -352,7 +352,7 @@ A busca por nome não faz parte do escopo obrigatório da Sprint 2 e poderá ser
 
 ## Dependências
 
-- US08 — Cadastrar profissionais da equipe médica.
+- US07 — Cadastrar profissionais da equipe médica.
 
 ---
 
@@ -416,7 +416,7 @@ para construir a escala médica.
 
 ## Dependências
 
-- US08 — Cadastrar profissionais.
+- US07 — Cadastrar profissionais.
 - US09 — Localizar profissional por identificador.
 
 ---
