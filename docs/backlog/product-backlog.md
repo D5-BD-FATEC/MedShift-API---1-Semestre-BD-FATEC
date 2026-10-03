@@ -544,8 +544,7 @@ cenários de teste relacionados à Sprint 2 estão detalhados no Sprint Backlog:
 
 ```text
 docs/sprint-2/sprint-backlog.md
-
----
+```
 
 # Sprint 3
 
