@@ -417,8 +417,7 @@ para construir a escala médica.
 ## Dependências
 
 - US08 — Cadastrar profissionais.
-- US10 — Localizar profissional por identificador.
-- US12 — Validar regras de escalação.
+- US09 — Localizar profissional por identificador.
 
 ---
 
@@ -529,8 +528,8 @@ desde que:
 
 ## Dependências
 
-- US08 — Cadastrar profissionais.
-- US11 — Escalar profissional em um turno.
+- US07 — Cadastrar profissionais.
+- US10 — Escalar profissional em um turno.
 
 ---
 
@@ -596,8 +595,8 @@ Cada turno exige quatro postos:
 
 ## Dependências
 
-- US11 — Escalar profissional.
-- US12 — Validar regras de escalação.
+- US10 — Escalar profissional.
+- US11 — Validar regras de escalação.
 
 ---
 
@@ -672,7 +671,7 @@ Cobertura: ATINGIDA
 
 ## Dependências
 
-- US13 — Validar cobertura dos três turnos.
+- US12 — Validar cobertura dos três turnos.
 
 ---
 
@@ -730,8 +729,8 @@ Nunca poderá possuir:
 
 ## Dependências
 
-- US11 — Escalar profissional.
-- US12 — Validar regras de escalação.
+- US10 — Escalar profissional.
+- US11 — Validar regras de escalação.
 
 ---
 
@@ -821,9 +820,9 @@ A apresentação visual poderá ser ajustada pela equipe durante o desenvolvimen
 
 ## Dependências
 
-- US13 — Validar cobertura.
-- US14 — Informar insuficiências.
-- US15 — Contagem de plantões.
+- US12 — Validar cobertura.
+- US13 — Informar insuficiências.
+- US14 — Contagem de plantões.
 
 ---
 
@@ -1340,23 +1339,23 @@ Uma User Story poderá ser considerada concluída quando:
 A ordem abaixo considera dependências técnicas e não representa necessariamente prioridade de negócio.
 
 ```text
-US08 — Cadastro de profissionais
+US07 — Cadastro de profissionais
         ↓
-US09 — Listagem completa
+US08 — Listagem completa
         ↓
-US10 — Busca por identificador
+US09 — Busca por identificador
         ↓
-US11 — Escalação
+US10 — Escalação
         ↓
-US12 — Validações da escalação
+US11 — Validações da escalação
         ↓
-US13 — Cobertura dos turnos
+US12 — Cobertura dos turnos
         ↓
-US14 — Diagnóstico de insuficiências
+US13 — Diagnóstico de insuficiências
         ↓
-US15 — Contagem de plantões
+US14 — Contagem de plantões
         ↓
-US16 — Resumo do dia
+US15 — Resumo do dia
 ```
 
 ---
