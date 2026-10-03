@@ -291,7 +291,7 @@ dos dados de entrada, sem necessidade de modificar o código-fonte entre as demo
 
 Antes que o Sprint Backlog seja considerado definitivo, permanecem as seguintes pendências:
 
-- [ ] cliente/P2 definir a ordem de prioridade das sete User Stories;
+- [ ] cliente/P2 definir a ordem de prioridade das User Stories;
 - [ ] equipe registrar no Product Backlog a ordem definida pelo cliente/P2;
 - [ ] equipe confirmar quais User Stories serão selecionadas para desenvolvimento;
 - [ ] equipe ordenar os itens selecionados de acordo com a prioridade;
