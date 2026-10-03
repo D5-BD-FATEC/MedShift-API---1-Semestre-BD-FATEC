@@ -20,6 +20,15 @@ Story Points.
 | - | US04 | A definir pelo cliente/P2 | Verificar a cobertura mínima do plantão | A estimar | Sprint 1 |
 | - | US05 | A definir pelo cliente/P2 | Informar se o plantão pode ser publicado | A estimar | Sprint 1 |
 | - | US06 | A definir pelo cliente/P2 | Informar o motivo da reprovação do plantão | A estimar | Sprint 1 |
+| - | US07 | A definir pelo cliente/P2 | Cadastrar profissionais da equipe médica | A estimar | Sprint 2 |
+| - | US08 | A definir pelo cliente/P2 | Consultar a lista completa de profissionais cadastrados | A estimar | Sprint 2 |
+| - | US09 | A definir pelo cliente/P2 | Localizar profissional pelo identificador | A estimar | Sprint 2 |
+| - | US10 | A definir pelo cliente/P2 | Escalar profissional em um turno | A estimar | Sprint 2 |
+| - | US11 | A definir pelo cliente/P2 | Validar regras de escalação | A estimar | Sprint 2 |
+| - | US12 | A definir pelo cliente/P2 | Validar cobertura dos três turnos | A estimar | Sprint 2 |
+| - | US13 | A definir pelo cliente/P2 | Informar turnos e especialidades com cobertura insuficiente | A estimar | Sprint 2 |
+| - | US14 | A definir pelo cliente/P2 | Apresentar quantidade de plantões por profissional | A estimar | Sprint 2 |
+| - | US15 | A definir pelo cliente/P2 | Apresentar resumo do dia | A estimar | Sprint 2 |
 
 ### Critério de Priorização
 
@@ -509,10 +518,32 @@ origem ou validação esteja claramente identificada.
 
 # Sprint 2
 
-As necessidades da Sprint 2 ainda não foram disponibilizadas.
+# User Stories da Sprint 2
 
-O Product Backlog será atualizado após a Sprint Review da Sprint 1,
-quando o cliente/P2 apresentar as próximas necessidades.
+As necessidades da Sprint 2 foram definidas a partir dos feedbacks apresentados
+pelo cliente/P2 durante a Sprint Review da Sprint 1.
+
+A Sprint 2 amplia o MedShift para permitir o cadastro da equipe médica,
+a distribuição dos profissionais entre os três turnos de um único dia
+e a validação das regras relacionadas à construção da escala.
+
+As User Stories definidas para esta Sprint são:
+
+- **US07 — Cadastrar profissionais da equipe médica**
+- **US08 — Consultar a lista completa de profissionais cadastrados**
+- **US09 — Localizar profissional pelo identificador**
+- **US10 — Escalar profissional em um turno**
+- **US11 — Validar regras de escalação**
+- **US12 — Validar cobertura dos três turnos**
+- **US13 — Informar turnos e especialidades com cobertura insuficiente**
+- **US14 — Apresentar quantidade de plantões por profissional**
+- **US15 — Apresentar resumo do dia**
+
+Os critérios de aceitação, tarefas, dependências, regras de negócio e
+cenários de teste relacionados à Sprint 2 estão detalhados no Sprint Backlog:
+
+```text
+docs/sprint-2/sprint-backlog.md
 
 ---
 
