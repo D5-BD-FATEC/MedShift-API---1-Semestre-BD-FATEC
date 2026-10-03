@@ -71,6 +71,25 @@ O sistema não possui, nesta etapa:
 
 O objetivo da Sprint 1 é verificar se um determinado plantão possui cobertura mínima adequada e informar se ele pode ou não ser publicado.
 
+### Escopo da Sprint 2
+
+Na Sprint 2, o MedShift evolui para permitir a construção da escala médica
+dos três turnos de um único dia.
+
+O escopo previsto para esta Sprint inclui:
+
+- cadastro da equipe médica durante a execução;
+- consulta da lista completa de profissionais cadastrados;
+- busca de profissional por identificador;
+- escalação de profissionais nos turnos Manhã, Tarde e Noite;
+- validação das regras de escalação;
+- verificação da cobertura de cada turno;
+- identificação de turnos e especialidades com cobertura insuficiente;
+- apresentação da quantidade de plantões atribuídos a cada profissional;
+- apresentação de um resumo geral do dia.
+
+Os dados permanecem disponíveis apenas durante a execução do programa,
+sem persistência entre execuções.
 ---
 
 ## 6. Turnos disponíveis
