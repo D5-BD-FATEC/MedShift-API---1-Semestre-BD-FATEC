@@ -53,7 +53,7 @@ feature/US03-validacao-quantidades
 feature/US04-verificacao-cobertura
 feature/US05-publicacao-plantao
 feature/US06-motivo-reprovacao
-feature/US07-escolha-invalida
+feature/US07-cadastro-profissionais
 ```
 
 Cada branch de funcionalidade deverá, sempre que possível, estar associada a uma User Story específica.
@@ -79,7 +79,7 @@ fix/USXX-descricao
 ```text
 fix/US03-validacao-negativos
 fix/US04-calculo-cobertura
-fix/US07-turno-invalido
+fix/US07-cadastro-profissionais
 ```
 
 Caso a correção não esteja diretamente relacionada a uma User Story, poderá ser utilizada uma descrição objetiva.
