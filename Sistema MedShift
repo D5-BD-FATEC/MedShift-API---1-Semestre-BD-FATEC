@@ -1,1 +1,306 @@
+algoritmo "MedShift"
 
+// Funcao: Analisar a cobertura de um plantao medico
+// Autor: Arthur Peres da Rocha
+// Data: 16/09/2026
+//
+// Cobertura minima:
+// - 2 Clinicos Gerais
+// - 1 Pediatra
+// - 1 Cirurgiao
+//
+// Limites maximos projetados:
+// - 10 Clinicos Gerais
+// - 5 Pediatras
+// - 5 Cirurgioes
+
+var
+
+   // Dados de entrada
+   turno : inteiro
+   qtdClinicos : inteiro
+   qtdPediatras : inteiro
+   qtdCirurgioes : inteiro
+
+   // Identificacador do turno
+   nomeTurno : caractere
+
+   // Limites minimos
+   minimoClinicos : inteiro
+   minimoPediatras : inteiro
+   minimoCirurgioes : inteiro
+
+   // Limites maximos
+   maximoClinicos : inteiro
+   maximoPediatras : inteiro
+   maximoCirurgioes : inteiro
+
+   // Controles logicos
+   turnoValido : logico
+   quantidadeClinicosValida : logico
+   quantidadePediatrasValida : logico
+   quantidadeCirurgioesValida : logico
+   quantidadesValidas : logico
+   coberturaAdequada : logico
+
+inicio
+
+   // Definicao dos limites minimos
+   minimoClinicos <- 2
+   minimoPediatras <- 1
+   minimoCirurgioes <- 1
+
+   // Definicao dos limites maximos
+   maximoClinicos <- 10
+   maximoPediatras <- 5
+   maximoCirurgioes <- 5
+
+   // Valores iniciais dos controles logicos
+   turnoValido <- falso
+   quantidadeClinicosValida <- falso
+   quantidadePediatrasValida <- falso
+   quantidadeCirurgioesValida <- falso
+   quantidadesValidas <- falso
+   coberturaAdequada <- falso
+
+   escreval("==============================================")
+   escreval("                  MEDSHIFT")
+   escreval("       ANALISE DE COBERTURA DO PLANTAO")
+   escreval("==============================================")
+   escreval("")
+
+   escreval("Selecione o turno que deseja analisar:")
+   escreval("")
+   escreval("1 - Manha")
+   escreval("2 - Tarde")
+   escreval("3 - Noite")
+   escreval("")
+
+   escreva("Informe a opcao desejada: ")
+   leia(turno)
+
+   // Identificacao e validacao do turno
+   se turno = 1 entao
+
+      nomeTurno <- "Manha"
+      turnoValido <- verdadeiro
+
+   senao
+
+      se turno = 2 entao
+
+         nomeTurno <- "Tarde"
+         turnoValido <- verdadeiro
+
+      senao
+
+         se turno = 3 entao
+
+            nomeTurno <- "Noite"
+            turnoValido <- verdadeiro
+
+         senao
+
+            turnoValido <- falso
+
+         fimse
+
+      fimse
+
+   fimse
+
+   //Solicita-se as quantidades se o turno for valido
+   se turnoValido = verdadeiro entao
+
+      escreval("")
+      escreval("----------------------------------------------")
+      escreval("Turno selecionado: ", nomeTurno)
+      escreval("----------------------------------------------")
+      escreval("")
+      escreval("Informe as quantidades de profissionais.")
+      escreval("")
+
+      escreva("Quantidade de Clinicos Gerais: ")
+      leia(qtdClinicos)
+
+      escreva("Quantidade de Pediatras: ")
+      leia(qtdPediatras)
+
+      escreva("Quantidade de Cirurgioes: ")
+      leia(qtdCirurgioes)
+
+      // Validacao da quantidade de Clinicos Gerais
+      se (qtdClinicos >= 0) e (qtdClinicos <= maximoClinicos) entao
+
+         quantidadeClinicosValida <- verdadeiro
+
+      senao
+
+         quantidadeClinicosValida <- falso
+
+      fimse
+
+      // Validacao da quantidade de Pediatras
+      se (qtdPediatras >= 0) e (qtdPediatras <= maximoPediatras) entao
+
+         quantidadePediatrasValida <- verdadeiro
+
+      senao
+
+         quantidadePediatrasValida <- falso
+
+      fimse
+
+      // Validacao da quantidade de Cirurgioes
+      se (qtdCirurgioes >= 0) e (qtdCirurgioes <= maximoCirurgioes) entao
+
+         quantidadeCirurgioesValida <- verdadeiro
+
+      senao
+
+         quantidadeCirurgioesValida <- falso
+
+      fimse
+
+      // Todos precisam ser validas
+      quantidadesValidas <- quantidadeClinicosValida e quantidadePediatrasValida e quantidadeCirurgioesValida
+
+      se quantidadesValidas = verdadeiro entao
+
+         // Verificacao m nima
+         coberturaAdequada <- (qtdClinicos >= minimoClinicos) e (qtdPediatras >= minimoPediatras) e (qtdCirurgioes >= minimoCirurgioes)
+
+         escreval("")
+         escreval("==============================================")
+         escreval("            RESULTADO DA ANALISE")
+         escreval("==============================================")
+         escreval("")
+         escreval("Turno analisado: ", nomeTurno)
+         escreval("")
+         escreval("Profissionais informados:")
+         escreval("- Clinicos Gerais: ", qtdClinicos)
+         escreval("- Pediatras: ", qtdPediatras)
+         escreval("- Cirurgioes: ", qtdCirurgioes)
+         escreval("")
+
+         se coberturaAdequada = verdadeiro entao
+
+            escreval("----------------------------------------------")
+            escreval("COBERTURA MINIMA ATINGIDA")
+            escreval("----------------------------------------------")
+            escreval("")
+            escreval("Todas as especialidades possuem a quantidade")
+            escreval("minima de profissionais exigida.")
+            escreval("")
+            escreval("CONCLUSAO: O plantao pode ser publicado.")
+
+         senao
+
+            escreval("----------------------------------------------")
+            escreval("COBERTURA MINIMA NAO ATINGIDA")
+            escreval("----------------------------------------------")
+            escreval("")
+            escreval("CONCLUSAO: O plantao nao pode ser publicado.")
+            escreval("")
+            escreval("Motivo ou motivos da reprovacao:")
+            escreval("")
+
+            // As verificacoes sao independentes para mostrar
+            // todas as especialidades insuficientes
+
+            se qtdClinicos < minimoClinicos entao
+
+               escreval("- Clinicos Gerais insuficientes.")
+               escreval("  Quantidade necessaria: ", minimoClinicos)
+               escreval("  Quantidade informada: ", qtdClinicos)
+               escreval("")
+
+            fimse
+
+            se qtdPediatras < minimoPediatras entao
+
+               escreval("- Pediatras insuficientes.")
+               escreval("  Quantidade necessaria: ", minimoPediatras)
+               escreval("  Quantidade informada: ", qtdPediatras)
+               escreval("")
+
+            fimse
+
+            se qtdCirurgioes < minimoCirurgioes entao
+
+               escreval("- Cirurgioes insuficientes.")
+               escreval("  Quantidade necessaria: ", minimoCirurgioes)
+               escreval("  Quantidade informada: ", qtdCirurgioes)
+               escreval("")
+
+            fimse
+
+         fimse
+
+      senao
+
+         // Tratamento  nico das quantidades invalidas
+         escreval("")
+         escreval("==============================================")
+         escreval("               DADOS INVALIDOS")
+         escreval("==============================================")
+         escreval("")
+
+         se quantidadeClinicosValida = falso entao
+
+            escreval("- Quantidade de Clinicos Gerais invalida.")
+            escreval("  Valor informado: ", qtdClinicos)
+            escreval("  Intervalo permitido: 0 a ", maximoClinicos)
+            escreval("")
+
+         fimse
+
+         se quantidadePediatrasValida = falso entao
+
+            escreval("- Quantidade de Pediatras invalida.")
+            escreval("  Valor informado: ", qtdPediatras)
+            escreval("  Intervalo permitido: 0 a ", maximoPediatras)
+            escreval("")
+
+         fimse
+
+         se quantidadeCirurgioesValida = falso entao
+
+            escreval("- Quantidade de Cirurgioes invalida.")
+            escreval("  Valor informado: ", qtdCirurgioes)
+            escreval("  Intervalo permitido: 0 a ", maximoCirurgioes)
+            escreval("")
+
+         fimse
+
+         escreval("A cobertura do plantao nao foi analisada.")
+         escreval("Execute novamente o programa e informe")
+         escreval("quantidades dentro dos intervalos permitidos.")
+
+      fimse
+
+   senao
+
+      // Tratamento da opcao de turno invalida
+      escreval("")
+      escreval("==============================================")
+      escreval("               OPCAO INVALIDA")
+      escreval("==============================================")
+      escreval("")
+      escreval("A opcao ", turno, " nao corresponde a um turno valido.")
+      escreval("")
+      escreval("Opcoes permitidas:")
+      escreval("1 - Manha")
+      escreval("2 - Tarde")
+      escreval("3 - Noite")
+      escreval("")
+      escreval("A analise do plantao nao foi realizada.")
+      escreval("Execute novamente o programa e selecione")
+      escreval("uma das opcoes disponiveis.")
+
+   fimse
+
+   escreval("")
+   escreval("==============================================")
+   escreval("            ENCERRAMENTO DO MEDSHIFT")
+   escreval("==============================================")
