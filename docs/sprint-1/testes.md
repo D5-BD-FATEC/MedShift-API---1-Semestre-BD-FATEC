@@ -48,21 +48,22 @@ Nesse caso, o valor deverá ser utilizado normalmente na análise da cobertura.
 
 ### Limite máximo validado
 
-O limite máximo permitido é de **11 médicos por turno**.
+O limite máximo permitido é de **11 médicos por especialidade em cada turno**.
 
-Esse limite considera o total de profissionais informados para o plantão,
-somando as três especialidades:
+O limite deverá ser verificado individualmente para:
 
 - Clínicos Gerais;
 - Pediatras;
 - Cirurgiões.
 
-A soma total não poderá ultrapassar **11 profissionais**.
+Cada especialidade poderá possuir entre **0 e 11 profissionais**.
 
-O limite de 11 médicos por turno foi proposto pela equipe e validado pelo cliente/P2.
+Considerando as três especialidades, o total máximo possível em um turno é de
+**33 médicos**, desde que nenhuma especialidade ultrapasse o limite individual
+de 11 profissionais.
 
-**Valor máximo:** 11 médicos por turno.
-
+**Máximo por especialidade:** 11 médicos.  
+**Máximo total possível por turno:** 33 médicos.  
 **Status:** Validado pelo cliente/P2.
 
 ### Tratamento de entradas inválidas
@@ -78,10 +79,11 @@ Nesta Sprint, não é obrigatório solicitar uma nova digitação após um erro.
 São consideradas entradas inválidas:
 
 - quantidades negativas;
-- opções de turno inexistentes;
-
+- quantidades superiores a 11 profissionais em qualquer especialidade;
+- opções de turno inexistentes.
 
 A quantidade **0 não é inválida**.
+
 
 ### Resultado final da análise
 
@@ -92,7 +94,6 @@ Quando a análise for concluída normalmente, o sistema deverá informar:
 - a especialidade ou as especialidades insuficientes, quando houver;
 - a quantidade necessária e a quantidade informada para cada especialidade insuficiente;
 - se o plantão pode ou não ser publicado.
-- total de profissionais superior a 11 médicos no plantão.
 
 ---
 
@@ -366,8 +367,8 @@ O teste será aprovado se o sistema identificar corretamente a insuficiência de
 
 **Objetivo:**
 
-Verificar se um plantão com exatamente 11 médicos é aceito como válido quando
-também atende à cobertura mínima das especialidades.
+Verificar se o sistema aceita as quantidades exatamente no limite máximo
+permitido de 11 profissionais em cada especialidade.
 
 **Dados de entrada:**
 
@@ -392,16 +393,15 @@ Cobertura mínima: ATINGIDA
 
 Conclusão:
 Plantão PODE ser publicado.
-**Critério de sucesso:**
-````
+```
 ---
 
 ## CT09 — Quantidade superior ao limite máximo
 
 **Objetivo:**
 
-Verificar se o sistema rejeita um plantão cujo total de profissionais
-ultrapasse o limite máximo de 11 médicos.
+Verificar se o sistema rejeita uma quantidade superior ao limite máximo
+de 11 profissionais em qualquer especialidade.
 
 **Dados de entrada:**
 
@@ -416,20 +416,14 @@ ultrapasse o limite máximo de 11 médicos.
 **Resultado esperado:**
 
 ```text
-ERRO: quantidade total de profissionais inválida.
+ERRO: quantidade de Clínicos Gerais inválida.
 
 O limite máximo permitido é de 11 médicos por especialidade.
 
-Total informado: 14 médicos.
+Quantidade informada de Clínicos Gerais: 12.
 
 Análise encerrada.
 ```
-
-**Critério de sucesso:**
-
- O teste será aprovado se o sistema rejeitar uma quantidade superior ao limite, informar claramente o erro e encerrar a análise sem utilizar o valor informado.
-
-
 
 ---
 
@@ -488,7 +482,6 @@ Os estados utilizados serão:
 - **A executar:** cenário ainda não testado;
 - **Aprovado:** comportamento obtido corresponde ao resultado esperado;
 - **Reprovado:** comportamento obtido não corresponde ao resultado esperado;
-- **Aguardando definição e validação:** cenário depende de uma regra que ainda precisa ser definida pela equipe e posteriormente validada pelo cliente/P2.
 
 Caso um teste seja reprovado, o problema identificado deverá ser corrigido e o cenário executado novamente antes que a funcionalidade correspondente seja considerada concluída.
 
@@ -510,7 +503,7 @@ Durante a Sprint Review, a equipe deverá demonstrar obrigatoriamente pelo menos
 4. **Seleção de uma opção inválida**  
    Sugestão: CT04.
 
-Como o limite máximo de 11 médicos por turno já foi validado pelo cliente/P2,
+Como o limite máximo de 11 médicos por especialidade já foi validado pelo cliente/P2,
 os cenários CT08 e CT09 também poderão ser utilizados durante a Sprint Review
 para demonstrar o comportamento do sistema no limite máximo e acima dele.
 
