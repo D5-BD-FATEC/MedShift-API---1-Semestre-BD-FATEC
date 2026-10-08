@@ -95,7 +95,7 @@ Caso o Git esteja instalado, o repositório também pode ser clonado.
 Abra o terminal, Prompt de Comando, PowerShell ou Git Bash e execute:
 
 ```bash
-git clone https://github.com/D7-BD-FATEC/MedShift-API---1-Semestre-BD-FATEC.git
+git clone https://github.com/D5-BD-FATEC/MedShift-API---1-Semestre-BD-FATEC.git
 ```
 
 Após a conclusão, acesse a pasta criada:
@@ -110,21 +110,10 @@ O conteúdo do projeto estará disponível localmente.
 
 ## 8. Localização do código-fonte
 
-Após obter o projeto, localize o arquivo que contém o algoritmo correspondente à Sprint que deseja executar.
+Após obter o projeto, o algoritmo principal do MedShift encontra-se atualmente
+na raiz do repositório, no arquivo:
 
-A estrutura do repositório poderá ser atualizada durante o desenvolvimento do projeto.
-
-O usuário deverá localizar o arquivo principal utilizado pela equipe para execução do MedShift.
-
-Caso o código seja posteriormente organizado em uma pasta específica, recomenda-se utilizar uma estrutura semelhante a:
-
-```text
-src/
-└── medshift.alg
-```
-
-O nome e a localização definitivos devem corresponder à organização adotada no repositório.
-
+Sistema MedShift
 ---
 
 ## 9. Abertura do projeto no VisuAlg
@@ -449,6 +438,9 @@ docs/
 │   ├── testes.md
 │   └── decisoes.md
 │
+├── sprint-2/
+│   └── sprint-backlog.md
+│
 ├── branch-strategy.md
 ├── commit-pattern.md
 ├── manual-instalacao.md
@@ -469,9 +461,7 @@ docs/backlog/product-backlog.md
 
 Contém as necessidades, User Stories, prioridades e critérios relacionados ao produto.
 
-
-Troque esse bloco inteiro por:
-
+---
 
 ### Sprint Backlogs
 
