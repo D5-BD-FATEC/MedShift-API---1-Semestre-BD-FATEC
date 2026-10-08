@@ -172,7 +172,7 @@ O usuário deverá conseguir escolher o turno pelo teclado sem qualquer alteraç
 
 ---
 
-## DEC06 — Limite máximo de profissionais por turno
+## DEC06 — Limite máximo de profissionais por especialidade
 
 **Categoria:** Regra de negócio  
 **Origem:** Proposta da equipe validada pelo cliente/P2  
@@ -180,19 +180,19 @@ O usuário deverá conseguir escolher o turno pelo teclado sem qualquer alteraç
 
 ### Decisão
 
-O limite máximo permitido será de **11 médicos por especialidade**.
+O limite máximo permitido é de **11 médicos por especialidade em cada turno**.
 
-O limite considera o total de profissionais informados para o plantão,
-independentemente da especialidade.
-
-Para verificar o limite máximo, deverão ser consideradas conjuntamente as
-quantidades de:
+O limite deverá ser verificado individualmente para:
 
 - Clínicos Gerais;
 - Pediatras;
 - Cirurgiões.
 
-A soma dessas quantidades não poderá ultrapassar **33 profissionais**.
+Cada especialidade poderá possuir entre **0 e 11 profissionais**.
+
+Considerando as três especialidades, o total máximo possível em um turno é de
+**33 médicos**, desde que nenhuma especialidade ultrapasse o limite individual
+de 11 profissionais.
 
 ### Justificativa
 
@@ -214,10 +214,11 @@ O cliente/P2 avaliou a proposta e validou o limite máximo de 11 médicos por es
 A partir desta validação:
 
 - o valor máximo deixa de ser representado por `X`;
-- o limite de 33 médicos por turno, sendo 11 por especialidade passa a ser uma regra confirmada da Sprint 1;
-- o total de profissionais das três especialidades deverá ser calculado;
-- totais entre 0 e 11 poderão prosseguir para as demais validações;
-- totais superiores a 33 por turno deverão ser considerados inválidos;
+- o limite de 11 médicos por especialidade passa a ser uma regra confirmada da Sprint 1;
+- cada especialidade deverá ser validada individualmente;
+- valores entre 0 e 11 em cada especialidade poderão prosseguir para as demais validações;
+- valores superiores a 11 em qualquer especialidade deverão ser considerados inválidos;
+- considerando as três especialidades, o total máximo possível por turno é de 33 médicos;
 - uma entrada inválida não deverá ser utilizada na análise do plantão.
 
 
@@ -233,12 +234,15 @@ Resultado: dentro do limite máximo.
 ```
 
 ### Exemplo inválido
+
+```text
 Clínicos Gerais: 5
 Pediatras: 12
 Cirurgiões: 3
 
 Total: 20 médicos
-Resultado: quantidade total inválida. Possuem 12 pediatras
+Resultado: quantidade inválida de Pediatras, pois ultrapassa o limite de 11.
+````
 
 
 
@@ -260,7 +264,7 @@ Nesta Sprint, o sistema não será obrigado a solicitar uma nova digitação ap�
 ### Exemplos de entradas inválidas
 
 - quantidade negativa de profissionais;
-- total de profissionais superior a 33 médicos no plantão;
+- total de profissionais superior a 11 médicos por especialidade;
 - opção de turno inexistente.
 
 A quantidade **0 não é inválida**.
