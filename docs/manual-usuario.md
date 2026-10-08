@@ -735,15 +735,12 @@ Para realizar uma nova análise, os dados deverão ser inseridos novamente.
 | Cirurgiões < 1 | Cobertura não atingida e plantão não pode ser publicado |
 | Quantidade igual a 0 | Entrada válida e utilizada na análise |
 | Quantidade negativa | Entrada inválida e análise encerrada |
-| Quantidade acima do limite máximo validado | Entrada inválida e análise encerrada |
-| Turno inexistente | Opção inválida e análise encerrada |
+| Quantidade superior a 11 em qualquer especialidade | Entrada inválida e análise encerrada || Turno inexistente | Opção inválida e análise encerrada |
 | Todos os dados válidos | Sistema realiza normalmente a análise |
 
-O limite máximo de profissionais por especialidade ainda está **em definição pela equipe** e é representado temporariamente por **X**.
+O limite máximo validado é de **11 profissionais por especialidade em cada turno**.
 
-Somente após a definição interna e a validação do cliente/P2 esse limite será considerado uma regra definitiva.
-
----
+Considerando as três especialidades, o total máximo possível é de **33 médicos por turno**.
 
 ## 27. Cenários utilizados na Sprint Review
 
@@ -756,8 +753,10 @@ Durante a Sprint Review, a equipe deverá estar preparada para demonstrar pelo m
 
 Depois que o limite máximo for definido pela equipe e validado pelo cliente/P2, também poderão ser demonstrados:
 
-5. uma quantidade exatamente igual ao limite máximo;
-6. uma quantidade superior ao limite máximo.
+Como o limite máximo já foi validado pelo cliente/P2, também poderão ser demonstrados:
+
+5. uma quantidade exatamente igual a 11 profissionais em uma especialidade;
+6. uma quantidade superior a 11 profissionais em uma especialidade.
 
 O sistema deverá executar os diferentes cenários sem necessidade de alteração do código-fonte durante a demonstração.
 
@@ -820,9 +819,9 @@ Quantidades negativas não são aceitas.
 
 A quantidade `0` é válida e representa que não existem profissionais disponíveis naquela especialidade.
 
-O limite máximo de profissionais por especialidade ainda está sendo definido pela equipe e é representado temporariamente por **X**.
+O limite máximo permitido é de **11 profissionais por especialidade**.
 
-Depois que a equipe definir o valor e o cliente/P2 validá-lo, quantidades superiores ao limite aprovado serão consideradas inválidas.
+Quantidades superiores a 11 em qualquer especialidade serão consideradas inválidas.
 
 ---
 
@@ -1056,6 +1055,5 @@ O usuário deverá conseguir realizar todo o processo através do console do Vis
 
 Nesta Sprint, uma execução poderá analisar um único plantão.
 
-O limite máximo de profissionais por especialidade ainda está **em definição pela equipe**, sendo representado temporariamente por **X**.
-
-Depois que a equipe definir um valor plausível, ele deverá ser apresentado ao cliente/P2 para validação antes de se tornar uma regra definitiva do sistema.
+O limite máximo validado é de **11 profissionais por especialidade em cada turno**,
+permitindo um total máximo possível de **33 médicos por turno**.
