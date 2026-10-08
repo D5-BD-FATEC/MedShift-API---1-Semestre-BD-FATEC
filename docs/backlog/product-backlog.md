@@ -537,17 +537,142 @@ A Sprint 2 amplia o MedShift para permitir o cadastro da equipe médica,
 a distribuição dos profissionais entre os três turnos de um único dia
 e a validação das regras relacionadas à construção da escala.
 
-As User Stories definidas para esta Sprint são:
+---
 
-- **US07 — Cadastrar profissionais da equipe médica**
-- **US08 — Consultar a lista completa de profissionais cadastrados**
-- **US09 — Localizar profissional pelo identificador**
-- **US10 — Escalar profissional em um turno**
-- **US11 — Validar regras de escalação**
-- **US12 — Validar cobertura dos três turnos**
-- **US13 — Informar turnos e especialidades com cobertura insuficiente**
-- **US14 — Apresentar quantidade de plantões por profissional**
-- **US15 — Apresentar resumo do dia**
+## US07 — Cadastrar profissionais da equipe médica
+
+Como coordenador de escala,
+quero cadastrar os profissionais da equipe médica,
+para que eles possam ser utilizados na construção da escala do dia.
+
+### Valor de Negócio
+
+Permitir que o sistema possua as informações necessárias sobre os profissionais
+disponíveis, formando a base para as consultas e para a construção da escala médica.
+
+**Prioridade:** A definir pelo cliente/P2
+
+---
+
+## US08 — Consultar a lista completa de profissionais cadastrados
+
+Como coordenador de escala,
+quero visualizar a lista de todos os profissionais cadastrados,
+para ter uma visão geral da equipe médica disponível.
+
+### Valor de Negócio
+
+Facilitar a visualização da equipe cadastrada, permitindo que a coordenação
+consulte os profissionais disponíveis antes de realizar as escalações.
+
+**Prioridade:** A definir pelo cliente/P2
+
+---
+
+## US09 — Localizar profissional pelo identificador
+
+Como coordenador de escala,
+quero localizar um profissional pelo identificador numérico,
+para consultar rapidamente seus dados.
+
+### Valor de Negócio
+
+Permitir a localização rápida de um profissional específico,
+reduzindo o tempo necessário para consultar seus dados e sua disponibilidade.
+
+**Prioridade:** A definir pelo cliente/P2
+
+---
+
+## US10 — Escalar profissional em um turno
+
+Como coordenador de escala,
+quero atribuir um profissional cadastrado a um turno do dia,
+para construir a escala médica.
+
+### Valor de Negócio
+
+Permitir que a coordenação distribua os profissionais cadastrados entre os
+turnos do dia e construa efetivamente a escala médica.
+
+**Prioridade:** A definir pelo cliente/P2
+
+---
+
+## US11 — Validar regras de escalação
+
+Como coordenador de escala,
+quero que o sistema valide cada tentativa de escalação,
+para impedir conflitos e atribuições incorretas.
+
+### Valor de Negócio
+
+Reduzir erros na construção da escala, impedindo atribuições que violem
+as regras de especialidade, disponibilidade e quantidade de plantões.
+
+**Prioridade:** A definir pelo cliente/P2
+
+---
+
+## US12 — Validar cobertura dos três turnos
+
+Como coordenador de escala,
+quero validar a cobertura dos três turnos do dia,
+para saber se Manhã, Tarde e Noite possuem a quantidade mínima necessária de profissionais.
+
+### Valor de Negócio
+
+Permitir que a coordenação identifique se os três turnos possuem profissionais
+suficientes para atender à cobertura mínima exigida.
+
+**Prioridade:** A definir pelo cliente/P2
+
+---
+
+## US13 — Informar turnos e especialidades com cobertura insuficiente
+
+Como coordenador de escala,
+quero saber quais turnos e quais especialidades estão com cobertura insuficiente,
+para identificar os problemas existentes na escala do dia.
+
+### Valor de Negócio
+
+Facilitar a identificação dos pontos de insuficiência da escala,
+permitindo que a coordenação saiba onde existem profissionais em falta.
+
+**Prioridade:** A definir pelo cliente/P2
+
+---
+
+## US14 — Apresentar quantidade de plantões por profissional
+
+Como coordenador de escala,
+quero visualizar quantos plantões foram atribuídos a cada profissional,
+para acompanhar a distribuição dos plantões da equipe.
+
+### Valor de Negócio
+
+Permitir o acompanhamento da distribuição dos plantões e facilitar a identificação
+da carga atribuída a cada profissional.
+
+**Prioridade:** A definir pelo cliente/P2
+
+---
+
+## US15 — Apresentar resumo do dia
+
+Como coordenador de escala,
+quero receber um resumo geral da escala do dia,
+para compreender rapidamente a situação dos três turnos e dos profissionais.
+
+### Valor de Negócio
+
+Fornecer uma visão consolidada da escala do dia, reunindo a situação dos turnos,
+as insuficiências existentes e a quantidade de plantões atribuída aos profissionais.
+
+**Prioridade:** A definir pelo cliente/P2
+
+---
 
 Os critérios de aceitação, tarefas, dependências, regras de negócio e
 cenários de teste relacionados à Sprint 2 estão detalhados no Sprint Backlog:
