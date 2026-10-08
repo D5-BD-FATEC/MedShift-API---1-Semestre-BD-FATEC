@@ -144,8 +144,8 @@ Então ele deve ser aceito e utilizado na análise do plantão.
 
 **Cenário inválido**
 
-Dado que o coordenador informe uma quantidade negativa ou que o total de médicos
-informados para o plantão ultrapasse o limite máximo validado,
+Dado que o coordenador informe uma quantidade negativa ou uma quantidade
+superior a 11 médicos em qualquer especialidade,
 Quando o sistema realizar a validação,
 Então deve informar claramente que o valor é inválido e impedir que ele seja
 utilizado na análise.
@@ -158,13 +158,24 @@ Então os dois comportamentos devem ser demonstráveis apenas pela alteração d
 
 ### Definição do limite máximo
 
-A equipe propõe o limite máximo de **33 médicos por turno, sendo 11 por especialidade**.
+Foi validado com o cliente/P2 o limite máximo de **11 médicos por especialidade em cada turno**.
+
+O limite é aplicado individualmente a:
+
+- Clínico Geral;
+- Pediatra;
+- Cirurgião.
+
+Dessa forma, cada especialidade poderá possuir entre 0 e 11 profissionais.
+
+Considerando as três especialidades, o plantão poderá possuir no máximo
+**33 médicos no total**, desde que nenhuma especialidade ultrapasse o limite
+individual de 11 profissionais.
 
 #### Justificativa
 
-O limite foi definido com o objetivo de garantir a cobertura mínima das
-especialidades, permitindo uma margem adicional de médicos para aumentar
-a segurança da escala e lidar com eventuais indisponibilidades.
+O limite foi definido com o objetivo de permitir uma margem de profissionais
+acima da cobertura mínima necessária para o plantão.
 
 A cobertura mínima exigida por plantão é de:
 
@@ -172,11 +183,12 @@ A cobertura mínima exigida por plantão é de:
 - 1 Pediatra;
 - 1 Cirurgião.
 
-Assim, o limite máximo proposto permite atender às necessidades mínimas do
-plantão e ainda manter uma margem adicional de profissionais.
+Quantidades superiores a 11 profissionais em qualquer especialidade deverão
+ser consideradas inválidas.
 
-Quantidades acima desse limite também poderão ser tratadas como possíveis
-erros de digitação.
+**Máximo por especialidade:** 11 médicos.  
+**Máximo total possível por turno:** 33 médicos.  
+**Status:** Validado pelo cliente/P2.
 
 ---
 
