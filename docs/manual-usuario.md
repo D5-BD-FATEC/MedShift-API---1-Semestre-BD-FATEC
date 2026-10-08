@@ -472,35 +472,13 @@ A quantidade `0` é válida, pois pode representar a ausência de profissionais 
 
 Valores excessivamente altos podem representar erros de digitação.
 
-A equipe ainda está definindo internamente um valor máximo plausível de profissionais por especialidade em um único plantão.
-
-Enquanto esse valor não for definido, ele será representado temporariamente por **X** na documentação.
-
-Depois que a equipe definir um valor numérico e sua justificativa, a proposta será apresentada ao cliente/P2 para validação.
+O limite máximo validado é de **11 médicos por especialidade em cada turno**.
 
 ### Limite máximo
 
 ```text
-X profissionais por especialidade
+11 profissionais por especialidade
 ```
-
-O símbolo **X é apenas uma representação temporária na documentação** e não corresponde a um valor numérico definitivo.
-
-Após a definição e validação, a regra será:
-
-```text
-0 até X → valores válidos
-Acima de X → valor inválido
-```
-
-A quantidade `0` continuará sendo válida, pois pode representar ausência de profissionais disponíveis em determinada especialidade.
-
-**Status:** Em definição pela equipe.
-
-Após a equipe definir o valor, esta seção deverá ser atualizada com a proposta concreta.
-
-Depois da validação pelo cliente/P2, o limite poderá ser considerado uma regra definitiva do sistema.
-
 ---
 
 ## 19. Mensagens apresentadas pelo sistema
