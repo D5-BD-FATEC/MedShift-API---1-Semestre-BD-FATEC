@@ -1101,8 +1101,7 @@ Escalar como Clínico Geral
 
 ### Resultado esperado
 
-A escalação deverá ser recusada.
-
+A escalação deverá ser recusada e os dados da escala deverão permanecer inalterados.
 ---
 
 ## CT2-09 — Mesmo profissional duas vezes no mesmo turno
@@ -1113,8 +1112,7 @@ Verificar a regra R3.
 
 ### Resultado esperado
 
-A segunda tentativa deverá ser recusada.
-
+A segunda tentativa deverá ser recusada e os dados da escala deverão permanecer inalterados.
 ---
 
 ## CT2-10 — Terceiro plantão no dia
@@ -1140,8 +1138,7 @@ Noite
 
 ### Resultado esperado
 
-A escalação deverá ser recusada.
-
+A escalação deverá ser recusada e os dados da escala deverão permanecer inalterados.
 ---
 
 ## CT2-11 — Profissional indisponível
@@ -1164,7 +1161,7 @@ Escalar no turno da Noite
 
 ### Resultado esperado
 
-A escalação deverá ser recusada.
+A escalação deverá ser recusada e os dados da escala deverão permanecer inalterados.
 
 ---
 
@@ -1228,6 +1225,39 @@ O sistema deverá apresentar:
 - situação da Noite;
 - insuficiências;
 - quantidade de plantões de cada profissional.
+  ## CT2-16 — Tentativa de escalar profissional inexistente
+
+### Objetivo
+
+Verificar se o sistema impede a escalação quando o identificador informado
+não pertence a nenhum profissional cadastrado.
+
+### Procedimento
+
+Informar um identificador que não esteja cadastrado e tentar realizar uma escalação.
+
+### Resultado esperado
+
+O sistema deverá recusar a escalação, informar que o profissional não foi
+encontrado e manter os dados da escala inalterados.
+
+---
+
+## CT2-17 — Tentativa de escalação em turno inexistente
+
+### Objetivo
+
+Verificar se o sistema impede a escalação quando for informada uma opção
+de turno diferente de Manhã, Tarde ou Noite.
+
+### Procedimento
+
+Tentar realizar uma escalação utilizando uma opção de turno inexistente.
+
+### Resultado esperado
+
+O sistema deverá recusar a escalação, informar que o turno é inválido
+e manter os dados da escala inalterados.
 
 ---
 
