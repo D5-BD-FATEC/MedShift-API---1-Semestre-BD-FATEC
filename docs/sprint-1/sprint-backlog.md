@@ -103,8 +103,6 @@ Nenhuma dependência funcional obrigatória.
 #### Dependências
 
 - US02 — Informar a quantidade de profissionais.
-- Definição interna do limite máximo de profissionais.
-- Validação posterior do limite máximo pelo cliente/P2.
 
 ---
 
@@ -266,8 +264,8 @@ Entre os principais cenários previstos estão:
 | CT09 | Quantidade superior ao limite máximo |
 | CT10 | Mais de uma especialidade com cobertura insuficiente |
 
-Os cenários CT08 e CT09 permanecem dependentes da definição interna do limite
-máximo pela equipe e da posterior validação pelo cliente/P2.
+Os cenários CT08 e CT09 utilizam o limite máximo validado de
+11 médicos por especialidade.
 
 ### Demonstração na Sprint Review
 
@@ -293,9 +291,6 @@ Ao final da Sprint 1, permaneceram registradas as seguintes pendências:
 - [ ] equipe revisar a decomposição das histórias em tarefas;
 - [ ] equipe realizar as estimativas das tarefas;
 - [ ] equipe confirmar que as histórias selecionadas atendem ao DoR;
-- [ ] equipe justificar o valor máximo escolhido;
-- [ ] proposta do limite máximo ser apresentada ao cliente/P2;
-- [ ] cliente/P2 validar ou solicitar alteração do limite máximo.
 
 ---
 
