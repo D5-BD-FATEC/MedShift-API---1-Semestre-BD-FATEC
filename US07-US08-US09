@@ -1,0 +1,317 @@
+algoritmo "MedShift_US07_US08_US09"
+
+// User Story:
+// US07 - Como coordenador de escala, quero cadastrar os
+// profissionais da equipe medica, para que eles possam ser
+// utilizados na construcao da escala do dia.
+
+// US08 - Como coordenador de escala, quero visualizar a
+// lista de todos os profissionais cadastrados, para ter uma
+// visão geral da equipe médica disponível.
+
+// US09 - Como coordenador de escala, quero localizar um
+// profissional pelo identificador numérico, para consultar
+// rapidamente seus dados.
+
+var
+
+capacidadeMaxima : inteiro
+qtdProfissionais : inteiro
+
+id : vetor[1..20] de inteiro
+nome : vetor[1..20] de caractere
+especialidade : vetor[1..20] de caractere
+
+disponivelManha : vetor[1..20] de logico
+disponivelTarde : vetor[1..20] de logico
+disponivelNoite : vetor[1..20] de logico
+
+i : inteiro
+opcaoEspecialidade : inteiro
+resposta : caractere
+
+// Variaveis utilizadas na busca por ID
+idBusca : inteiro
+posicaoEncontrada : inteiro
+profissionalEncontrado : logico
+desejaBuscar : caractere
+
+inicio
+
+capacidadeMaxima <- 20
+qtdProfissionais <- 0
+resposta <- "S"
+
+escreval("==============================================")
+escreval("                  MEDSHIFT")
+escreval("        CADASTRO DA EQUIPE MEDICA")
+escreval("==============================================")
+
+repita
+
+   escreval("")
+   escreval("----------------------------------------------")
+   escreval("Cadastro do profissional ", qtdProfissionais + 1)
+   escreval("----------------------------------------------")
+
+   // Incremento automatico da quantidade de profissionais
+   qtdProfissionais <- qtdProfissionais + 1
+
+   // O ID recebe automaticamente o numero do cadastro
+   id[qtdProfissionais] <- qtdProfissionais
+
+   escreval("ID gerado automaticamente: ", id[qtdProfissionais])
+
+   escreva("Nome do profissional: ")
+   leia(nome[qtdProfissionais])
+
+   // Cadastro e validacao da especialidade
+   repita
+
+      escreval("")
+      escreval("Especialidade:")
+      escreval("1 - Clinico Geral")
+      escreval("2 - Pediatra")
+      escreval("3 - Cirurgiao")
+      escreva("Informe a opcao desejada: ")
+      leia(opcaoEspecialidade)
+
+      escolha opcaoEspecialidade
+
+      caso 1
+         especialidade[qtdProfissionais] <- "Clinico Geral"
+
+      caso 2
+         especialidade[qtdProfissionais] <- "Pediatra"
+
+      caso 3
+         especialidade[qtdProfissionais] <- "Cirurgiao"
+
+      outrocaso
+         escreval("")
+         escreval("ERRO: Especialidade invalida.")
+         escreval("Informe uma opcao entre 1 e 3.")
+
+      fimescolha
+
+   ate (opcaoEspecialidade >= 1) e (opcaoEspecialidade <= 3)
+
+   // Disponibilidade pela manha
+   escreva("Disponivel pela manha (S/N)? ")
+   leia(resposta)
+
+   se (resposta = "S") ou (resposta = "s") entao
+      disponivelManha[qtdProfissionais] <- verdadeiro
+   senao
+      disponivelManha[qtdProfissionais] <- falso
+   fimse
+
+   // Disponibilidade pela tarde
+   escreva("Disponivel pela tarde (S/N)? ")
+   leia(resposta)
+
+   se (resposta = "S") ou (resposta = "s") entao
+      disponivelTarde[qtdProfissionais] <- verdadeiro
+   senao
+      disponivelTarde[qtdProfissionais] <- falso
+   fimse
+
+   // Disponibilidade pela noite
+   escreva("Disponivel pela noite (S/N)? ")
+   leia(resposta)
+
+   se (resposta = "S") ou (resposta = "s") entao
+      disponivelNoite[qtdProfissionais] <- verdadeiro
+   senao
+      disponivelNoite[qtdProfissionais] <- falso
+   fimse
+
+   escreval("")
+   escreval("PROFISSIONAL CADASTRADO COM SUCESSO!")
+   escreval("ID DO PROFISSIONAL: ", id[qtdProfissionais])
+
+   // Verifica se ainda existe espaco para novos cadastros
+   se qtdProfissionais < capacidadeMaxima entao
+
+      escreval("")
+      escreva("Deseja cadastrar outro profissional (S/N)? ")
+      leia(resposta)
+
+   senao
+
+      escreval("")
+      escreval("LIMITE MAXIMO DE CADASTROS ATINGIDO!")
+      resposta <- "N"
+
+   fimse
+
+ate (resposta = "N") ou (resposta = "n")
+
+// Exibicao dos profissionais cadastrados
+escreval("")
+escreval("==============================================")
+escreval("          PROFISSIONAIS CADASTRADOS")
+escreval("==============================================")
+
+se qtdProfissionais = 0 entao
+
+   escreval("")
+   escreval("Nenhum profissional foi cadastrado.")
+
+senao
+
+   para i de 1 ate qtdProfissionais faca
+
+      escreval("")
+      escreval("----------------------------------------------")
+      escreval("Profissional ", i)
+      escreval("----------------------------------------------")
+      escreval("ID: ", id[i])
+      escreval("Nome: ", nome[i])
+      escreval("Especialidade: ", especialidade[i])
+
+      escreva("Disponibilidade: ")
+
+      se disponivelManha[i] = verdadeiro entao
+         escreva("Manha; ")
+      fimse
+
+      se disponivelTarde[i] = verdadeiro entao
+         escreva("Tarde; ")
+      fimse
+
+      se disponivelNoite[i] = verdadeiro entao
+         escreva("Noite; ")
+      fimse
+
+      se (disponivelManha[i] = falso) e (disponivelTarde[i] = falso) e (disponivelNoite[i] = falso) entao
+         escreva("Nenhum turno informado")
+      fimse
+
+      escreval("")
+
+   fimpara
+
+fimse
+
+escreval("")
+escreval("==============================================")
+escreval("Total de profissionais cadastrados: ", qtdProfissionais)
+escreval("==============================================")
+
+// US09 - Localizacao de profissional pelo ID
+
+se qtdProfissionais > 0 entao
+
+   escreval("")
+   escreval("==============================================")
+   escreval("          BUSCA DE PROFISSIONAL POR ID")
+   escreval("==============================================")
+
+   desejaBuscar <- "S"
+
+   repita
+
+      escreval("")
+      escreva("Informe o ID do profissional: ")
+      leia(idBusca)
+
+      // Reinicia os controles antes de cada busca
+      profissionalEncontrado <- falso
+      posicaoEncontrada <- 0
+
+      // Procura o ID dentro do vetor
+      para i de 1 ate qtdProfissionais faca
+
+         se id[i] = idBusca entao
+
+            profissionalEncontrado <- verdadeiro
+            posicaoEncontrada <- i
+
+         fimse
+
+      fimpara
+
+      se profissionalEncontrado = verdadeiro entao
+
+         escreval("")
+         escreval("==============================================")
+         escreval("          PROFISSIONAL LOCALIZADO")
+         escreval("==============================================")
+         escreval("")
+         escreval("ID: ", id[posicaoEncontrada])
+         escreval("Nome: ", nome[posicaoEncontrada])
+         escreval("Especialidade: ", especialidade[posicaoEncontrada])
+
+         escreva("Disponibilidade: ")
+
+         se disponivelManha[posicaoEncontrada] = verdadeiro entao
+            escreva("Manha; ")
+         fimse
+
+         se disponivelTarde[posicaoEncontrada] = verdadeiro entao
+            escreva("Tarde; ")
+         fimse
+
+         se disponivelNoite[posicaoEncontrada] = verdadeiro entao
+            escreva("Noite; ")
+         fimse
+
+         se (disponivelManha[posicaoEncontrada] = falso) e (disponivelTarde[posicaoEncontrada] = falso) e (disponivelNoite[posicaoEncontrada] = falso) entao
+
+            escreva("Nenhum turno informado")
+
+         fimse
+
+         escreval("")
+
+      senao
+
+         escreval("")
+         escreval("==============================================")
+         escreval("          PROFISSIONAL NAO LOCALIZADO")
+         escreval("==============================================")
+         escreval("")
+         escreval("ERRO: Nao existe profissional cadastrado")
+         escreval("com o ID ", idBusca, ".")
+         escreval("")
+         escreval("Intervalo atual de IDs: 1 a ", qtdProfissionais)
+
+      fimse
+
+      escreval("")
+      escreva("Deseja buscar outro profissional (S/N)? ")
+      leia(desejaBuscar)
+
+      enquanto (desejaBuscar <> "S") e (desejaBuscar <> "s") e (desejaBuscar <> "N") e (desejaBuscar <> "n") faca
+
+         escreval("")
+         escreval("ERRO: Resposta invalida.")
+         escreval("Informe S para sim ou N para nao.")
+         escreval("")
+         escreva("Deseja buscar outro profissional (S/N)? ")
+         leia(desejaBuscar)
+
+      fimenquanto
+
+   ate (desejaBuscar = "N") ou (desejaBuscar = "n")
+
+senao
+
+   escreval("")
+   escreval("==============================================")
+   escreval("          BUSCA NAO REALIZADA")
+   escreval("==============================================")
+   escreval("")
+   escreval("Nao existem profissionais cadastrados.")
+   escreval("Cadastre pelo menos um profissional")
+   escreval("antes de realizar uma busca por ID.")
+
+fimse
+
+escreval("")
+escreval("==============================================")
+escreval("            ENCERRAMENTO DO MEDSHIFT")
+escreval("==============================================")
+
+fimalgoritmo
