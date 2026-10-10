@@ -75,7 +75,6 @@ respeitando as regras de disponibilidade, especialidade e quantidade de plantõe
 | **Lucas Augusto** | Product Owner |
 | **Fernanda Martins** | Scrum Master |
 | **Augusto Rocha** | Desenvolvedor |
-| **Allan Almeida** | Desenvolvedor |
 | **Arthur Peres** | Desenvolvedor |
 
 ---
