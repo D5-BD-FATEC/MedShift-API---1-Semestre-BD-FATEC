@@ -126,6 +126,42 @@ repita
       disponivelNoite[qtdProfissionais] <- falso
    fimse
 
+   enquanto (disponivelManha[qtdProfissionais] = falso) e (disponivelTarde[qtdProfissionais] = falso) e (disponivelNoite[qtdProfissionais] = falso) faca
+         escreval ("")
+         escreval ("==============================================================")
+         escreval ("    CADASTRE OS TURNOS CORRETAMENTE OU REINICIE O SISTEMA.    ")
+         escreval ("==============================================================")
+         escreval ("")
+         escreva("Disponivel pela manha (S/N)? ")
+         leia(resposta)
+
+         se (resposta = "S") ou (resposta = "s") entao
+            disponivelManha[qtdProfissionais] <- verdadeiro
+         senao
+            disponivelManha[qtdProfissionais] <- falso
+         fimse
+
+         // Disponibilidade pela tarde
+         escreva("Disponivel pela tarde (S/N)? ")
+         leia(resposta)
+
+         se (resposta = "S") ou (resposta = "s") entao
+            disponivelTarde[qtdProfissionais] <- verdadeiro
+         senao
+            disponivelTarde[qtdProfissionais] <- falso
+         fimse
+
+         // Disponibilidade pela noite
+         escreva("Disponivel pela noite (S/N)? ")
+         leia(resposta)
+
+         se (resposta = "S") ou (resposta = "s") entao
+            disponivelNoite[qtdProfissionais] <- verdadeiro
+         senao
+            disponivelNoite[qtdProfissionais] <- falso
+         fimse
+      fimenquanto
+
    escreval("")
    escreval("PROFISSIONAL CADASTRADO COM SUCESSO!")
    escreval("ID DO PROFISSIONAL: ", id[qtdProfissionais])
