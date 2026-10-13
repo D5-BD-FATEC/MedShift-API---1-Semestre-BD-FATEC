@@ -1,0 +1,114 @@
+# MedShift — Planejamento da Sprint 2
+
+## Divisão dos blocos de desenvolvimento
+
+A Sprint 2 está dividida em quatro blocos sequenciais, cada um responsável por um conjunto de funcionalidades do sistema de escala médica.
+
+---
+
+## Bloco 1 — Arthur
+
+**Tema:** Cadastro e consulta da equipe  
+**User Stories:** US07, US08 e US09
+
+### Objetivo
+Criar a base de profissionais que será utilizada por todas as outras funcionalidades do sistema.
+
+### US07 — Cadastro de profissionais
+- **Descrição:** Como coordenador de escala, quero cadastrar os profissionais da equipe médica, para que eles possam ser utilizados na construção da escala do dia.
+- **Situação:** Concluída.
+- **Prioridade:** 1 — Muito alta.
+- **Justificativa:** Todas as outras funcionalidades dependem dos profissionais cadastrados.
+
+### US08 — Listagem de profissionais
+- **Descrição:** Como coordenador de escala, quero visualizar a lista de todos os profissionais cadastrados, para ter uma visão geral da equipe médica disponível.
+- **Situação:** Concluída.
+- **Prioridade:** 2 — Muito alta.
+- **Justificativa:** Permite conferir se os cadastros foram armazenados corretamente.
+
+### US09 — Localização por ID
+- **Descrição:** Como coordenador de escala, quero localizar um profissional pelo identificador numérico, para consultar rapidamente seus dados.
+- **Situação:** Próxima.
+- **Prioridade:** 3 — Alta.
+- **Justificativa:** A busca pelo ID será necessária para selecionar um profissional e atribuí-lo a um turno.
+
+### Ordem de desenvolvimento
+1. US07 — Cadastrar profissionais.
+2. US08 — Listar profissionais.
+3. US09 — Buscar profissional por ID.
+
+### Resultado esperado
+- Cadastrar profissionais.
+- Gerar um ID automático.
+- Listar todos os profissionais cadastrados.
+- Localizar um profissional específico pelo ID.
+
+---
+
+## Bloco 2 — Augusto
+
+**Tema:** Construção e validação da escala  
+**User Stories:** US10 e US11
+
+### Objetivo
+Permitir que o coordenador selecione um profissional cadastrado e atribua esse profissional a um turno, evitando erros de escalação.
+
+### US10 — Atribuição de profissional ao turno
+- **Descrição:** Como coordenador de escala, quero atribuir um profissional cadastrado a um turno do dia, para construir a escala médica.
+- **Situação:** Pendente.
+- **Prioridade:** 4 — Alta.
+- **Dependências:** US07 e US09.
+- **Justificativa:** O profissional precisa estar cadastrado e ser localizado antes de receber um turno.
+
+### US11 — Validação da escalação
+- **Descrição:** Como coordenador de escala, quero que o sistema valide cada tentativa de escalação, para impedir conflitos e atribuições incorretas.
+- **Situação:** Pendente.
+- **Prioridade:** 5 — Muito alta.
+- **Dependência:** US10.
+- **Justificativa:** Evita que dados incorretos sejam adicionados à escala.
+
+### Validações da US11
+- [ ] O ID informado existe.
+- [ ] O turno informado é válido.
+- [ ] Verificar se o profissional já está escalado no mesmo turno.
+- [ ] Verificar se o profissional está disponível para o turno.
+- [ ] Verificar se o profissional já atingiu algum limite definido de plantões.
+- [ ] Verificar se existe espaço disponível no turno.
+- [ ] Verificar se a especialidade do profissional é válida.
+
+### Ordem de desenvolvimento
+1. US10 — Atribuir profissional ao turno.
+2. US11 — Validar a tentativa de escalação.
+
+### Resultado esperado
+- Localizar o profissional pelo ID.
+- Selecionar Manhã, Tarde ou Noite.
+- Atribuir o profissional ao turno.
+- Impedir escalas duplicadas ou incorretas.
+- Informar claramente o motivo de uma tentativa inválida.
+
+**Observação:** A US11 deve ser implementada junto da US10. O sistema não deve aceitar uma escalação antes de realizar as validações.
+
+---
+
+## Bloco 3 — Fernanda
+
+**Tema:** Análise da cobertura dos turnos  
+**User Stories:** US12 e US13
+
+### Objetivo
+Verificar se a escala construída atende à quantidade mínima de profissionais em todos os turnos.
+
+### US12 — Validação da cobertura dos três turnos
+- **Descrição:** Como coordenador de escala, quero validar a cobertura dos três turnos do dia, para saber se Manhã, Tarde e Noite possuem a quantidade mínima necessária de profissionais.
+- **Situação:** Pendente.
+- **Prioridade:** 6 — Alta.
+- **Dependências:** US10 e US11.
+- **Justificativa:** A cobertura só pode ser analisada depois que os profissionais forem corretamente escalados.
+
+### US13 — Identificação das coberturas insuficientes
+- **Descrição:** Como coordenador de escala, quero saber quais turnos e quais especialidades estão com cobertura insuficiente, para identificar os problemas existentes na escala do dia.
+- **Situação:** Pendente.
+- **Prioridade:** 7 — Alta.
+- **Dependência:** US12.
+- **Justificativa
