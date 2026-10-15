@@ -304,3 +304,4 @@ inicio
    escreval("==============================================")
    escreval("            ENCERRAMENTO DO MEDSHIFT")
    escreval("==============================================")
+fimalgoritmo
