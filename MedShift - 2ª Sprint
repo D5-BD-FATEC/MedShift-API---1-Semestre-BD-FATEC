@@ -1,59 +1,84 @@
-algoritmo "Medshift - 2ª Sprint"
+algoritmo "MedShift - 2ª Sprint"
 
 var
 
-capacidadeMaxima : inteiro
-qtdProfissionais : inteiro
+  capacidadeMaxima : inteiro
+  capacidadeMinima : inteiro
 
-id : vetor[1..20] de inteiro
-nome : vetor[1..20] de caractere
-especialidade : vetor[1..20] de caractere
+  qtdProfissionais : inteiro
+  qtdClinicos : inteiro
+  qtdPediatras : inteiro
+  qtdCirurgioes : inteiro
 
-disponivelManha : vetor[1..20] de logico
-disponivelTarde : vetor[1..20] de logico
-disponivelNoite : vetor[1..20] de logico
+  minimoClinicos : inteiro
+  minimoPediatras : inteiro
+  minimoCirurgioes : inteiro
 
-i : inteiro
-opcaoEspecialidade : inteiro
-resposta : caractere
+  id : vetor[1..20] de inteiro
+  nome : vetor[1..20] de caractere
+  especialidade : vetor[1..20] de caractere
 
-// Variaveis utilizadas na busca por ID
-idBusca : inteiro
-posicaoEncontrada : inteiro
-profissionalEncontrado : logico
-desejaBuscar : caractere
+  disponivelManha : vetor[1..20] de logico
+  disponivelTarde : vetor[1..20] de logico
+  disponivelNoite : vetor[1..20] de logico
+
+  i : inteiro
+  opcaoEspecialidade : inteiro
+  resposta : caractere
+
+  // Variaveis utilizadas na busca por ID.
+  idBusca : inteiro
+  posicaoEncontrada : inteiro
+  profissionalEncontrado : logico
+  desejaBuscar : caractere
 
 inicio
 
-capacidadeMaxima <- 20
-qtdProfissionais <- 0
-resposta <- "S"
+  capacidadeMaxima <- 20
+  capacidadeMinima <- 4
 
-escreval("==============================================")
-escreval("                  MEDSHIFT")
-escreval("        CADASTRO DA EQUIPE MEDICA")
-escreval("==============================================")
+  resposta <- "S"
 
-repita
+  qtdProfissionais <- 0
+  qtdClinicos <- 0
+  qtdPediatras <- 0
+  qtdCirurgioes <- 0
 
-   escreval("")
-   escreval("----------------------------------------------")
-   escreval("Cadastro do profissional ", qtdProfissionais + 1)
-   escreval("----------------------------------------------")
+  // Minimos para a verificacao preliminar da equipe.
+  // A cobertura de cada turno sera verificada na etapa de escalacao.
+  minimoClinicos <- 2
+  minimoPediatras <- 1
+  minimoCirurgioes <- 1
 
-   // Incremento automatico da quantidade de profissionais
-   qtdProfissionais <- qtdProfissionais + 1
+  escreval("==============================================")
+  escreval("                  MEDSHIFT")
+  escreval("        CADASTRO DA EQUIPE MEDICA")
+  escreval("==============================================")
 
-   // O ID recebe automaticamente o numero do cadastro
-   id[qtdProfissionais] <- qtdProfissionais
+  repita
 
-   escreval("ID gerado automaticamente: ", id[qtdProfissionais])
+    escreval("")
+    escreval("----------------------------------------------")
+    escreval("Cadastro do profissional ", qtdProfissionais + 1)
+    escreval("----------------------------------------------")
 
-   escreva("Nome do profissional: ")
-   leia(nome[qtdProfissionais])
+    qtdProfissionais <- qtdProfissionais + 1
 
-   // Cadastro e validacao da especialidade
-   repita
+    // O ID recebe automaticamente o numero do cadastro.
+    id[qtdProfissionais] <- qtdProfissionais
+
+    // Nenhum turno foi atribuido ao profissional neste momento.
+    escaladoManha[qtdProfissionais] <- falso
+    escaladoTarde[qtdProfissionais] <- falso
+    escaladoNoite[qtdProfissionais] <- falso
+
+    escreval("ID gerado automaticamente: ", id[qtdProfissionais])
+
+    escreva("Nome do profissional: ")
+    leia(nome[qtdProfissionais])
+
+    // Cadastro e validacao da especialidade.
+    repita
 
       escreval("")
       escreval("Especialidade:")
@@ -65,125 +90,186 @@ repita
 
       escolha opcaoEspecialidade
 
-      caso 1
-         especialidade[qtdProfissionais] <- "Clinico Geral"
+        caso 1
+          especialidade[qtdProfissionais] <- "Clinico Geral"
 
-      caso 2
-         especialidade[qtdProfissionais] <- "Pediatra"
+        caso 2
+          especialidade[qtdProfissionais] <- "Pediatra"
 
-      caso 3
-         especialidade[qtdProfissionais] <- "Cirurgiao"
+        caso 3
+          especialidade[qtdProfissionais] <- "Cirurgiao"
 
-      outrocaso
-         escreval("")
-         escreval("ERRO: Especialidade invalida.")
-         escreval("Informe uma opcao entre 1 e 3.")
+        outrocaso
+          escreval("")
+          escreval("ERRO: Especialidade invalida.")
+          escreval("Informe uma opcao entre 1 e 3.")
 
       fimescolha
 
-   ate (opcaoEspecialidade >= 1) e (opcaoEspecialidade <= 3)
+    ate (opcaoEspecialidade >= 1) e (opcaoEspecialidade <= 3)
 
-   // Disponibilidade pela manha
-   escreva("Disponivel pela manha (S/N)? ")
-   leia(resposta)
+    // Disponibilidade pela manha.
+    escreva("Disponivel pela manha (S/N)? ")
+    leia(resposta)
 
-   se (resposta = "S") ou (resposta = "s") entao
+    enquanto (resposta <> "S") e (resposta <> "s") e (resposta <> "N") e (resposta <> "n") faca
+      escreval("ERRO: Resposta invalida. Informe S ou N.")
+      escreva("Disponivel pela manha (S/N)? ")
+      leia(resposta)
+    fimenquanto
+
+    se (resposta = "S") ou (resposta = "s") entao
       disponivelManha[qtdProfissionais] <- verdadeiro
-   senao
+    senao
       disponivelManha[qtdProfissionais] <- falso
-   fimse
+    fimse
 
-   // Disponibilidade pela tarde
-   escreva("Disponivel pela tarde (S/N)? ")
-   leia(resposta)
+    // Disponibilidade pela tarde.
+    escreva("Disponivel pela tarde (S/N)? ")
+    leia(resposta)
 
-   se (resposta = "S") ou (resposta = "s") entao
+    enquanto (resposta <> "S") e (resposta <> "s") e (resposta <> "N") e (resposta <> "n") faca
+      escreval("ERRO: Resposta invalida. Informe S ou N.")
+      escreva("Disponivel pela tarde (S/N)? ")
+      leia(resposta)
+    fimenquanto
+
+    se (resposta = "S") ou (resposta = "s") entao
       disponivelTarde[qtdProfissionais] <- verdadeiro
-   senao
+    senao
       disponivelTarde[qtdProfissionais] <- falso
-   fimse
+    fimse
 
-   // Disponibilidade pela noite
-   escreva("Disponivel pela noite (S/N)? ")
-   leia(resposta)
+    // Disponibilidade pela noite.
+    escreva("Disponivel pela noite (S/N)? ")
+    leia(resposta)
 
-   se (resposta = "S") ou (resposta = "s") entao
+    enquanto (resposta <> "S") e (resposta <> "s") e (resposta <> "N") e (resposta <> "n") faca
+      escreval("ERRO: Resposta invalida. Informe S ou N.")
+      escreva("Disponivel pela noite (S/N)? ")
+      leia(resposta)
+    fimenquanto
+
+    se (resposta = "S") ou (resposta = "s") entao
       disponivelNoite[qtdProfissionais] <- verdadeiro
-   senao
+    senao
       disponivelNoite[qtdProfissionais] <- falso
-   fimse
+    fimse
 
-   enquanto (disponivelManha[qtdProfissionais] = falso) e (disponivelTarde[qtdProfissionais] = falso) e (disponivelNoite[qtdProfissionais] = falso) faca
-         escreval ("")
-         escreval ("==============================================================")
-         escreval ("    CADASTRE OS TURNOS CORRETAMENTE OU REINICIE O SISTEMA.    ")
-         escreval ("==============================================================")
-         escreval ("")
-         escreva("Disponivel pela manha (S/N)? ")
-         leia(resposta)
+    // Exige disponibilidade em pelo menos um turno.
+    enquanto (disponivelManha[qtdProfissionais] = falso) e (disponivelTarde[qtdProfissionais] = falso) e (disponivelNoite[qtdProfissionais] = falso) faca
 
-         se (resposta = "S") ou (resposta = "s") entao
-            disponivelManha[qtdProfissionais] <- verdadeiro
-         senao
-            disponivelManha[qtdProfissionais] <- falso
-         fimse
+      escreval("")
+      escreval("========================================================")
+      escreval("ERRO: Informe disponibilidade em pelo menos um turno.")
+      escreval("========================================================")
+      escreval("")
 
-         // Disponibilidade pela tarde
-         escreva("Disponivel pela tarde (S/N)? ")
-         leia(resposta)
+      escreva("Disponivel pela manha (S/N)? ")
+      leia(resposta)
 
-         se (resposta = "S") ou (resposta = "s") entao
-            disponivelTarde[qtdProfissionais] <- verdadeiro
-         senao
-            disponivelTarde[qtdProfissionais] <- falso
-         fimse
-
-         // Disponibilidade pela noite
-         escreva("Disponivel pela noite (S/N)? ")
-         leia(resposta)
-
-         se (resposta = "S") ou (resposta = "s") entao
-            disponivelNoite[qtdProfissionais] <- verdadeiro
-         senao
-            disponivelNoite[qtdProfissionais] <- falso
-         fimse
+      enquanto (resposta <> "S") e (resposta <> "s") e (resposta <> "N") e (resposta <> "n") faca
+        escreval("ERRO: Resposta invalida. Informe S ou N.")
+        escreva("Disponivel pela manha (S/N)? ")
+        leia(resposta)
       fimenquanto
 
-   escreval("")
-   escreval("PROFISSIONAL CADASTRADO COM SUCESSO!")
-   escreval("ID DO PROFISSIONAL: ", id[qtdProfissionais])
+      se (resposta = "S") ou (resposta = "s") entao
+        disponivelManha[qtdProfissionais] <- verdadeiro
+      senao
+        disponivelManha[qtdProfissionais] <- falso
+      fimse
 
-   // Verifica se ainda existe espaco para novos cadastros
-   se qtdProfissionais < capacidadeMaxima entao
+      escreva("Disponivel pela tarde (S/N)? ")
+      leia(resposta)
+
+      enquanto (resposta <> "S") e (resposta <> "s") e (resposta <> "N") e (resposta <> "n") faca
+        escreval("ERRO: Resposta invalida. Informe S ou N.")
+        escreva("Disponivel pela tarde (S/N)? ")
+        leia(resposta)
+      fimenquanto
+
+      se (resposta = "S") ou (resposta = "s") entao
+        disponivelTarde[qtdProfissionais] <- verdadeiro
+      senao
+        disponivelTarde[qtdProfissionais] <- falso
+      fimse
+
+      escreva("Disponivel pela noite (S/N)? ")
+      leia(resposta)
+
+      enquanto (resposta <> "S") e (resposta <> "s") e (resposta <> "N") e (resposta <> "n") faca
+        escreval("ERRO: Resposta invalida. Informe S ou N.")
+        escreva("Disponivel pela noite (S/N)? ")
+        leia(resposta)
+      fimenquanto
+
+      se (resposta = "S") ou (resposta = "s") entao
+        disponivelNoite[qtdProfissionais] <- verdadeiro
+      senao
+        disponivelNoite[qtdProfissionais] <- falso
+      fimse
+
+    fimenquanto
+
+    escreval("")
+    escreval("PROFISSIONAL CADASTRADO COM SUCESSO!")
+    escreval("ID DO PROFISSIONAL: ", id[qtdProfissionais])
+
+    // Verifica se ainda existe espaco para novos cadastros.
+    se qtdProfissionais < capacidadeMaxima entao
 
       escreval("")
       escreva("Deseja cadastrar outro profissional (S/N)? ")
       leia(resposta)
 
-   senao
+      enquanto (resposta <> "S") e (resposta <> "s") e (resposta <> "N") e (resposta <> "n") faca
+        escreval("")
+        escreval("ERRO: Resposta invalida.")
+        escreval("Informe S para sim ou N para nao.")
+        escreva("Deseja cadastrar outro profissional (S/N)? ")
+        leia(resposta)
+      fimenquanto
+
+    senao
 
       escreval("")
       escreval("LIMITE MAXIMO DE CADASTROS ATINGIDO!")
       resposta <- "N"
 
-   fimse
+    fimse
 
-ate (resposta = "N") ou (resposta = "n")
+  ate (resposta = "N") ou (resposta = "n")
 
-// Exibicao dos profissionais cadastrados
-escreval("")
-escreval("==============================================")
-escreval("          PROFISSIONAIS CADASTRADOS")
-escreval("==============================================")
+  // Contagem da quantidade de profissionais de cada especialidade.
+  para i de 1 ate qtdProfissionais faca
 
-se qtdProfissionais = 0 entao
+    se especialidade[i] = "Clinico Geral" entao
+      qtdClinicos <- qtdClinicos + 1
+    senao
+      se especialidade[i] = "Pediatra" entao
+        qtdPediatras <- qtdPediatras + 1
+      senao
+        qtdCirurgioes <- qtdCirurgioes + 1
+      fimse
+    fimse
 
-   escreval("")
-   escreval("Nenhum profissional foi cadastrado.")
+  fimpara
 
-senao
+  // Exibicao dos profissionais cadastrados.
+  escreval("")
+  escreval("==============================================")
+  escreval("          PROFISSIONAIS CADASTRADOS")
+  escreval("==============================================")
 
-   para i de 1 ate qtdProfissionais faca
+  se qtdProfissionais = 0 entao
+
+    escreval("")
+    escreval("Nenhum profissional foi cadastrado.")
+
+  senao
+
+    para i de 1 ate qtdProfissionais faca
 
       escreval("")
       escreval("----------------------------------------------")
@@ -196,109 +282,106 @@ senao
       escreva("Disponibilidade: ")
 
       se disponivelManha[i] = verdadeiro entao
-         escreva("Manha; ")
+        escreva("Manha; ")
       fimse
 
       se disponivelTarde[i] = verdadeiro entao
-         escreva("Tarde; ")
+        escreva("Tarde; ")
       fimse
 
       se disponivelNoite[i] = verdadeiro entao
-         escreva("Noite; ")
+        escreva("Noite; ")
       fimse
 
       se (disponivelManha[i] = falso) e (disponivelTarde[i] = falso) e (disponivelNoite[i] = falso) entao
-         escreva("Nenhum turno informado")
+        escreva("Nenhum turno informado")
       fimse
 
       escreval("")
 
-   fimpara
+    fimpara
 
-fimse
+  fimse
 
-escreval("")
-escreval("==============================================")
-escreval("Total de profissionais cadastrados: ", qtdProfissionais)
-escreval("==============================================")
+  escreval("")
+  escreval("==============================================")
+  escreval("Total de profissionais cadastrados: ", qtdProfissionais)
+  escreval("==============================================")
 
-// US09 - Localizacao de profissional pelo ID
+  // Verificacao preliminar da equipe.
+  // Mantido o bloqueio da busca quando os minimos nao sao atingidos.
+  se (qtdProfissionais >= capacidadeMinima) e (qtdClinicos >= minimoClinicos) e (qtdPediatras >= minimoPediatras) e (qtdCirurgioes >= minimoCirurgioes) entao
 
-se qtdProfissionais > 0 entao
+    // US09 - Localizacao de profissional pelo ID.
+    escreval("")
+    escreval("==============================================")
+    escreval("          BUSCA DE PROFISSIONAL POR ID")
+    escreval("==============================================")
 
-   escreval("")
-   escreval("==============================================")
-   escreval("          BUSCA DE PROFISSIONAL POR ID")
-   escreval("==============================================")
+    desejaBuscar <- "S"
 
-   desejaBuscar <- "S"
-
-   repita
+    repita
 
       escreval("")
       escreva("Informe o ID do profissional: ")
       leia(idBusca)
 
-      // Reinicia os controles antes de cada busca
+      // Reinicia os controles antes de cada busca.
       profissionalEncontrado <- falso
       posicaoEncontrada <- 0
 
-      // Procura o ID dentro do vetor
+      // Procura o ID dentro do vetor.
       para i de 1 ate qtdProfissionais faca
 
-         se id[i] = idBusca entao
-
-            profissionalEncontrado <- verdadeiro
-            posicaoEncontrada <- i
-
-         fimse
+        se id[i] = idBusca entao
+          profissionalEncontrado <- verdadeiro
+          posicaoEncontrada <- i
+        fimse
 
       fimpara
 
       se profissionalEncontrado = verdadeiro entao
 
-         escreval("")
-         escreval("==============================================")
-         escreval("          PROFISSIONAL LOCALIZADO")
-         escreval("==============================================")
-         escreval("")
-         escreval("ID: ", id[posicaoEncontrada])
-         escreval("Nome: ", nome[posicaoEncontrada])
-         escreval("Especialidade: ", especialidade[posicaoEncontrada])
+        escreval("")
+        escreval("==============================================")
+        escreval("          PROFISSIONAL LOCALIZADO")
+        escreval("==============================================")
+        escreval("")
+        escreval("ID: ", id[posicaoEncontrada])
+        escreval("Nome: ", nome[posicaoEncontrada])
+        escreval("Especialidade: ", especialidade[posicaoEncontrada])
 
-         escreva("Disponibilidade: ")
+        escreva("Disponibilidade: ")
 
-         se disponivelManha[posicaoEncontrada] = verdadeiro entao
-            escreva("Manha; ")
-         fimse
+        se disponivelManha[posicaoEncontrada] = verdadeiro entao
+          escreva("Manha; ")
+        fimse
 
-         se disponivelTarde[posicaoEncontrada] = verdadeiro entao
-            escreva("Tarde; ")
-         fimse
+        se disponivelTarde[posicaoEncontrada] = verdadeiro entao
+          escreva("Tarde; ")
+        fimse
 
-         se disponivelNoite[posicaoEncontrada] = verdadeiro entao
-            escreva("Noite; ")
-         fimse
+        se disponivelNoite[posicaoEncontrada] = verdadeiro entao
+          escreva("Noite; ")
+        fimse
 
-         se (disponivelManha[posicaoEncontrada] = falso) e (disponivelTarde[posicaoEncontrada] = falso) e (disponivelNoite[posicaoEncontrada] = falso) entao
+        se (disponivelManha[posicaoEncontrada] = falso) e (disponivelTarde[posicaoEncontrada] = falso) e (disponivelNoite[posicaoEncontrada] = falso) entao
+          escreva("Nenhum turno informado")
+        fimse
 
-            escreva("Nenhum turno informado")
-
-         fimse
-
-         escreval("")
+        escreval("")
 
       senao
 
-         escreval("")
-         escreval("==============================================")
-         escreval("          PROFISSIONAL NAO LOCALIZADO")
-         escreval("==============================================")
-         escreval("")
-         escreval("ERRO: Nao existe profissional cadastrado")
-         escreval("com o ID ", idBusca, ".")
-         escreval("")
-         escreval("Intervalo atual de IDs: 1 a ", qtdProfissionais)
+        escreval("")
+        escreval("==============================================")
+        escreval("          PROFISSIONAL NAO LOCALIZADO")
+        escreval("==============================================")
+        escreval("")
+        escreval("ERRO: Nao existe profissional cadastrado")
+        escreval("com o ID ", idBusca, ".")
+        escreval("")
+        escreval("Intervalo atual de IDs: 1 a ", qtdProfissionais)
 
       fimse
 
@@ -308,33 +391,65 @@ se qtdProfissionais > 0 entao
 
       enquanto (desejaBuscar <> "S") e (desejaBuscar <> "s") e (desejaBuscar <> "N") e (desejaBuscar <> "n") faca
 
-         escreval("")
-         escreval("ERRO: Resposta invalida.")
-         escreval("Informe S para sim ou N para nao.")
-         escreval("")
-         escreva("Deseja buscar outro profissional (S/N)? ")
-         leia(desejaBuscar)
+        escreval("")
+        escreval("ERRO: Resposta invalida.")
+        escreval("Informe S para sim ou N para nao.")
+        escreva("Deseja buscar outro profissional (S/N)? ")
+        leia(desejaBuscar)
 
       fimenquanto
 
-   ate (desejaBuscar = "N") ou (desejaBuscar = "n")
+    ate (desejaBuscar = "N") ou (desejaBuscar = "n")
 
-senao
+  senao
 
-   escreval("")
-   escreval("==============================================")
-   escreval("          BUSCA NAO REALIZADA")
-   escreval("==============================================")
-   escreval("")
-   escreval("Nao existem profissionais cadastrados.")
-   escreval("Cadastre pelo menos um profissional")
-   escreval("antes de realizar uma busca por ID.")
+    limpatela
+    escreval("========================================================")
+    escreval(" ERRO: EQUIPE INSUFICIENTE PARA PROSSEGUIR")
+    escreval("")
+    escreval("              CONFIRA OS MOTIVOS ABAIXO:")
+    escreval("========================================================")
+    escreval("")
 
-fimse
+    se qtdProfissionais < capacidadeMinima entao
+      escreval("QUANTIDADE MINIMA DE MEDICOS NAO ATINGIDA.")
+      escreval("Cadastrados: ", qtdProfissionais, ". Minimo: ", capacidadeMinima)
+      escreval("")
+    fimse
 
-escreval("")
-escreval("==============================================")
-escreval("            ENCERRAMENTO DO MEDSHIFT")
-escreval("==============================================")
+    se qtdClinicos < minimoClinicos entao
+      escreval("QUANTIDADE MINIMA DE CLINICOS NAO ATINGIDA.")
+      escreval("Cadastrados: ", qtdClinicos, ". Minimo: ", minimoClinicos)
+      escreval("")
+    fimse
+
+    se qtdPediatras < minimoPediatras entao
+      escreval("QUANTIDADE MINIMA DE PEDIATRAS NAO ATINGIDA.")
+      escreval("Cadastrados: ", qtdPediatras, ". Minimo: ", minimoPediatras)
+      escreval("")
+    fimse
+
+    se qtdCirurgioes < minimoCirurgioes entao
+      escreval("QUANTIDADE MINIMA DE CIRURGIOES NAO ATINGIDA.")
+      escreval("Cadastrados: ", qtdCirurgioes, ". Minimo: ", minimoCirurgioes)
+      escreval("")
+    fimse
+
+    escreval("--------------------------------------------------------")
+    escreval("REINICIE O SISTEMA E CADASTRE, NO MINIMO:")
+    escreval("")
+    escreval(minimoClinicos, " Clinicos Gerais")
+    escreval(minimoPediatras, " Pediatra(s)")
+    escreval(minimoCirurgioes, " Cirurgiao(oes)")
+    escreval("Total minimo de profissionais: ", capacidadeMinima)
+    escreval("--------------------------------------------------------")
+    escreval("")
+
+  fimse
+
+  escreval("")
+  escreval("=======================================================")
+  escreval("                ENCERRAMENTO DO MEDSHIFT")
+  escreval("=======================================================")
 
 fimalgoritmo
