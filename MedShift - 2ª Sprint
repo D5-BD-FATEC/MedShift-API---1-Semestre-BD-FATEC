@@ -1,18 +1,5 @@
 algoritmo "Medshift - 2ª Sprint"
 
-// User Story:
-// US07 - Como coordenador de escala, quero cadastrar os
-// profissionais da equipe medica, para que eles possam ser
-// utilizados na construcao da escala do dia.
-
-// US08 - Como coordenador de escala, quero visualizar a
-// lista de todos os profissionais cadastrados, para ter uma
-// visão geral da equipe médica disponível.
-
-// US09 - Como coordenador de escala, quero localizar um
-// profissional pelo identificador numérico, para consultar
-// rapidamente seus dados.
-
 var
 
 capacidadeMaxima : inteiro
