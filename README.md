@@ -108,6 +108,8 @@ Permitir o cadastro da equipe médica, a consulta dos profissionais cadastrados 
 **📑 Documentação da Sprint 2**
 
 - 📋 [Sprint Backlog — Sprint 2](docs/sprint-2/sprint-backlog.md)
+- 🧩 [Divisão de Trabalho — Sprint 2](divisao-blocos-sprint-2.md)
+
 
 ---
 
