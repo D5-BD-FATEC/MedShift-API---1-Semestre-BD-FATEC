@@ -35,6 +35,9 @@ var
    qtdCirurgioes : inteiro
    qtdPlantoes : vetor[1..20] de inteiro
 
+   quantidadePlantoes : inteiro
+   totalPlantoes : inteiro
+
    minimoClinicos : inteiro
    minimoPediatras : inteiro
    minimoCirurgioes : inteiro
@@ -767,6 +770,74 @@ inicio
          ate (desejaEscalar = "N") ou (desejaEscalar = "n")
 
       fimse
+
+      // US14 - Quantidade de plantoes por profissional
+
+      totalPlantoes <- 0
+
+      escreval("")
+      escreval("==============================================")
+      escreval(" RELATORIO DE PLANTOES POR PROFISSIONAL")
+      escreval("==============================================")
+
+      para i de 1 ate qtdProfissionais faca
+
+         // Reinicia a contagem para cada profissional
+         quantidadePlantoes <- 0
+
+         // Verifica plantao da manha
+         se escaladoManha[i] = verdadeiro entao
+            quantidadePlantoes <- quantidadePlantoes + 1
+         fimse
+
+         // Verifica plantao da tarde
+         se escaladoTarde[i] = verdadeiro entao
+            quantidadePlantoes <- quantidadePlantoes + 1
+         fimse
+
+         // Verifica plantao da noite
+         se escaladoNoite[i] = verdadeiro entao
+            quantidadePlantoes <- quantidadePlantoes + 1
+         fimse
+
+         // Soma os plantoes da equipe
+         totalPlantoes <- totalPlantoes + quantidadePlantoes
+
+         // Exibe os dados do profissional
+         escreval("")
+         escreval("----------------------------------------------")
+         escreval("ID: ", id[i])
+         escreval("Nome: ", nome[i])
+         escreval("Especialidade: ", especialidade[i])
+         escreval("Quantidade de plantoes: ", quantidadePlantoes)
+
+         // Verifica o limite diario de plantoes
+         se quantidadePlantoes > maximoPlantoesDia entao
+            escreval("ALERTA: Limite diario excedido!")
+         senao
+            se quantidadePlantoes = maximoPlantoesDia entao
+               escreval("Status: Limite diario atingido.")
+            senao
+               se quantidadePlantoes = 1 entao
+                  escreval("Status: 1 plantao atribuido.")
+               senao
+                  escreval("Status: Nenhum plantao atribuido.")
+               fimse
+            fimse
+         fimse
+
+      fimpara
+
+      // Exibe o total geral de plantoes
+      escreval("")
+      escreval("==============================================")
+      escreval("        RESUMO GERAL DA EQUIPE")
+      escreval("==============================================")
+      escreval("Total de profissionais: ", qtdProfissionais)
+      escreval("Total de plantoes atribuidos: ", totalPlantoes)
+      escreval("Limite por profissional: ", maximoPlantoesDia)
+      escreval("==============================================")
+
 
       // Verifica os minimos somente depois da montagem da escala
       // Os minimos sao exigidos em CADA turno, nao apenas no cadastro
