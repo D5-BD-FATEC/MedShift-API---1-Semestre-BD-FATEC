@@ -1,5 +1,5 @@
-algoritmo "MedShift_US07_US08_US09_US10_US11"
-// Disciplina   : [Linguagem e Lógica de Programação]
+algoritmo "MedShift Sprint 2"
+// Disciplina: Linguagem e Lógica de Programação
 
 // User Story:
 // US07 - Como coordenador de escala, quero cadastrar os
@@ -156,15 +156,15 @@ inicio
          escreva("Informe a opção desejada: ")
          leia(opcaoEspecialidade)
 
-         se (opcaoEspecialidade = 1) então
+         se (opcaoEspecialidade = 1) entao
             especialidade[qtdProfissionais] <- "Clínico Geral"
-         senão
-            se (opcaoEspecialidade = 2) então
+         senao
+            se (opcaoEspecialidade = 2) entao
                especialidade[qtdProfissionais] <- "Pediatra"
-            senão
-               se (opcaoEspecialidade = 3) então
+            senao
+               se (opcaoEspecialidade = 3) entao
                   especialidade[qtdProfissionais] <- "Cirurgião"
-               senão
+               senao
                   escreval("")
                   escreval("ERRO: Especialidade inválida.")
                   escreval("Informe uma opção entre 1 e 3.")
