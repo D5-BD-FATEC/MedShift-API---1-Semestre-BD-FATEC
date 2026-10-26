@@ -500,7 +500,7 @@ inicio
 
    escreval("")
    escreval("============================================================")
-   escreval(" US12/US13 - COBERTURA DE DISPONIBILIDADE: MANHA")
+   escreval("             COBERTURA DE DISPONIBILIDADE: MANHÃ")
    escreval("============================================================")
    escreval("Clinicos Gerais: ", qtdClinicosManha, "/", minimoClinicos)
    escreval("Pediatras: ", qtdPediatrasManha, "/", minimoPediatras)
@@ -541,7 +541,7 @@ inicio
 
    escreval("")
    escreval("============================================================")
-   escreval(" US12/US13 - COBERTURA DE DISPONIBILIDADE: TARDE")
+   escreval("             COBERTURA DE DISPONIBILIDADE: TARDE")
    escreval("============================================================")
    escreval("Clinicos Gerais: ", qtdClinicosTarde, "/", minimoClinicos)
    escreval("Pediatras: ", qtdPediatrasTarde, "/", minimoPediatras)
@@ -582,7 +582,7 @@ inicio
 
    escreval("")
    escreval("============================================================")
-   escreval(" US12/US13 - COBERTURA DE DISPONIBILIDADE: NOITE")
+   escreval("             COBERTURA DE DISPONIBILIDADE: NOITE")
    escreval("============================================================")
    escreval("Clinicos Gerais: ", qtdClinicosNoite, "/", minimoClinicos)
    escreval("Pediatras: ", qtdPediatrasNoite, "/", minimoPediatras)
@@ -919,26 +919,31 @@ inicio
                      // Valida antes de alterar os vetores e o contador
                      se especialidade[posicaoEncontrada] <> especialidadePosto entao
                         escalacaoValida <- falso
+                        escreval("")
                         escreval("ERRO: Especialidade incompatível com o cadastro.")
                      fimse
 
                      se jaEscaladoNoTurno = verdadeiro entao
                         escalacaoValida <- falso
+                        escreval("")
                         escreval("ERRO: Profissional já escalado neste turno.")
                      fimse
 
                      se disponivelNoTurno = falso entao
                         escalacaoValida <- falso
+                        escreval("")
                         escreval("ERRO: Profissional indisponível para este turno.")
                      fimse
 
                      se qtdPlantoes[posicaoEncontrada] >= maximoPlantoesDia entao
                         escalacaoValida <- falso
+                        escreval("")
                         escreval("ERRO: Limite de ", maximoPlantoesDia, " plantões no dia atingido.")
                      fimse
 
                      se posicaoLivre = 0 entao
                         escalacaoValida <- falso
+                        escreval("")
                         escreval("ERRO: Capacidade do turno atingida.")
                      fimse
 
@@ -974,6 +979,7 @@ inicio
                   senao
 
                      escalacaoValida <- falso
+                     escreval("")
                      escreval("ERRO: Especialidade inválida. Escolha 1, 2 ou 3.")
 
                   fimse
@@ -981,6 +987,7 @@ inicio
                senao
 
                   escalacaoValida <- falso
+                  escreval("")
                   escreval("ERRO: Turno inválido. Escolha 1, 2 ou 3.")
 
                fimse
@@ -988,6 +995,7 @@ inicio
             senao
 
                escalacaoValida <- falso
+               escreval("")
                escreval("ERRO: Profissional não encontrado. ID informado: ", idBusca)
 
             fimse
@@ -1016,6 +1024,7 @@ inicio
 
       totalPlantoes <- 0
 
+      limpatela
       escreval("")
       escreval("==============================================")
       escreval(" RELATORIO DE PLANTOES POR PROFISSIONAL")
@@ -1178,13 +1187,13 @@ inicio
       escreval("                RESULTADO DA ESCALA DO DIA")
       escreval("============================================================")
       escreval("")
-     
+
       se escalaDiaValida = verdadeiro entao
          escreval("")
-         escreval("ESCALA DO DIA VALIDADA.")
+         escreval("Escala do dia validada. A escala pode ser publicada.")
       senao
          escreval("")
-         escreval("ESCALA DO DIA NÃO VALIDADA.")
+         escreval("Escala do dia NÃO validada. A escala NÃO pode ser publicada.")
       fimse
 
       // Permite continuar a escalação se estiver incompleta
