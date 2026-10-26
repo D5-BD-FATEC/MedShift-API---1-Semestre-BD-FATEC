@@ -91,6 +91,34 @@ var
    cirurgioesTurno : inteiro
    escalaDiaValida : logico
 
+   // US12 - Contagem de profissionais disponiveis por especialidade e turno
+   qtdClinicosManha : inteiro
+   qtdPediatrasManha : inteiro
+   qtdCirurgioesManha : inteiro
+   qtdClinicosTarde : inteiro
+   qtdPediatrasTarde : inteiro
+   qtdCirurgioesTarde : inteiro
+   qtdClinicosNoite : inteiro
+   qtdPediatrasNoite : inteiro
+   qtdCirurgioesNoite : inteiro
+
+   // US13 - Quantidade de profissionais faltantes por turno
+   faltamClinicosManha : inteiro
+   faltamPediatrasManha : inteiro
+   faltamCirurgioesManha : inteiro
+   faltamClinicosTarde : inteiro
+   faltamPediatrasTarde : inteiro
+   faltamCirurgioesTarde : inteiro
+   faltamClinicosNoite : inteiro
+   faltamPediatrasNoite : inteiro
+   faltamCirurgioesNoite : inteiro
+
+   // Resultado da validacao da disponibilidade
+   coberturaManha : logico
+   coberturaTarde : logico
+   coberturaNoite : logico
+   escalaCompleta : logico
+
 inicio
 
    capacidadeMaxima <- 20
@@ -382,6 +410,210 @@ inicio
    escreval("============================================================")
    escreval("Total de profissionais cadastrados: ", qtdProfissionais)
    escreval("============================================================")
+
+
+   // ============================================================
+   // US12 e US13 - ANALISE DA DISPONIBILIDADE DOS TRES TURNOS
+   // Esta analise verifica disponibilidade declarada no cadastro.
+   // A validacao da escala efetivamente montada continua abaixo.
+   // ============================================================
+
+   qtdClinicosManha <- 0
+   qtdPediatrasManha <- 0
+   qtdCirurgioesManha <- 0
+   qtdClinicosTarde <- 0
+   qtdPediatrasTarde <- 0
+   qtdCirurgioesTarde <- 0
+   qtdClinicosNoite <- 0
+   qtdPediatrasNoite <- 0
+   qtdCirurgioesNoite <- 0
+
+   para i de 1 ate qtdProfissionais faca
+
+      se disponivelManha[i] = verdadeiro entao
+         se especialidade[i] = "Clínico Geral" entao
+            qtdClinicosManha <- qtdClinicosManha + 1
+         senao
+            se especialidade[i] = "Pediatra" entao
+               qtdPediatrasManha <- qtdPediatrasManha + 1
+            senao
+               se especialidade[i] = "Cirurgião" entao
+                  qtdCirurgioesManha <- qtdCirurgioesManha + 1
+               fimse
+            fimse
+         fimse
+      fimse
+
+      se disponivelTarde[i] = verdadeiro entao
+         se especialidade[i] = "Clínico Geral" entao
+            qtdClinicosTarde <- qtdClinicosTarde + 1
+         senao
+            se especialidade[i] = "Pediatra" entao
+               qtdPediatrasTarde <- qtdPediatrasTarde + 1
+            senao
+               se especialidade[i] = "Cirurgião" entao
+                  qtdCirurgioesTarde <- qtdCirurgioesTarde + 1
+               fimse
+            fimse
+         fimse
+      fimse
+
+      se disponivelNoite[i] = verdadeiro entao
+         se especialidade[i] = "Clínico Geral" entao
+            qtdClinicosNoite <- qtdClinicosNoite + 1
+         senao
+            se especialidade[i] = "Pediatra" entao
+               qtdPediatrasNoite <- qtdPediatrasNoite + 1
+            senao
+               se especialidade[i] = "Cirurgião" entao
+                  qtdCirurgioesNoite <- qtdCirurgioesNoite + 1
+               fimse
+            fimse
+         fimse
+      fimse
+
+   fimpara
+
+   coberturaManha <- verdadeiro
+   coberturaTarde <- verdadeiro
+   coberturaNoite <- verdadeiro
+   escalaCompleta <- verdadeiro
+
+   // ---------------- MANHA ----------------
+   faltamClinicosManha <- 0
+   faltamPediatrasManha <- 0
+   faltamCirurgioesManha <- 0
+
+   se qtdClinicosManha < minimoClinicos entao
+      faltamClinicosManha <- minimoClinicos - qtdClinicosManha
+      coberturaManha <- falso
+   fimse
+   se qtdPediatrasManha < minimoPediatras entao
+      faltamPediatrasManha <- minimoPediatras - qtdPediatrasManha
+      coberturaManha <- falso
+   fimse
+   se qtdCirurgioesManha < minimoCirurgioes entao
+      faltamCirurgioesManha <- minimoCirurgioes - qtdCirurgioesManha
+      coberturaManha <- falso
+   fimse
+
+   escreval("")
+   escreval("============================================================")
+   escreval(" US12/US13 - COBERTURA DE DISPONIBILIDADE: MANHA")
+   escreval("============================================================")
+   escreval("Clinicos Gerais: ", qtdClinicosManha, "/", minimoClinicos)
+   escreval("Pediatras: ", qtdPediatrasManha, "/", minimoPediatras)
+   escreval("Cirurgioes: ", qtdCirurgioesManha, "/", minimoCirurgioes)
+   se faltamClinicosManha > 0 entao
+      escreval("Faltam ", faltamClinicosManha, " clinico(s) geral(is).")
+   fimse
+   se faltamPediatrasManha > 0 entao
+      escreval("Faltam ", faltamPediatrasManha, " pediatra(s).")
+   fimse
+   se faltamCirurgioesManha > 0 entao
+      escreval("Faltam ", faltamCirurgioesManha, " cirurgiao(oes).")
+   fimse
+   se coberturaManha = verdadeiro entao
+      escreval("RESULTADO: DISPONIBILIDADE DA MANHA ADEQUADA.")
+   senao
+      escreval("RESULTADO: DISPONIBILIDADE DA MANHA INSUFICIENTE.")
+      escalaCompleta <- falso
+   fimse
+
+   // ---------------- TARDE ----------------
+   faltamClinicosTarde <- 0
+   faltamPediatrasTarde <- 0
+   faltamCirurgioesTarde <- 0
+
+   se qtdClinicosTarde < minimoClinicos entao
+      faltamClinicosTarde <- minimoClinicos - qtdClinicosTarde
+      coberturaTarde <- falso
+   fimse
+   se qtdPediatrasTarde < minimoPediatras entao
+      faltamPediatrasTarde <- minimoPediatras - qtdPediatrasTarde
+      coberturaTarde <- falso
+   fimse
+   se qtdCirurgioesTarde < minimoCirurgioes entao
+      faltamCirurgioesTarde <- minimoCirurgioes - qtdCirurgioesTarde
+      coberturaTarde <- falso
+   fimse
+
+   escreval("")
+   escreval("============================================================")
+   escreval(" US12/US13 - COBERTURA DE DISPONIBILIDADE: TARDE")
+   escreval("============================================================")
+   escreval("Clinicos Gerais: ", qtdClinicosTarde, "/", minimoClinicos)
+   escreval("Pediatras: ", qtdPediatrasTarde, "/", minimoPediatras)
+   escreval("Cirurgioes: ", qtdCirurgioesTarde, "/", minimoCirurgioes)
+   se faltamClinicosTarde > 0 entao
+      escreval("Faltam ", faltamClinicosTarde, " clinico(s) geral(is).")
+   fimse
+   se faltamPediatrasTarde > 0 entao
+      escreval("Faltam ", faltamPediatrasTarde, " pediatra(s).")
+   fimse
+   se faltamCirurgioesTarde > 0 entao
+      escreval("Faltam ", faltamCirurgioesTarde, " cirurgiao(oes).")
+   fimse
+   se coberturaTarde = verdadeiro entao
+      escreval("RESULTADO: DISPONIBILIDADE DA TARDE ADEQUADA.")
+   senao
+      escreval("RESULTADO: DISPONIBILIDADE DA TARDE INSUFICIENTE.")
+      escalaCompleta <- falso
+   fimse
+
+   // ---------------- NOITE ----------------
+   faltamClinicosNoite <- 0
+   faltamPediatrasNoite <- 0
+   faltamCirurgioesNoite <- 0
+
+   se qtdClinicosNoite < minimoClinicos entao
+      faltamClinicosNoite <- minimoClinicos - qtdClinicosNoite
+      coberturaNoite <- falso
+   fimse
+   se qtdPediatrasNoite < minimoPediatras entao
+      faltamPediatrasNoite <- minimoPediatras - qtdPediatrasNoite
+      coberturaNoite <- falso
+   fimse
+   se qtdCirurgioesNoite < minimoCirurgioes entao
+      faltamCirurgioesNoite <- minimoCirurgioes - qtdCirurgioesNoite
+      coberturaNoite <- falso
+   fimse
+
+   escreval("")
+   escreval("============================================================")
+   escreval(" US12/US13 - COBERTURA DE DISPONIBILIDADE: NOITE")
+   escreval("============================================================")
+   escreval("Clinicos Gerais: ", qtdClinicosNoite, "/", minimoClinicos)
+   escreval("Pediatras: ", qtdPediatrasNoite, "/", minimoPediatras)
+   escreval("Cirurgioes: ", qtdCirurgioesNoite, "/", minimoCirurgioes)
+   se faltamClinicosNoite > 0 entao
+      escreval("Faltam ", faltamClinicosNoite, " clinico(s) geral(is).")
+   fimse
+   se faltamPediatrasNoite > 0 entao
+      escreval("Faltam ", faltamPediatrasNoite, " pediatra(s).")
+   fimse
+   se faltamCirurgioesNoite > 0 entao
+      escreval("Faltam ", faltamCirurgioesNoite, " cirurgiao(oes).")
+   fimse
+   se coberturaNoite = verdadeiro entao
+      escreval("RESULTADO: DISPONIBILIDADE DA NOITE ADEQUADA.")
+   senao
+      escreval("RESULTADO: DISPONIBILIDADE DA NOITE INSUFICIENTE.")
+      escalaCompleta <- falso
+   fimse
+
+   escreval("")
+   escreval("============================================================")
+   escreval(" RESULTADO FINAL DA ANALISE DE DISPONIBILIDADE")
+   escreval("============================================================")
+   se escalaCompleta = verdadeiro entao
+      escreval("DISPONIBILIDADE SUFICIENTE NOS TRES TURNOS.")
+   senao
+      escreval("ATENCAO: HA TURNOS COM DISPONIBILIDADE INSUFICIENTE.")
+      escreval("Consulte acima as especialidades e quantidades faltantes.")
+   fimse
+   escreval("============================================================")
+   escreval("")
 
    // US09 - Localizacao de profissional pelo ID
 
