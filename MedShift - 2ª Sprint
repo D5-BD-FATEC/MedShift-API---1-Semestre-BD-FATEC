@@ -83,6 +83,7 @@ var
    jaEscaladoNoTurno : logico
    escalacaoValida : logico
    desejaEscalar : caractere
+   desejaCorrigirEscala : caractere
 
    // Contagem e validacao da cobertura de cada turno
    clinicosTurno : inteiro
@@ -532,6 +533,12 @@ inicio
       escreval("============================================================")
 
 
+      // Permite continuar a escalação se o dia estiver incompleto
+      desejaCorrigirEscala <- "S"
+
+      repita
+
+
       // US10 e US11 - Construcao e validacao da escala
       escreval("")
       escreval("============================================================")
@@ -938,6 +945,7 @@ inicio
       escreval("                RESULTADO DA ESCALA DO DIA")
       escreval("============================================================")
       escreval("")
+     
       se escalaDiaValida = verdadeiro entao
          escreval("")
          escreval("ESCALA DO DIA VALIDADA.")
@@ -946,7 +954,30 @@ inicio
          escreval("ESCALA DO DIA NÃO VALIDADA.")
       fimse
 
+      // Permite continuar a escalação se estiver incompleta
+      se escalaDiaValida = verdadeiro entao
+         desejaCorrigirEscala <- "N"
+      senao
+
+         repita
+
+            escreval("")
+            escreva("Deseja continuar a escalação (S/N)? ")
+            leia(desejaCorrigirEscala)
+
+            se (desejaCorrigirEscala <> "S") e (desejaCorrigirEscala <> "s") e (desejaCorrigirEscala <> "N") e (desejaCorrigirEscala <> "n") entao
+               escreval("ERRO: Informe S ou N.")
+            fimse
+
+         ate (desejaCorrigirEscala = "S") ou (desejaCorrigirEscala = "s") ou (desejaCorrigirEscala = "N") ou (desejaCorrigirEscala = "n")
+
+      fimse
+
+      // Repete a escalação ou encerra o processo
+      ate (desejaCorrigirEscala = "N") ou (desejaCorrigirEscala = "n")
+
    senao
+
 
       limpatela
       escreval("============================================================")
