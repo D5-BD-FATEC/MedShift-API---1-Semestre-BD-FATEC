@@ -22,6 +22,8 @@ algoritmo "MedShift_US07_US08_US09_US10_US11"
 // tentativa de escalacao, para impedir conflitos e
 // atribuicoes incorretas.
 
+// US14 — Como coordenador de escala, quero visualizar quantos plantões foram atribuídos a cada profissional, para acompanhar a distribuição dos plantões da equipe médica.
+
 var
 
    capacidadeMaxima : inteiro
