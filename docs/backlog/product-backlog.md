@@ -29,6 +29,19 @@ Story Points.
 | - | US13 | A definir pelo cliente/P2 | Informar turnos e especialidades com cobertura insuficiente | A estimar | Sprint 2 |
 | - | US14 | A definir pelo cliente/P2 | Apresentar quantidade de plantões por profissional | A estimar | Sprint 2 |
 | - | US15 | A definir pelo cliente/P2 | Apresentar resumo do dia | A estimar | Sprint 2 |
+| - | US16 | A definir pelo cliente/P2 | Representar a escala de segunda a sexta-feira, com três turnos por dia | A estimar | Sprint 3 |
+| - | US17 | A definir pelo cliente/P2 | Escalar profissionais em qualquer turno da semana, respeitando regras de equilíbrio | A estimar | Sprint 3 |
+| - | US18 | A definir pelo cliente/P2 | Consultar a cobertura de cada dia e turno da semana | A estimar | Sprint 3 |
+| - | US19 | A definir pelo cliente/P2 | Identificar automaticamente os turnos e especialidades com cobertura insuficiente | A estimar | Sprint 3 |
+| - | US20 | A definir pelo cliente/P2 | Calcular a quantidade total de plantões por profissional durante a semana | A estimar | Sprint 3 |
+| - | US21 | A definir pelo cliente/P2 | Apresentar a maior, a menor e a média de plantões da equipe e identificar sobrecargas | A estimar | Sprint 3 |
+| - | US22 | A definir pelo cliente/P2 | Calcular o percentual de turnos plenamente cobertos e classificar a cobertura semanal | A estimar | Sprint 3 |
+| - | US23 | A definir pelo cliente/P2 | Calcular a quantidade de falhas de cobertura por especialidade | A estimar | Sprint 3 |
+| - | US24 | A definir pelo cliente/P2 | Gerar um relatório textual resumido com os indicadores da semana | A estimar | Sprint 3 |
+| - | US25 | A definir pelo cliente/P2 | Exportar os dados da equipe e da escala por meio do console | A estimar | Sprint 3 |
+| - | US26 | A definir pelo cliente/P2 | Recuperar os dados exportados por meio de um arquivo-texto de entrada | A estimar | Sprint 3 |
+| - | US27 | A definir pelo cliente/P2 | Encerrar a execução do sistema por meio de uma operação controlada | A estimar | Sprint 3 |
+
 
 ### Critério de Priorização
 
