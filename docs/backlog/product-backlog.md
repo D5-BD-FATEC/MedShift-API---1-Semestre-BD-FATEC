@@ -683,9 +683,859 @@ docs/sprint-2/sprint-backlog.md
 
 # Sprint 3
 
-As necessidades da Sprint 3 ainda não foram disponibilizadas.
+As necessidades da Sprint 3 foram definidas a partir dos feedbacks apresentados pelo cliente/P2 durante a Sprint Review da Sprint 2.
 
-O Product Backlog será atualizado conforme a evolução do projeto e
-os feedbacks apresentados pelo cliente/P2.
+A terceira Sprint amplia o MedShift para permitir a construção e a análise de uma escala médica semanal, considerando cinco dias, de segunda a sexta-feira, com três turnos por dia.
 
+Além da construção da escala, o sistema deverá apresentar indicadores gerenciais sobre a distribuição dos plantões e permitir a continuidade dos dados entre execuções, utilizando a exportação pelo console e a recuperação por arquivo-texto.
+
+Esta Sprint também contempla o encerramento controlado do sistema.
+
+---
+
+## Contexto da Sprint 3
+
+Após a Sprint Review 2, o cliente identificou a necessidade de utilizar o MedShift para organizar a escala médica de uma semana completa, evitando que a equipe precise cadastrar novamente todos os profissionais e montar toda a escala sempre que o programa for iniciado.
+
+Na Sprint 3, o sistema deverá evoluir para permitir:
+
+- Representação de cinco dias, de segunda a sexta-feira;
+- Organização de três turnos por dia: Manhã, Tarde e Noite;
+- Construção e consulta de uma escala semanal;
+- Validação da cobertura mínima de cada turno;
+- Identificação dos dias, turnos e especialidades com cobertura insuficiente;
+- Contagem dos plantões atribuídos a cada profissional durante a semana;
+- Identificação da maior, menor e média carga de plantões;
+- Identificação de profissionais sobrecarregados;
+- Cálculo do percentual de turnos plenamente cobertos;
+- Contagem das falhas de cobertura por especialidade;
+- Geração de um relatório textual semanal;
+- Exportação dos dados pelo console;
+- Recuperação dos dados por meio de arquivo-texto;
+- Encerramento controlado do sistema.
+
+---
+
+## Estrutura da semana
+
+A escala semanal deverá considerar:
+
+- **5 dias:** segunda, terça, quarta, quinta e sexta-feira;
+- **3 turnos por dia:** Manhã, Tarde e Noite;
+- **15 turnos no total;**
+- **60 postos de trabalho por semana.**
+
+### Distribuição dos postos
+
+| Especialidade | Quantidade de postos na semana |
+|---|---:|
+| Clínico Geral | 30 |
+| Pediatra | 15 |
+| Cirurgião | 15 |
+| **Total** | **60** |
+
+### Cobertura mínima por turno
+
+| Especialidade | Manhã | Tarde | Noite |
+|---|---:|---:|---:|
+| Clínico Geral | 2 | 2 | 2 |
+| Pediatra | 1 | 1 | 1 |
+| Cirurgião | 1 | 1 | 1 |
+
+A cobertura mínima deverá ser verificada individualmente em cada um dos quinze turnos da semana.
+
+A escolha da estrutura de dados utilizada para representar os dias, turnos e postos será uma decisão técnica da equipe, respeitando as limitações do VisuAlg.
+
+---
+
+# User Stories da Sprint 3
+
+## US16 — Representar a estrutura semanal de cinco dias
+
+**Como** coordenador de escala,  
+**quero** que o sistema represente os cinco dias úteis da semana e seus respectivos turnos,  
+**para** que seja possível organizar a escala médica de segunda a sexta-feira.
+
+### Valor de Negócio
+
+Permitir que a coordenação trabalhe com uma escala semanal completa, substituindo a limitação anterior de organizar apenas um dia por execução.
+
+### Critérios de Aceitação
+
+**Cenário válido — estrutura semanal disponível**
+
+Dado que o sistema seja iniciado,  
+Quando a estrutura da semana for inicializada,  
+Então deverá disponibilizar os cinco dias da semana,  
+E cada dia deverá possuir os turnos Manhã, Tarde e Noite,  
+E o sistema deverá representar os quinze turnos e os sessenta postos previstos.
+
+**Cenário inválido — turno inexistente**
+
+Dado que o coordenador tente acessar um turno que não pertence à estrutura semanal,  
+Quando o sistema validar a identificação informada,  
+Então deverá informar que o turno é inválido,  
+E não deverá permitir que uma escalação seja realizada nesse turno.
+
+**Demonstração no VisuAlg**
+
+Dado que o programa esteja sendo executado no VisuAlg,  
+Quando forem consultados os dias e turnos disponíveis,  
+Então os cinco dias e seus respectivos turnos deverão ser identificados corretamente, sem alteração do código-fonte.
+
+**Prioridade:** A definir pelo cliente/P2
+
+---
+
+## US17 — Escalar profissionais nos quinze turnos da semana
+
+**Como** coordenador de escala,  
+**quero** atribuir profissionais cadastrados aos turnos de todos os dias da semana,  
+**para** construir a escala médica semanal.
+
+### Valor de Negócio
+
+Permitir que a coordenação distribua os profissionais entre os quinze turnos da semana, organizando os sessenta postos de trabalho previstos.
+
+### Dados utilizados
+
+A escalação deverá utilizar os profissionais cadastrados anteriormente, considerando:
+
+- Identificador do profissional;
+- Nome;
+- Especialidade;
+- Disponibilidade por turno;
+- Dia da semana;
+- Turno escolhido.
+
+### Critérios de Aceitação
+
+**Cenário válido — escalação realizada**
+
+Dado que exista um profissional cadastrado,  
+E que ele esteja disponível para o turno selecionado,  
+E que sua especialidade seja compatível com o posto,  
+Quando o coordenador realizar a escalação,  
+Então o sistema deverá registrar o profissional no dia, turno e posto correspondentes.
+
+**Cenário inválido — profissional inexistente**
+
+Dado que o identificador informado não corresponda a nenhum profissional cadastrado,  
+Quando o coordenador tentar realizar a escalação,  
+Então o sistema deverá recusar a operação,  
+E informar que o profissional não foi encontrado.
+
+**Cenário inválido — profissional incompatível**
+
+Dado que o profissional esteja cadastrado em determinada especialidade,  
+Quando houver tentativa de utilizá-lo em um posto de outra especialidade,  
+Então o sistema deverá recusar a escalação,  
+E informar a incompatibilidade identificada.
+
+**Demonstração no VisuAlg**
+
+Dado que o programa esteja sendo executado no VisuAlg,  
+Quando forem realizadas escalações válidas e inválidas em diferentes dias e turnos,  
+Então os resultados deverão ser demonstráveis sem alteração do código-fonte.
+
+**Prioridade:** A definir pelo cliente/P2
+
+---
+
+## US18 — Validar a cobertura de cada turno da semana
+
+**Como** coordenador de escala,  
+**quero** que o sistema valide a cobertura mínima dos quinze turnos da semana,  
+**para** saber quais turnos atendem às necessidades de profissionais de cada especialidade.
+
+### Valor de Negócio
+
+Permitir que a coordenação verifique se cada turno possui a quantidade mínima necessária de profissionais, evitando que a validação fique restrita a apenas um dia.
+
+### Critérios de Aceitação
+
+**Cenário válido — turno com cobertura adequada**
+
+Dado que um turno possua pelo menos dois Clínicos Gerais, um Pediatra e um Cirurgião,  
+Quando o sistema realizar a validação da cobertura,  
+Então deverá identificar que a cobertura mínima daquele turno foi atingida.
+
+**Cenário inválido — turno com cobertura insuficiente**
+
+Dado que pelo menos uma especialidade esteja abaixo da quantidade mínima exigida,  
+Quando o sistema realizar a validação,  
+Então deverá identificar que a cobertura mínima daquele turno não foi atingida.
+
+**Cenário — validação dos quinze turnos**
+
+Dado que exista uma escala semanal cadastrada,  
+Quando o sistema executar a validação de cobertura,  
+Então deverá analisar individualmente os quinze turnos,  
+E apresentar o resultado correspondente a cada um deles.
+
+**Demonstração no VisuAlg**
+
+Dado que o programa esteja sendo executado no VisuAlg,  
+Quando forem utilizadas escalas com coberturas adequadas e insuficientes,  
+Então os resultados de todos os turnos deverão ser demonstráveis sem alteração do código-fonte.
+
+**Prioridade:** A definir pelo cliente/P2
+
+---
+
+## US19 — Identificar dias, turnos e especialidades com cobertura insuficiente
+
+**Como** coordenador de escala,  
+**quero** identificar quais dias, turnos e especialidades apresentam cobertura insuficiente,  
+**para** localizar rapidamente os problemas existentes na escala semanal.
+
+### Valor de Negócio
+
+Facilitar a identificação das falhas de cobertura, permitindo que a coordenação saiba exatamente onde faltam profissionais para completar a escala.
+
+### Critérios de Aceitação
+
+**Cenário válido — identificação de insuficiência**
+
+Dado que determinado turno apresente quantidade inferior à cobertura mínima em uma ou mais especialidades,  
+Quando o sistema realizar a análise da semana,  
+Então deverá identificar o dia, o turno e cada especialidade insuficiente.
+
+**Cenário inválido — ausência de insuficiência**
+
+Dado que todos os turnos atendam à cobertura mínima exigida,  
+Quando o sistema realizar a análise,  
+Então não deverá apresentar especialidades como insuficientes.
+
+**Cenário — múltiplas insuficiências**
+
+Dado que existam falhas em diferentes dias e turnos,  
+Quando o sistema realizar a análise semanal,  
+Então deverá apresentar todas as insuficiências identificadas, sem omitir os demais turnos com problemas.
+
+**Demonstração no VisuAlg**
+
+Dado que o programa esteja sendo executado no VisuAlg,  
+Quando forem utilizadas semanas com uma ou mais falhas de cobertura,  
+Então o sistema deverá apresentar os respectivos dias, turnos e especialidades insuficientes.
+
+**Prioridade:** A definir pelo cliente/P2
+
+---
+
+## US20 — Apresentar a quantidade de plantões por profissional na semana
+
+**Como** coordenador de escala,  
+**quero** visualizar a quantidade total de plantões atribuídos a cada profissional durante a semana,  
+**para** acompanhar a distribuição da carga de trabalho da equipe médica.
+
+### Valor de Negócio
+
+Permitir que a coordenação acompanhe a quantidade de plantões atribuídos individualmente aos profissionais, facilitando a análise da distribuição semanal da equipe.
+
+### Critérios de Aceitação
+
+**Cenário válido — profissional com plantões**
+
+Dado que um profissional tenha sido escalado em um ou mais turnos da semana,  
+Quando o sistema calcular sua quantidade de plantões,  
+Então deverá apresentar o total de plantões atribuídos a ele.
+
+**Cenário válido — profissional sem plantões**
+
+Dado que exista um profissional cadastrado que não tenha sido escalado em nenhum turno,  
+Quando o sistema apresentar a quantidade de plantões por profissional,  
+Então deverá informar que esse profissional possui zero plantões atribuídos.
+
+**Cenário — totalização da equipe**
+
+Dado que existam profissionais cadastrados e escalações realizadas,  
+Quando o sistema calcular as quantidades de plantões,  
+Então deverá apresentar a quantidade individual de cada profissional,  
+E permitir a obtenção do total geral de plantões atribuídos na semana.
+
+**Demonstração no VisuAlg**
+
+Dado que o programa esteja sendo executado no VisuAlg,  
+Quando forem utilizados profissionais com quantidades diferentes de plantões,  
+Então o sistema deverá apresentar corretamente a carga semanal de cada um.
+
+**Prioridade:** A definir pelo cliente/P2
+
+---
+
+## US21 — Identificar a distribuição e a sobrecarga da equipe
+
+**Como** coordenador de escala,  
+**quero** visualizar a maior, a menor e a média de plantões da equipe, além de identificar os profissionais sobrecarregados,  
+**para** acompanhar o equilíbrio na distribuição dos plantões semanais.
+
+### Valor de Negócio
+
+Permitir que a coordenação avalie a distribuição dos plantões entre os profissionais, identificando diferenças relevantes de carga de trabalho.
+
+### Indicadores necessários
+
+O sistema deverá identificar:
+
+- Maior quantidade de plantões atribuídos a um profissional;
+- Menor quantidade de plantões atribuídos a um profissional;
+- Profissional ou profissionais correspondentes à maior carga;
+- Profissional ou profissionais correspondentes à menor carga;
+- Média de plantões da equipe;
+- Profissionais considerados sobrecarregados.
+
+### Regra de sobrecarga — R10
+
+Um profissional será considerado sobrecarregado quando possuir uma quantidade de plantões superior à média da equipe mais um plantão.
+
+### Critérios de Aceitação
+
+**Cenário válido — cálculo dos indicadores**
+
+Dado que existam profissionais cadastrados e plantões atribuídos,  
+Quando o sistema calcular a distribuição da carga semanal,  
+Então deverá identificar a maior e a menor quantidade de plantões,  
+E apresentar os profissionais correspondentes,  
+E calcular a média de plantões da equipe.
+
+**Cenário válido — profissional sobrecarregado**
+
+Dado que um profissional possua quantidade de plantões superior à média da equipe mais um,  
+Quando o sistema aplicar a regra R10,  
+Então deverá identificá-lo como sobrecarregado.
+
+**Cenário válido — ausência de sobrecarga**
+
+Dado que nenhum profissional possua quantidade de plantões superior à média da equipe mais um,  
+Quando o sistema realizar a análise,  
+Então deverá informar que não foram identificados profissionais sobrecarregados.
+
+**Cenário inválido — equipe vazia**
+
+Dado que não exista nenhum profissional cadastrado,  
+Quando o sistema tentar calcular a média de plantões,  
+Então deverá tratar a ausência de profissionais,  
+E não deverá realizar uma divisão por zero.
+
+**Demonstração no VisuAlg**
+
+Dado que o programa esteja sendo executado no VisuAlg,  
+Quando forem utilizadas distribuições de plantões uniformes e não uniformes,  
+Então os indicadores deverão ser calculados corretamente e os profissionais sobrecarregados identificados conforme R10.
+
+**Prioridade:** A definir pelo cliente/P2
+
+---
+
+## US22 — Calcular o percentual de turnos plenamente cobertos
+
+**Como** coordenador de escala,  
+**quero** visualizar o percentual de turnos que atingiram a cobertura mínima durante a semana,  
+**para** avaliar o nível geral de cobertura da escala médica.
+
+### Valor de Negócio
+
+Fornecer um indicador percentual que permita avaliar rapidamente quantos dos quinze turnos da semana atendem integralmente à cobertura mínima exigida.
+
+### Regra de classificação — R11
+
+A semana somente poderá ser classificada como plenamente coberta quando todos os quinze turnos atenderem à cobertura mínima nas três especialidades.
+
+Um único turno com cobertura insuficiente impede a classificação da semana como plenamente coberta.
+
+### Critérios de Aceitação
+
+**Cenário válido — semana com todos os turnos cobertos**
+
+Dado que os quinze turnos atendam à cobertura mínima exigida,  
+Quando o sistema calcular o percentual de cobertura semanal,  
+Então deverá apresentar quinze turnos plenamente cobertos,  
+E o percentual deverá ser igual a 100%,  
+E a semana deverá ser classificada como plenamente coberta.
+
+**Cenário válido — semana parcialmente coberta**
+
+Dado que alguns turnos não atendam à cobertura mínima,  
+Quando o sistema calcular o percentual de cobertura,  
+Então deverá considerar apenas os turnos que atingiram integralmente os mínimos,  
+E apresentar o percentual correspondente,  
+E classificar a semana como não plenamente coberta.
+
+**Cenário — aplicação da regra R11**
+
+Dado que pelo menos um dos quinze turnos apresente cobertura insuficiente,  
+Quando o sistema classificar a semana,  
+Então não deverá classificá-la como plenamente coberta.
+
+**Demonstração no VisuAlg**
+
+Dado que o programa esteja sendo executado no VisuAlg,  
+Quando forem utilizadas semanas com diferentes quantidades de turnos plenamente cobertos,  
+Então os valores de quantidade, percentual e classificação semanal deverão ser apresentados corretamente.
+
+**Prioridade:** A definir pelo cliente/P2
+
+---
+
+## US23 — Contabilizar falhas de cobertura por especialidade
+
+**Como** coordenador de escala,  
+**quero** visualizar a quantidade de turnos em que cada especialidade apresentou cobertura insuficiente,  
+**para** identificar quais especialidades concentram mais falhas durante a semana.
+
+### Valor de Negócio
+
+Permitir que a coordenação identifique as especialidades com maior ocorrência de insuficiência, facilitando a avaliação da disponibilidade de profissionais e do planejamento da equipe.
+
+### Critérios de Aceitação
+
+**Cenário válido — falhas identificadas**
+
+Dado que existam turnos com quantidade de profissionais inferior ao mínimo exigido em uma ou mais especialidades,  
+Quando o sistema contabilizar as falhas,  
+Então deverá apresentar a quantidade de turnos com insuficiência para cada especialidade.
+
+**Cenário válido — nenhuma falha**
+
+Dado que todos os quinze turnos atendam à cobertura mínima,  
+Quando o sistema contabilizar as falhas,  
+Então deverá informar zero falhas para Clínicos Gerais, Pediatras e Cirurgiões.
+
+**Cenário — falhas em diferentes turnos**
+
+Dado que uma mesma especialidade apresente insuficiência em diferentes turnos da semana,  
+Quando o sistema realizar a contagem,  
+Então deverá contabilizar cada turno com insuficiência uma única vez para aquela especialidade.
+
+**Demonstração no VisuAlg**
+
+Dado que o programa esteja sendo executado no VisuAlg,  
+Quando forem utilizadas semanas com diferentes situações de cobertura,  
+Então o sistema deverá apresentar a quantidade de turnos com falha para cada especialidade.
+
+**Prioridade:** A definir pelo cliente/P2
+
+---
+
+## US24 — Gerar relatório semanal da escala médica
+
+**Como** coordenador de escala,  
+**quero** visualizar um relatório textual resumido da semana,  
+**para** consultar de forma consolidada a situação da cobertura e a distribuição dos plantões da equipe médica.
+
+### Valor de Negócio
+
+Reunir os principais indicadores semanais em uma única apresentação, facilitando a análise gerencial da escala e a identificação de problemas.
+
+### Informações obrigatórias do relatório
+
+O relatório semanal deverá apresentar:
+
+- Situação geral da semana;
+- Quantidade de turnos plenamente cobertos;
+- Percentual de turnos plenamente cobertos;
+- Falhas de cobertura por especialidade;
+- Quantidade de plantões de cada profissional;
+- Maior carga de plantões e profissional correspondente;
+- Menor carga de plantões e profissional correspondente;
+- Média de plantões da equipe;
+- Lista de profissionais sobrecarregados, conforme R10.
+
+### Critérios de Aceitação
+
+**Cenário válido — relatório gerado**
+
+Dado que existam profissionais cadastrados e uma escala semanal processada,  
+Quando o coordenador solicitar o relatório semanal,  
+Então o sistema deverá apresentar os indicadores exigidos,  
+E os valores apresentados deverão corresponder aos dados da escala.
+
+**Cenário válido — semana plenamente coberta**
+
+Dado que todos os quinze turnos atendam à cobertura mínima,  
+Quando o relatório for gerado,  
+Então deverá informar que a semana está plenamente coberta,  
+E apresentar o percentual de 100%.
+
+**Cenário válido — semana com falhas**
+
+Dado que existam turnos com cobertura insuficiente,  
+Quando o relatório for gerado,  
+Então deverá apresentar as falhas identificadas e as especialidades correspondentes,  
+E classificar a semana como não plenamente coberta.
+
+**Cenário inválido — ausência de profissionais**
+
+Dado que não exista nenhum profissional cadastrado,  
+Quando o relatório for solicitado,  
+Então o sistema deverá tratar a coleção vazia,  
+E não deverá realizar cálculos que dependam de uma divisão por zero.
+
+**Demonstração no VisuAlg**
+
+Dado que o programa esteja sendo executado no VisuAlg,  
+Quando forem utilizadas semanas com diferentes distribuições e situações de cobertura,  
+Então o relatório deverá apresentar os indicadores de forma textual, clara e consistente com os dados processados.
+
+**Prioridade:** A definir pelo cliente/P2
+
+---
+
+## US25 — Exportar os dados da semana pelo console
+
+**Como** coordenador de escala,  
+**quero** exportar os dados dos profissionais e das escalações da semana por meio do console,  
+**para** guardar as informações e permitir sua recuperação em uma execução futura.
+
+### Valor de Negócio
+
+Permitir que a coordenação preserve o estado atual da equipe e da escala semanal, contornando a limitação do VisuAlg de não possuir gravação direta em arquivos.
+
+### Funcionamento esperado
+
+O sistema deverá oferecer uma operação de exportação de dados.
+
+Ao selecionar essa operação, deverá apresentar no console um bloco de informações contendo todos os dados necessários para reconstruir o estado atual do sistema.
+
+O bloco deverá incluir:
+
+- Quantidade de profissionais cadastrados;
+- Identificador de cada profissional;
+- Nome de cada profissional;
+- Especialidade;
+- Disponibilidade para Manhã, Tarde e Noite;
+- Quantidade de profissionais escalados em cada um dos quinze turnos;
+- Identificadores dos profissionais escalados;
+- Especialidades dos postos ocupados.
+
+O coordenador deverá copiar o bloco exibido e salvá-lo manualmente em um arquivo-texto.
+
+### Critérios de Aceitação
+
+**Cenário válido — exportação dos dados**
+
+Dado que existam profissionais cadastrados e escalações realizadas,  
+Quando o coordenador selecionar a operação Exportar dados,  
+Então o sistema deverá apresentar as informações necessárias para reconstruir a equipe e a escala semanal.
+
+**Cenário válido — preservação da estrutura**
+
+Dado que o sistema apresente o bloco de dados para exportação,  
+Quando as informações forem copiadas para um arquivo-texto,  
+Então a ordem dos dados deverá permitir sua leitura posterior pela US26.
+
+**Cenário válido — exportação de coleção vazia**
+
+Dado que não existam profissionais cadastrados,  
+Quando o coordenador solicitar a exportação,  
+Então o sistema deverá tratar a ausência de dados, apresentando uma mensagem clara e evitando gerar informações inconsistentes.
+
+**Demonstração no VisuAlg**
+
+Dado que o programa esteja sendo executado no VisuAlg,  
+Quando o coordenador selecionar a operação de exportação,  
+Então o sistema deverá imprimir o bloco de dados no console, permitindo sua cópia manual para um arquivo-texto.
+
+**Prioridade:** A definir pelo cliente/P2
+
+---
+
+## US26 — Recuperar os dados da semana por arquivo-texto
+
+**Como** coordenador de escala,  
+**quero** recuperar os dados dos profissionais e das escalações a partir de um arquivo-texto,  
+**para** continuar utilizando a equipe e a escala semanal sem precisar cadastrar e lançar todas as informações novamente.
+
+### Valor de Negócio
+
+Permitir a continuidade dos dados entre diferentes execuções do MedShift, reduzindo o trabalho de redigitação e tornando o sistema mais prático para a coordenação.
+
+### Funcionamento esperado
+
+O VisuAlg não possui um comando próprio para gravar o estado do programa em um arquivo.
+
+Para atender à necessidade de continuidade, o sistema deverá utilizar o comando `arquivo` para fornecer ao programa as informações previamente exportadas pela US25.
+
+O arquivo-texto deverá conter os dados em uma ordem compatível com a sequência de comandos `leia` utilizada na recuperação.
+
+A recuperação deverá reconstruir:
+
+- Os profissionais cadastrados;
+- Os identificadores;
+- Os nomes;
+- As especialidades;
+- As disponibilidades;
+- As escalações dos quinze turnos;
+- A quantidade de plantões atribuídos a cada profissional.
+
+A US25 e a US26 deverão utilizar o mesmo contrato de organização dos dados.
+
+### Critérios de Aceitação
+
+**Cenário válido — recuperação realizada**
+
+Dado que exista um arquivo-texto contendo os dados exportados anteriormente,  
+Quando o MedShift for executado utilizando esse arquivo como entrada,  
+Então deverá recuperar os profissionais e as escalações da semana,  
+E reconstruir o estado correspondente aos dados originais.
+
+**Cenário inválido — identificador duplicado**
+
+Dado que o arquivo contenha dois profissionais com o mesmo identificador,  
+Quando o sistema realizar a validação dos dados recuperados,  
+Então deverá identificar a duplicidade,  
+E recusar os dados inconsistentes, apresentando uma mensagem clara.
+
+**Cenário inválido — quantidade fora do limite**
+
+Dado que o arquivo contenha uma quantidade de profissionais ou escalações fora dos limites permitidos,  
+Quando o sistema realizar a recuperação,  
+Então deverá identificar a inconsistência,  
+E impedir que os dados inválidos sejam utilizados.
+
+**Cenário inválido — escalação inconsistente**
+
+Dado que o arquivo contenha uma escalação com profissional inexistente, especialidade incompatível, indisponibilidade ou violação das regras de escalação,  
+Quando o sistema validar os dados,  
+Então deverá identificar a inconsistência,  
+E recusar o estado inválido.
+
+**Cenário válido — teste de ida e volta**
+
+Dado que uma semana tenha sido montada e exportada pela US25,  
+Quando o sistema for executado novamente utilizando o arquivo-texto correspondente,  
+Então deverá recuperar os mesmos profissionais e escalações,  
+E o relatório semanal e seus indicadores deverão ser idênticos aos apresentados antes da exportação.
+
+**Demonstração no VisuAlg**
+
+Dado que o programa esteja sendo executado no VisuAlg,  
+Quando forem utilizados arquivos com dados válidos e inválidos,  
+Então o sistema deverá demonstrar a recuperação correta e o tratamento das inconsistências sem alteração do código-fonte entre os cenários.
+
+**Prioridade:** A definir pelo cliente/P2
+
+---
+
+## US27 — Encerrar o sistema de forma controlada
+
+**Como** coordenador de escala,  
+**quero** possuir uma opção específica para encerrar o MedShift,  
+**para** finalizar a utilização do sistema de maneira clara e controlada.
+
+### Valor de Negócio
+
+Permitir que o usuário encerre a execução do programa por meio de uma operação prevista, evitando que o encerramento dependa de interrupções externas ou de comportamentos inesperados.
+
+### Funcionamento esperado
+
+O sistema deverá disponibilizar uma opção de encerramento na interface textual.
+
+Quando essa opção for selecionada, o programa deverá finalizar o processamento e apresentar uma mensagem informando que o MedShift foi encerrado.
+
+### Critérios de Aceitação
+
+**Cenário válido — encerramento solicitado**
+
+Dado que o MedShift esteja em execução,  
+Quando o coordenador selecionar a opção de encerramento,  
+Então o sistema deverá finalizar a execução,  
+E apresentar uma mensagem de encerramento concluído.
+
+**Cenário inválido — opção inexistente**
+
+Dado que o sistema apresente as opções disponíveis,  
+Quando o coordenador informar uma opção que não corresponda a nenhuma operação válida,  
+Então deverá apresentar uma mensagem de erro,  
+E não deverá interpretar a opção inválida como uma solicitação de encerramento.
+
+**Cenário válido — encerramento após utilização**
+
+Dado que o coordenador tenha realizado operações de cadastro, consulta, escalação ou relatório,  
+Quando selecionar a opção de encerramento,  
+Então o sistema deverá concluir a execução sem iniciar novas operações.
+
+**Demonstração no VisuAlg**
+
+Dado que o programa esteja sendo executado no VisuAlg,  
+Quando forem testadas uma opção válida de encerramento e uma opção inválida,  
+Então o sistema deverá demonstrar os respectivos comportamentos sem alteração do código-fonte.
+
+**Prioridade:** A definir pelo cliente/P2
+
+---
+
+# Regras de Negócio da Sprint 3
+
+As regras R1 a R7, definidas durante a Sprint 2, continuam válidas e deverão ser respeitadas durante a construção, validação e recuperação da escala semanal.
+
+As novas regras da Sprint 3 são apresentadas a seguir.
+
+## R8 — Limite semanal de plantões por profissional
+
+Um profissional deverá possuir um limite de plantões durante a semana.
+
+**Sugestão de referência apresentada no material do cliente:** seis plantões por profissional na semana.
+
+A equipe deverá propor o limite e submetê-lo à validação do cliente/P2.
+
+Caso o limite seja ultrapassado, o sistema deverá impedir a escalação ou gerar um alerta, conforme a definição acordada com o cliente/P2.
+
+**Status:** Proposta de referência — pendente de validação.
+
+## R9 — Descanso entre turno da noite e manhã do dia seguinte
+
+Um profissional que trabalhar no turno da Noite de determinado dia não poderá ser escalado no turno da Manhã do dia seguinte.
+
+A regra deverá ser verificada durante a construção da escala semanal.
+
+**Exemplo:**
+
+Se um profissional trabalhar na segunda-feira à noite, não poderá ser escalado na terça-feira pela manhã.
+
+**Status:** Regra definida para a Sprint 3.
+
+## R10 — Identificação de profissionais sobrecarregados
+
+Um profissional será considerado sobrecarregado quando possuir quantidade de plantões superior à média de plantões da equipe acrescida de um plantão.
+
+**Fórmula de referência:**
+
+```text
+Limite de sobrecarga = Média da equipe + 1
+
+Profissional sobrecarregado:
+Quantidade de plantões > Média da equipe + 1
+```
+
+O sistema deverá identificar os profissionais que atenderem a essa condição.
+
+**Status:** Regra definida para a Sprint 3.
+
+## R11 — Classificação da semana plenamente coberta
+
+A semana somente poderá ser classificada como plenamente coberta quando todos os quinze turnos atenderem à cobertura mínima exigida para as três especialidades.
+
+A existência de um único turno com cobertura insuficiente impedirá que a semana seja classificada como plenamente coberta.
+
+**Status:** Regra definida para a Sprint 3.
+
+---
+
+# Restrições e decisões técnicas da Sprint 3
+
+A implementação deverá respeitar as limitações do VisuAlg e as regras técnicas definidas nas etapas anteriores do projeto.
+
+## Continuidade dos dados
+
+O comando `arquivo` deverá ser utilizado para fornecer dados de entrada ao programa por meio de um arquivo-texto.
+
+O VisuAlg não permite que o programa grave diretamente seu próprio estado em um arquivo.
+
+Por esse motivo:
+
+- A US25 deverá apresentar os dados no console;
+- O coordenador deverá copiar o conteúdo para um arquivo-texto;
+- A US26 deverá utilizar o comando `arquivo` para recuperar os dados;
+- A ordem dos dados exportados deverá corresponder à ordem de leitura utilizada na recuperação;
+- Os dados recuperados deverão ser validados antes de serem utilizados.
+
+O arquivo deverá ser considerado um roteiro completo de execução, pois seus dados alimentarão todos os comandos `leia` executados pelo programa, inclusive eventuais opções de menu.
+
+## Estruturas de dados
+
+A representação dos dias, turnos, profissionais e postos será definida pela equipe.
+
+A solução deverá respeitar:
+
+- O limite de duas dimensões para vetores no VisuAlg;
+- A ausência de estruturas do tipo registro;
+- A necessidade de manter a consistência entre vetores paralelos;
+- As limitações de manipulação de arquivos da ferramenta.
+
+A escolha da representação da semana deverá ser justificada pela equipe durante a apresentação final.
+
+## Formatação dos indicadores
+
+Os cálculos de média e percentual deverão apresentar resultados com formatação adequada.
+
+As divisões reais deverão utilizar a formatação de saída do VisuAlg para evitar a exibição de casas decimais excessivas.
+
+O cálculo da média deverá tratar previamente a possibilidade de não existirem profissionais cadastrados, evitando divisão por zero.
+
+---
+
+# Referência para dimensionamento e testes
+
+A semana possui sessenta postos de trabalho:
+
+| Especialidade | Postos semanais |
+|---|---:|
+| Clínico Geral | 30 |
+| Pediatra | 15 |
+| Cirurgião | 15 |
+| **Total** | **60** |
+
+Considerando a sugestão de seis plantões semanais por profissional apresentada na R8, o dimensionamento mínimo teórico para ocupar os sessenta postos é de onze profissionais:
+
+- Cinco Clínicos Gerais;
+- Três Pediatras;
+- Três Cirurgiões.
+
+Essa composição deixa os profissionais praticamente no limite semanal sugerido.
+
+Para os testes e demonstrações, o material da Sprint 3 recomenda uma equipe de doze profissionais:
+
+- Seis Clínicos Gerais;
+- Três Pediatras;
+- Três Cirurgiões.
+
+Com essa composição, uma semana com todos os sessenta postos ocupados resulta em média de cinco plantões por profissional.
+
+**Observação:** o limite semanal de seis plantões permanece uma sugestão de referência até sua validação pelo cliente/P2. A composição de doze profissionais é recomendada para os testes, não uma quantidade obrigatória para todo cadastro.
+
+---
+
+# Dependências entre as User Stories
+
+| User Story | Dependência ou relação |
+|---|---|
+| US16 | Base estrutural para a representação semanal. |
+| US17 | Depende da estrutura semanal da US16 e dos dados de cadastro da Sprint 2. |
+| US18 | Depende da estrutura semanal e das escalações realizadas. |
+| US19 | Utiliza os resultados da validação de cobertura da US18. |
+| US20 | Utiliza os dados das escalações semanais da US17. |
+| US21 | Utiliza as quantidades de plantões calculadas na US20. |
+| US22 | Utiliza a validação de cobertura realizada na US18 e a regra R11. |
+| US23 | Utiliza os resultados de cobertura para contabilizar as falhas por especialidade. |
+| US24 | Consolida os resultados das US18, US19, US20, US21, US22 e US23. |
+| US25 | Exporta os dados necessários para reconstruir o estado semanal. |
+| US26 | Depende do formato de exportação definido pela US25. |
+| US27 | Disponibiliza o encerramento controlado da execução. |
+
+---
+
+# Pontos pendentes de validação com o cliente/P2
+
+| ID | Assunto | Definição necessária | Responsável | Status |
+|---|---|---|---|---|
+| PEN10 | Limite semanal de plantões — R8 | Validar se o limite será de seis plantões por profissional e se seu descumprimento impedirá a escalação ou gerará apenas um alerta. | Cliente/P2 | Pendente |
+| PEN11 | Estrutura da semana | Validar a apresentação da representação semanal escolhida pela equipe, quando necessário. | Equipe / Cliente/P2 | A definir |
+| PEN12 | Formato de continuidade | Apresentar e validar o contrato de exportação e recuperação entre US25 e US26. | Equipe / Cliente/P2 | A definir |
+
+---
+
+## Documentação complementar
+
+Os detalhes de implementação, tarefas, critérios de aceite, cenários de teste e organização do trabalho da Sprint 3 deverão ser registrados no documento específico do Sprint Backlog:
+
+```text
+docs/sprint-3/sprint-backlog.md
+```
+
+O Product Backlog permanece como documento de referência das necessidades do produto. O Sprint Backlog deverá detalhar o trabalho selecionado pela equipe para desenvolvimento durante a Sprint 3.
+
+---
+Nenhuma proposta pendente de validação deverá ser registrada como regra confirmada antes de sua aprovação pelo cliente/P2.
 ---
