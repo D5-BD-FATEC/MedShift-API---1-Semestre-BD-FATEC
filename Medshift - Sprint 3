@@ -1,0 +1,1618 @@
+Algoritmo "Sprint 3 - Medshift"
+// Disciplina   : [Linguagem e Lógica de Programação]
+// Professor   : Antonio Carlos Nicolodi
+
+// Disciplina: Linguagem e Lógica de Programação
+
+var
+
+   // Variável para utilizar o menu
+   diaOperacao : inteiro
+   inicioRelatorio : inteiro
+   menu : inteiro
+   retornarDiretoMenu : logico
+
+   // US16 - Semana de cinco dias, sem matrizes
+   diasSemana : vetor[1..5] de caractere
+   quantidadeDias : inteiro
+   turnosPorDia : inteiro
+   totalTurnosSemana : inteiro
+   postosMinimosSemana : inteiro
+   totalPosicoes : inteiro
+   diaEscolhido : inteiro
+   inicioDia : inteiro
+   indiceDia : inteiro
+
+   primeiroDiaConsulta : inteiro
+   ultimoDiaConsulta : inteiro
+
+   // Consulta independente: nao altera o dia escolhido para montagem
+   diaConsulta : inteiro
+   inicioConsulta : inteiro
+   turnoConsulta : inteiro
+   idConsulta : inteiro
+   quantidadeConsulta : inteiro
+   nomeTurnoConsulta : caractere
+   temEscalaConsulta : logico
+
+   // Limites do sistema: definidos uma vez no início
+   capacidadeMaxima : inteiro
+   capacidadeMinima : inteiro
+   maximoPlantoesDia : inteiro
+   maximoPlantoesSemana : inteiro
+   plantoesSemana : inteiro
+
+   // Dados que precisam permanecer entre as opções do menu
+   qtdProfissionais : inteiro
+   qtdPlantoes : vetor[1..100] de inteiro
+
+   // Contadores calculados novamente em cada consulta
+   qtdClinicos : inteiro
+   qtdPediatras : inteiro
+   qtdCirurgioes : inteiro
+
+   quantidadePlantoes : inteiro
+   totalPlantoes : inteiro
+
+   // Mínimos necessários no cadastro para cobrir o dia
+   minimoEquipeClinicos : inteiro
+   minimoEquipePediatras : inteiro
+   minimoEquipeCirurgioes : inteiro
+
+   // Mínimos de cobertura de cada turno
+   minimoClinicos : inteiro
+   minimoPediatras : inteiro
+   minimoCirurgioes : inteiro
+
+   id : vetor[1..20] de inteiro
+   nome : vetor[1..20] de caractere
+   especialidade : vetor[1..20] de caractere
+
+   disponivelManha : vetor[1..20] de logico
+   disponivelTarde : vetor[1..20] de logico
+   disponivelNoite : vetor[1..20] de logico
+
+   escaladoManha : vetor[1..100] de logico
+   escaladoTarde : vetor[1..100] de logico
+   escaladoNoite : vetor[1..100] de logico
+
+   // Cada vetor guarda cinco faixas de até 20 IDs, uma faixa por dia
+   // Zero indica posto livre
+   escalaManha : vetor[1..100] de inteiro
+   escalaTarde : vetor[1..100] de inteiro
+   escalaNoite : vetor[1..100] de inteiro
+
+   i : inteiro
+   opcaoEspecialidade : inteiro
+   resposta : caractere
+
+   // Entrada textual: validar antes de converter ou guardar
+   entrada : caractere
+   entradaValida : logico
+   indiceEntrada : inteiro
+   caractereEntrada : caractere
+
+   // Variáveis utilizadas na busca por ID
+   idBusca : inteiro
+   posicaoEncontrada : inteiro
+   profissionalEncontrado : logico
+   desejaBuscar : caractere
+
+   // Variáveis utilizadas na escalação
+   turnoEscolhido : inteiro
+   opcaoEspecialidadeEscala : inteiro
+   posicaoLivre : inteiro
+   idNaVaga : inteiro
+   qtdExibidos : inteiro
+   nomeTurno : caractere
+   especialidadePosto : caractere
+   disponivelNoTurno : logico
+   jaEscaladoNoTurno : logico
+   escalacaoValida : logico
+   desejaEscalar : caractere
+   desejaCorrigirEscala : caractere
+
+   // Contagem e validação da cobertura dos turnos do dia selecionado
+   clinicosTurno : inteiro
+   pediatrasTurno : inteiro
+   cirurgioesTurno : inteiro
+   escalaDiaValida : logico
+
+   // Contadores reutilizados na análise de cada turno
+   faltamClinicos : inteiro
+   faltamPediatras : inteiro
+   faltamCirurgioes : inteiro
+   coberturaTurno : logico
+   tituloTurno : caractere
+   escalaCompleta : logico
+
+inicio
+
+   // Regras e limites
+   capacidadeMaxima <- 20
+   capacidadeMinima <- 7
+   maximoPlantoesDia <- 2
+   maximoPlantoesSemana <- 6
+
+   // Estado inicial da equipe
+   qtdProfissionais <- 0
+
+   minimoEquipeClinicos <- 3
+   minimoEquipePediatras <- 2
+   minimoEquipeCirurgioes <- 2
+
+   minimoClinicos <- 2
+   minimoPediatras <- 1
+   minimoCirurgioes <- 1
+
+   // Estado inicial dos dados: não repetir ao voltar para o menu
+   para i de 1 ate capacidadeMaxima faca
+      id[i] <- 0
+      nome[i] <- ""
+      especialidade[i] <- ""
+      disponivelManha[i] <- falso
+      disponivelTarde[i] <- falso
+      disponivelNoite[i] <- falso
+   fimpara
+
+   quantidadeDias <- 5
+   turnosPorDia <- 3
+   totalTurnosSemana <- quantidadeDias * turnosPorDia
+   postosMinimosSemana <- totalTurnosSemana * (minimoClinicos + minimoPediatras + minimoCirurgioes)
+   totalPosicoes <- quantidadeDias * capacidadeMaxima
+
+   diasSemana[1] <- "Segunda-feira"
+   diasSemana[2] <- "Terça-feira"
+   diasSemana[3] <- "Quarta-feira"
+   diasSemana[4] <- "Quinta-feira"
+   diasSemana[5] <- "Sexta-feira"
+   diaEscolhido <- 1
+   inicioDia <- 0
+
+   // Cinco faixas de 20 posições por vetor: uma faixa para cada dia.
+   // Estes dados nunca são zerados ao trocar o dia ou voltar ao menu.
+   para i de 1 ate totalPosicoes faca
+      qtdPlantoes[i] <- 0
+      escaladoManha[i] <- falso
+      escaladoTarde[i] <- falso
+      escaladoNoite[i] <- falso
+      escalaManha[i] <- 0
+      escalaTarde[i] <- 0
+      escalaNoite[i] <- 0
+   fimpara
+
+   mudacor("branco","fundos")
+   mudacor("azul","frente")
+
+   // Os dados acima são inicializados apenas uma vez.
+   repita
+      // Cada operação decide se precisa de pausa para leitura.
+      retornarDiretoMenu <- falso
+      limpatela
+      escreval("          = MEDSHIFT - SISTEMA DE ESCALAS MÉDICAS =")
+      escreval("")
+      escreval("- Menu -")
+      escreval("")
+      escreval("1. Cadastrar médicos")
+      escreval("2. Visualizar médicos cadastrados")
+      escreval("3. Conferir cobertura de disponibilidade")
+      escreval("4. Buscar ID dos médicos")
+      escreval("5. Montar ou continuar a escala médica")
+      escreval("6. Visualizar plantões por médico")
+      escreval("7. Visualizar escala por dia e turno")
+      escreval("0. Sair")
+      escreval("")
+      escreva("Escolha uma opção: ")
+      leia(entrada)
+      enquanto (entrada <> "0") e (entrada <> "1") e (entrada <> "2") e (entrada <> "3") e (entrada <> "4") e (entrada <> "5") e (entrada <> "6") e (entrada <> "7") faca
+         escreval("ERRO: Opção inválida! Selecione 0, 1, 2, 3, 4, 5, 6 ou 8.")
+         escreva("Escolha uma opção: ")
+         leia(entrada)
+      fimenquanto
+      menu <- caracpnum(entrada)
+
+      // Recalcula a disponibilidade antes de consultar ou montar a escala.
+      // Não depende de ter visitado a opção 3 anteriormente.
+      se menu = 3 entao
+         limpatela
+         se menu = 5 entao
+            escreval("============================================================")
+            escreval("          DIA SELECIONADO: ", diasSemana[diaEscolhido])
+            escreval("============================================================")
+         fimse
+         escalaCompleta <- falso
+         se qtdProfissionais > 0 entao
+            // ============================================================
+            // US12 e US13 - ANÁLISE DA DISPONIBILIDADE DOS TRÊS TURNOS
+            // Esta análise verifica disponibilidade declarada no cadastro.
+            // A validação da escala efetivamente montada continua abaixo.
+            // ============================================================
+
+            escalaCompleta <- verdadeiro
+            escreval("============================================================")
+            escreval("                 ANÁLISE DE DISPONIBILIDADE")
+            escreval("============================================================")
+            escreval("")
+            para turnoEscolhido de 1 ate 3 faca
+               // Reconta os cadastros em cada consulta, sem duplicar os totais.
+               clinicosTurno <- 0
+               pediatrasTurno <- 0
+               cirurgioesTurno <- 0
+               coberturaTurno <- verdadeiro
+               escolha turnoEscolhido
+               caso 1
+                  nomeTurno <- "MANHÃ"
+                  tituloTurno <- "MANHÃ"
+               caso 2
+                  nomeTurno <- "TARDE"
+                  tituloTurno <- "TARDE"
+               caso 3
+                  nomeTurno <- "NOITE"
+                  tituloTurno <- "NOITE"
+               fimescolha
+
+               para i de 1 ate qtdProfissionais faca
+                  // Consulta a disponibilidade do médico no turno analisado.
+                  disponivelNoTurno <- falso
+                  se turnoEscolhido = 1 entao
+                     disponivelNoTurno <- disponivelManha[i]
+                  fimse
+                  se turnoEscolhido = 2 entao
+                     disponivelNoTurno <- disponivelTarde[i]
+                  fimse
+                  se turnoEscolhido = 3 entao
+                     disponivelNoTurno <- disponivelNoite[i]
+                  fimse
+
+                  // Compara diretamente o texto salvo no cadastro.
+                  se disponivelNoTurno = verdadeiro entao
+                     se especialidade[i] = "Clínico Geral" entao
+                        clinicosTurno <- clinicosTurno + 1
+                     fimse
+                     se especialidade[i] = "Pediatra" entao
+                        pediatrasTurno <- pediatrasTurno + 1
+                     fimse
+                     se especialidade[i] = "Cirurgião" entao
+                        cirurgioesTurno <- cirurgioesTurno + 1
+                     fimse
+                  fimse
+               fimpara
+               faltamClinicos <- 0
+               faltamPediatras <- 0
+               faltamCirurgioes <- 0
+
+               se clinicosTurno < minimoClinicos entao
+                  faltamClinicos <- minimoClinicos - clinicosTurno
+                  coberturaTurno <- falso
+               fimse
+               se pediatrasTurno < minimoPediatras entao
+                  faltamPediatras <- minimoPediatras - pediatrasTurno
+                  coberturaTurno <- falso
+               fimse
+               se cirurgioesTurno < minimoCirurgioes entao
+                  faltamCirurgioes <- minimoCirurgioes - cirurgioesTurno
+                  coberturaTurno <- falso
+               fimse
+
+               escreval("= COBERTURA DE DISPONIBILIDADE: ", tituloTurno," =")
+               escreval("")
+               escreval("Clínicos gerais: ", clinicosTurno, "/", minimoClinicos)
+               escreval("Pediatras: ", pediatrasTurno, "/", minimoPediatras)
+               escreval("Cirurgiões: ", cirurgioesTurno, "/", minimoCirurgioes)
+               escreval("")
+               se faltamClinicos > 0 entao
+                  escreval("Faltam ", faltamClinicos, " clínico(s) geral(is).")
+               fimse
+               se faltamPediatras > 0 entao
+                  escreval("Faltam ", faltamPediatras, " pediatra(s).")
+               fimse
+               se faltamCirurgioes > 0 entao
+                  escreval("Faltam ", faltamCirurgioes, " cirurgião(ões).")
+               fimse
+               escreval("")
+               se coberturaTurno = verdadeiro entao
+                  escreval("RESULTADO: DISPONIBILIDADE DA ", nomeTurno, " ADEQUADA.")
+               senao
+                  escreval("RESULTADO: DISPONIBILIDADE DA ", nomeTurno, " INSUFICIENTE.")
+                  escalaCompleta <- falso
+               fimse
+               escreval("")
+
+            fimpara
+
+            escreval("")
+            escreval("============================================================")
+            escreval("      RESULTADO FINAL DA ANÁLISE DE DISPONIBILIDADE")
+            escreval("============================================================")
+            se escalaCompleta = verdadeiro entao
+               escreval("")
+               escreval("DISPONIBILIDADE SUFICIENTE NOS TRÊS TURNOS.")
+            senao
+               escreval("")
+               escreval("ATENÇÃO: HÁ TURNOS COM DISPONIBILIDADE INSUFICIENTE.")
+               escreval("Consulte acima as especialidades e quantidades faltantes.")
+            fimse
+            escreval("")
+            escreval("============================================================")
+            escreval("")
+
+         senao
+            escreval("")
+            escreval("Nenhum profissional foi cadastrado. Utilize a opção 1.")
+         fimse
+      fimse
+
+      escolha menu
+      caso 1
+         se qtdProfissionais < capacidadeMaxima entao
+            retornarDiretoMenu <- verdadeiro
+            repita
+
+               limpatela
+               escreval("============================================================")
+               escreval("                          MEDSHIFT")
+               escreval("                 CADASTRO DA EQUIPE MÉDICA")
+               escreval("============================================================")
+               escreval("")
+
+               // Incremento automático da quantidade de profissionais
+               qtdProfissionais <- qtdProfissionais + 1
+
+               // O ID recebe automaticamente o número do cadastro
+               id[qtdProfissionais] <- qtdProfissionais
+
+               escreval("------------------------------------------------------------")
+               escreval("Cadastro do profissional ",id[qtdProfissionais])
+               escreval("------------------------------------------------------------")
+
+
+
+               escreval("")
+               escreva("Nome do profissional: ")
+               leia(nome[qtdProfissionais])
+
+               // Cadastro e validação da especialidade
+               repita
+
+                  escreval("")
+                  escreval("Especialidade:")
+                  escreval("")
+                  escreval("1 - Clínico Geral")
+                  escreval("2 - Pediatra")
+                  escreval("3 - Cirurgião")
+                  escreval("")
+                  escreva("Informe a opção desejada: ")
+                  leia(entrada)
+                  enquanto (entrada <> "1") e (entrada <> "2") e (entrada <> "3") faca
+                     escreval("ERRO: Digite somente 1, 2 ou 3, sem letras, sinais ou casas decimais.")
+                     escreva("Informe a opção desejada: ")
+                     leia(entrada)
+                  fimenquanto
+                  opcaoEspecialidade <- caracpnum(entrada)
+
+                  se (opcaoEspecialidade = 1) entao
+                     especialidade[qtdProfissionais] <- "Clínico Geral"
+                  senao
+                     se (opcaoEspecialidade = 2) entao
+                        especialidade[qtdProfissionais] <- "Pediatra"
+                     senao
+                        se (opcaoEspecialidade = 3) entao
+                           especialidade[qtdProfissionais] <- "Cirurgião"
+                        senao
+                           escreval("")
+                           escreval("ERRO: Especialidade inválida.")
+                           escreval("Informe uma opção entre 1 e 3.")
+                        fimse
+                     fimse
+                  fimse
+
+               ate (opcaoEspecialidade >= 1) e (opcaoEspecialidade <= 3)
+
+               escreval("")
+               escreval("Disponibilidade por turno (S = sim / N = não):")
+               escreval("")
+
+               repita
+                  para turnoEscolhido de 1 ate 3 faca
+                     escolha turnoEscolhido
+                     caso 1
+                        nomeTurno <- "manhã"
+                     caso 2
+                        nomeTurno <- "tarde"
+                     caso 3
+                        nomeTurno <- "noite"
+                     fimescolha
+
+                     escreva("Disponível pela ", nomeTurno, " (S/N)? ")
+                     leia(resposta)
+                     enquanto (resposta <> "S") e (resposta <> "s") e (resposta <> "N") e (resposta <> "n") faca
+                        escreval("")
+                        escreval("ERRO: Resposta inválida. Informe S ou N.")
+                        escreva("Disponível pela ", nomeTurno, " (S/N)? ")
+                        leia(resposta)
+                     fimenquanto
+
+                     escolha turnoEscolhido
+                     caso 1
+                        disponivelManha[qtdProfissionais] <- (resposta = "S") ou (resposta = "s")
+                     caso 2
+                        disponivelTarde[qtdProfissionais] <- (resposta = "S") ou (resposta = "s")
+                     caso 3
+                        disponivelNoite[qtdProfissionais] <- (resposta = "S") ou (resposta = "s")
+                     fimescolha
+                  fimpara
+
+                  se (disponivelManha[qtdProfissionais] = falso) e (disponivelTarde[qtdProfissionais] = falso) e (disponivelNoite[qtdProfissionais] = falso) entao
+                     escreval("")
+                     escreval("============================================================")
+                     escreval("ERRO: Informe disponibilidade em pelo menos um turno.")
+                     escreval("============================================================")
+                     escreval("")
+                  fimse
+               ate disponivelManha[qtdProfissionais] ou disponivelTarde[qtdProfissionais] ou disponivelNoite[qtdProfissionais]
+
+               escreval("")
+               escreval("------------------------------------------------------------")
+               escreval("PROFISSIONAL CADASTRADO COM SUCESSO!")
+               escreval("ID (gerado automaticamente): ", id[qtdProfissionais])
+               escreval("------------------------------------------------------------")
+
+               // Verifica se ainda existe espaço para novos cadastros
+               se qtdProfissionais < capacidadeMaxima entao
+
+                  escreval("")
+                  escreva("Deseja cadastrar outro profissional (S/N)? ")
+                  leia(resposta)
+
+                  enquanto (resposta <> "S") e (resposta <> "s") e (resposta <> "N") e (resposta <> "n") faca
+                     escreval("")
+                     escreval("ERRO: Resposta inválida. Informe S ou N.")
+                     escreva("Deseja cadastrar outro profissional (S/N)? ")
+                     leia(resposta)
+                  fimenquanto
+
+               senao
+
+                  escreval("")
+                  escreval("LIMITE MÁXIMO DE CADASTROS ATINGIDO!")
+                  resposta <- "N"
+
+               fimse
+
+            ate (resposta = "N") ou (resposta = "n")
+
+         senao
+            escreval("LIMITE MÁXIMO DE CADASTROS ATINGIDO!")
+         fimse
+
+      caso 2
+         // Exibição dos profissionais cadastrados
+         limpatela
+         escreval("")
+         escreval("============================================================")
+         escreval("                 PROFISSIONAIS CADASTRADOS")
+         escreval("============================================================")
+
+         se qtdProfissionais = 0 entao
+
+            escreval("")
+            escreval("Nenhum profissional foi cadastrado.")
+
+         senao
+
+            para i de 1 ate qtdProfissionais faca
+
+               escreval("")
+               escreval("------------------------------------------------------------")
+               escreval("Profissional ", i)
+               escreval("------------------------------------------------------------")
+               escreval("ID: ", id[i])
+               escreval("Nome: ", nome[i])
+               escreval("Especialidade: ", especialidade[i])
+
+               escreva("Disponibilidade: ")
+
+               se disponivelManha[i] = verdadeiro entao
+                  escreva("Manhã; ")
+               fimse
+
+               se disponivelTarde[i] = verdadeiro entao
+                  escreva("Tarde; ")
+               fimse
+
+               se disponivelNoite[i] = verdadeiro entao
+                  escreva("Noite; ")
+               fimse
+
+               se (disponivelManha[i] = falso) e (disponivelTarde[i] = falso) e (disponivelNoite[i] = falso) entao
+                  escreva("Nenhum turno informado")
+               fimse
+
+               escreval("")
+
+            fimpara
+
+         fimse
+
+         escreval("")
+         escreval("============================================================")
+         escreval("Total de profissionais cadastrados: ", qtdProfissionais)
+         escreval("============================================================")
+
+      caso 3
+         // O diagnóstico de disponibilidade já foi exibido antes do escolha.
+         escreval("")
+
+      caso 4
+         se qtdProfissionais > 0 entao
+            retornarDiretoMenu <- verdadeiro
+            desejaBuscar <- "S"
+
+            repita
+            limpatela
+            escreval("============================================================")
+            escreval("               BUSCA DE PROFISSIONAL POR ID")
+            escreval("============================================================")
+
+               escreval("")
+               repita
+                  escreva("Informe o ID do profissional: ")
+                  leia(entrada)
+                  entradaValida <- (compr(entrada) > 0) e (compr(entrada) <= compr(numpcarac(capacidadeMaxima)))
+                  se entradaValida entao
+                     para indiceEntrada de 1 ate compr(entrada) faca
+                        caractereEntrada <- copia(entrada, indiceEntrada, 1)
+                        se pos(caractereEntrada, "0123456789") = 0 entao
+                           entradaValida <- falso
+                        fimse
+                     fimpara
+                  fimse
+                  se entradaValida = falso entao
+                     escreval("")
+                     escreval("ERRO: Informe o ID usando apenas dígitos, sem sinais ou casas decimais.")
+                  fimse
+               ate entradaValida
+               idBusca <- caracpnum(entrada)
+
+               // Reinicia os controles antes de cada busca
+               profissionalEncontrado <- falso
+               posicaoEncontrada <- 0
+
+               // Procura o ID dentro do vetor
+               // ID automático corresponde à posição no cadastro
+               se (idBusca >= 1) e (idBusca <= qtdProfissionais) entao
+                  profissionalEncontrado <- verdadeiro
+                  posicaoEncontrada <- idBusca
+               fimse
+
+               se profissionalEncontrado = verdadeiro entao
+                  escreval("")
+                  escreval("= PROFISSIONAL LOCALIZADO =")
+                  escreval("")
+                  escreval("ID: ", id[posicaoEncontrada])
+                  escreval("Nome: ", nome[posicaoEncontrada])
+                  escreval("Especialidade: ", especialidade[posicaoEncontrada])
+
+                  escreva("Disponibilidade: ")
+
+                  se disponivelManha[posicaoEncontrada] = verdadeiro entao
+                     escreva("Manhã; ")
+                  fimse
+
+                  se disponivelTarde[posicaoEncontrada] = verdadeiro entao
+                     escreva("Tarde; ")
+                  fimse
+
+                  se disponivelNoite[posicaoEncontrada] = verdadeiro entao
+                     escreva("Noite; ")
+                  fimse
+
+                  se (disponivelManha[posicaoEncontrada] = falso) e (disponivelTarde[posicaoEncontrada] = falso) e (disponivelNoite[posicaoEncontrada] = falso) entao
+
+                     escreva("Nenhum turno informado")
+
+                  fimse
+
+                  escreval("")
+
+               senao
+
+                  escreval("")
+                  escreval("= PROFISSIONAL NÃO LOCALIZADO =")
+                  escreval("")
+                  escreval("ERRO: Não existe profissional cadastrado")
+                  escreval("com o ID ", idBusca, ".")
+                  escreval("")
+                  escreval("Intervalo atual de IDs: 1 a ", qtdProfissionais)
+
+               fimse
+
+               escreval("")
+               escreva("Deseja buscar outro profissional (S/N)? ")
+               leia(desejaBuscar)
+
+               enquanto (desejaBuscar <> "S") e (desejaBuscar <> "s") e (desejaBuscar <> "N") e (desejaBuscar <> "n") faca
+
+                  escreval("")
+                  escreval("ERRO: Resposta inválida.")
+                  escreval("Informe S para sim ou N para não.")
+                  escreval("")
+                  escreva("Deseja buscar outro profissional (S/N)? ")
+                  leia(desejaBuscar)
+
+               fimenquanto
+
+            ate (desejaBuscar = "N") ou (desejaBuscar = "n")
+         senao
+            escreval("")
+            escreval("Nenhum profissional foi cadastrado. Utilize a opção 1.")
+         fimse
+
+      caso 5
+         retornarDiretoMenu <- verdadeiro
+         repita
+            limpatela
+            escreval("============================================================")
+            escreval("                 MONTAR OU CONTINUAR ESCALA")
+            escreval("============================================================")
+            para indiceDia de 1 ate quantidadeDias faca
+               escreval(indiceDia, " - ", diasSemana[indiceDia])
+            fimpara
+            escreval("0 - Voltar ao menu principal")
+            escreval("")
+            escreva("Selecione o dia (1 a 5) ou 0 para voltar: ")
+            leia(entrada)
+            enquanto (entrada <> "0") e (entrada <> "1") e (entrada <> "2") e (entrada <> "3") e (entrada <> "4") e (entrada <> "5") faca
+               escreval("ERRO: Digite somente uma opção de 0 a 5.")
+               escreva("Selecione o dia (1 a 5) ou 0 para voltar: ")
+               leia(entrada)
+            fimenquanto
+            diaOperacao <- caracpnum(entrada)
+            se diaOperacao <> 0 entao
+               diaEscolhido <- diaOperacao
+               inicioDia <- (diaEscolhido - 1) * capacidadeMaxima
+               retornarDiretoMenu <- falso
+               // Confere a equipe mínima antes de analisar a disponibilidade.
+               se menu = 5 entao
+                  // Contagem da quantidade de profissionais de cada especialidade
+
+                  // Recalcular totais não deve somar uma consulta sobre a anterior
+                  qtdClinicos <- 0
+                  qtdPediatras <- 0
+                  qtdCirurgioes <- 0
+
+                  para i de 1 ate qtdProfissionais faca
+                     se especialidade[i] = "Clínico Geral" entao
+                        qtdClinicos <- qtdClinicos + 1
+                     senao
+                        se especialidade[i] = "Pediatra" entao
+                           qtdPediatras <- qtdPediatras + 1
+                        senao
+                           qtdCirurgioes <- qtdCirurgioes + 1
+                        fimse
+                     fimse
+                  fimpara
+
+               fimse
+               // Recalcula a disponibilidade antes de consultar ou montar a escala.
+               // Não depende de ter visitado a opção 3 anteriormente.
+               se (menu = 3) ou ((menu = 5) e (qtdProfissionais >= capacidadeMinima) e (qtdClinicos >= minimoEquipeClinicos) e (qtdPediatras >= minimoEquipePediatras) e (qtdCirurgioes >= minimoEquipeCirurgioes)) entao
+                  limpatela
+                  se menu = 5 entao
+                     escreval("============================================================")
+                     escreval("          DIA SELECIONADO: ", diasSemana[diaEscolhido])
+                     escreval("============================================================")
+                  fimse
+                  escalaCompleta <- falso
+                  se qtdProfissionais > 0 entao
+                     // ============================================================
+                     // US12 e US13 - ANÁLISE DA DISPONIBILIDADE DOS TRÊS TURNOS
+                     // Esta análise verifica disponibilidade declarada no cadastro.
+                     // A validação da escala efetivamente montada continua abaixo.
+                     // ============================================================
+
+                     escalaCompleta <- verdadeiro
+                     escreval("============================================================")
+                     escreval("                 ANÁLISE DE DISPONIBILIDADE")
+                     escreval("============================================================")
+                     escreval("")
+                     para turnoEscolhido de 1 ate 3 faca
+                        // Reconta os cadastros em cada consulta, sem duplicar os totais.
+                        clinicosTurno <- 0
+                        pediatrasTurno <- 0
+                        cirurgioesTurno <- 0
+                        coberturaTurno <- verdadeiro
+                        escolha turnoEscolhido
+                        caso 1
+                           nomeTurno <- "MANHÃ"
+                           tituloTurno <- "MANHÃ"
+                        caso 2
+                           nomeTurno <- "TARDE"
+                           tituloTurno <- "TARDE"
+                        caso 3
+                           nomeTurno <- "NOITE"
+                           tituloTurno <- "NOITE"
+                        fimescolha
+
+                        para i de 1 ate qtdProfissionais faca
+                           // Consulta a disponibilidade do médico no turno analisado.
+                           disponivelNoTurno <- falso
+                           se turnoEscolhido = 1 entao
+                              disponivelNoTurno <- disponivelManha[i]
+                           fimse
+                           se turnoEscolhido = 2 entao
+                              disponivelNoTurno <- disponivelTarde[i]
+                           fimse
+                           se turnoEscolhido = 3 entao
+                              disponivelNoTurno <- disponivelNoite[i]
+                           fimse
+
+                           // Compara diretamente o texto salvo no cadastro.
+                           se disponivelNoTurno = verdadeiro entao
+                              se especialidade[i] = "Clínico Geral" entao
+                                 clinicosTurno <- clinicosTurno + 1
+                              fimse
+                              se especialidade[i] = "Pediatra" entao
+                                 pediatrasTurno <- pediatrasTurno + 1
+                              fimse
+                              se especialidade[i] = "Cirurgião" entao
+                                 cirurgioesTurno <- cirurgioesTurno + 1
+                              fimse
+                           fimse
+                        fimpara
+                        faltamClinicos <- 0
+                        faltamPediatras <- 0
+                        faltamCirurgioes <- 0
+
+                        se clinicosTurno < minimoClinicos entao
+                           faltamClinicos <- minimoClinicos - clinicosTurno
+                           coberturaTurno <- falso
+                        fimse
+                        se pediatrasTurno < minimoPediatras entao
+                           faltamPediatras <- minimoPediatras - pediatrasTurno
+                           coberturaTurno <- falso
+                        fimse
+                        se cirurgioesTurno < minimoCirurgioes entao
+                           faltamCirurgioes <- minimoCirurgioes - cirurgioesTurno
+                           coberturaTurno <- falso
+                        fimse
+
+                        escreval("= COBERTURA DE DISPONIBILIDADE: ", tituloTurno," =")
+                        escreval("")
+                        escreval("Clínicos gerais: ", clinicosTurno, "/", minimoClinicos)
+                        escreval("Pediatras: ", pediatrasTurno, "/", minimoPediatras)
+                        escreval("Cirurgiões: ", cirurgioesTurno, "/", minimoCirurgioes)
+                        escreval("")
+                        se faltamClinicos > 0 entao
+                           escreval("Faltam ", faltamClinicos, " clínico(s) geral(is).")
+                        fimse
+                        se faltamPediatras > 0 entao
+                           escreval("Faltam ", faltamPediatras, " pediatra(s).")
+                        fimse
+                        se faltamCirurgioes > 0 entao
+                           escreval("Faltam ", faltamCirurgioes, " cirurgião(ões).")
+                        fimse
+                        escreval("")
+                        se coberturaTurno = verdadeiro entao
+                           escreval("RESULTADO: DISPONIBILIDADE DA ", nomeTurno, " ADEQUADA.")
+                        senao
+                           escreval("RESULTADO: DISPONIBILIDADE DA ", nomeTurno, " INSUFICIENTE.")
+                           escalaCompleta <- falso
+                        fimse
+                        escreval("")
+
+                     fimpara
+
+                     escreval("")
+                     escreval("============================================================")
+                     escreval("      RESULTADO FINAL DA ANÁLISE DE DISPONIBILIDADE")
+                     escreval("============================================================")
+                     se escalaCompleta = verdadeiro entao
+                        escreval("")
+                        escreval("DISPONIBILIDADE SUFICIENTE NOS TRÊS TURNOS.")
+                     senao
+                        escreval("")
+                        escreval("ATENÇÃO: HÁ TURNOS COM DISPONIBILIDADE INSUFICIENTE.")
+                        escreval("Consulte acima as especialidades e quantidades faltantes.")
+                     fimse
+                     escreval("")
+                     escreval("============================================================")
+                     escreval("")
+
+                  senao
+                     escreval("")
+                     escreval("Nenhum profissional foi cadastrado. Utilize a opção 1.")
+                  fimse
+               fimse
+               se (qtdProfissionais >= capacidadeMinima) e (qtdClinicos >= minimoEquipeClinicos) e (qtdPediatras >= minimoEquipePediatras) e (qtdCirurgioes >= minimoEquipeCirurgioes) e (escalaCompleta = verdadeiro) entao
+                  retornarDiretoMenu <- verdadeiro
+
+                  // Permite continuar a escalação se o dia estiver incompleto
+                  desejaCorrigirEscala <- "S"
+
+                  repita
+
+                     // US10 e US11 - Construção e validação da escala
+                     escreval("")
+                     escreval("============================================================")
+                     escreval("                      ESCALAÇÃO DO DIA")
+                     escreval("Dia selecionado: ", diasSemana[diaEscolhido])
+                     escreval("============================================================")
+                     escreval("")
+                     escreval("Cada profissional pode receber no máximo ", maximoPlantoesDia, " plantões por dia.")
+                     escreval("Limite semanal por profissional (R8): ", maximoPlantoesSemana, " plantões.")
+                     escreva("Deseja escalar um profissional (S/N)? ")
+                     leia(desejaEscalar)
+
+                     enquanto (desejaEscalar <> "S") e (desejaEscalar <> "s") e (desejaEscalar <> "N") e (desejaEscalar <> "n") faca
+                        escreval("")
+                        escreval("ERRO: Resposta inválida. Informe S ou N.")
+                        escreva("Deseja escalar um profissional (S/N)? ")
+                        leia(desejaEscalar)
+                     fimenquanto
+
+                     se (desejaEscalar = "S") ou (desejaEscalar = "s") entao
+
+                        repita
+
+                           // Reinicia os controles antes de cada tentativa
+                           profissionalEncontrado <- falso
+                           posicaoEncontrada <- 0
+                           posicaoLivre <- 0
+                           escalacaoValida <- verdadeiro
+
+                           escreval("")
+                           escreval("------------------------------------------------------------")
+                           escreval("               NOVA TENTATIVA DE ESCALAÇÃO")
+                           escreval("------------------------------------------------------------")
+                           escreval("")
+                           repita
+                              escreva("Informe o ID para escalação: ")
+                              leia(entrada)
+                              entradaValida <- (compr(entrada) > 0) e (compr(entrada) <= compr(numpcarac(capacidadeMaxima)))
+                              se entradaValida entao
+                                 para indiceEntrada de 1 ate compr(entrada) faca
+                                    caractereEntrada <- copia(entrada, indiceEntrada, 1)
+                                    se pos(caractereEntrada, "0123456789") = 0 entao
+                                       entradaValida <- falso
+                                    fimse
+                                 fimpara
+                              fimse
+                              se entradaValida = falso entao
+                                 escreval("")
+                                 escreval("ERRO: Informe o ID usando apenas dígitos, sem sinais ou casas decimais.")
+                              fimse
+                           ate entradaValida
+                           idBusca <- caracpnum(entrada)
+
+                           // ID automático corresponde à posição no cadastro
+                           se (idBusca >= 1) e (idBusca <= qtdProfissionais) entao
+                              profissionalEncontrado <- verdadeiro
+                              posicaoEncontrada <- idBusca
+                           fimse
+
+                           se profissionalEncontrado = verdadeiro entao
+
+                              // R8 - Soma os plantões do médico nos cinco dias.
+                              // Recalcula antes de cada tentativa, sem alterar o dia selecionado.
+                              plantoesSemana <- 0
+                              para indiceDia de 1 ate quantidadeDias faca
+                                 plantoesSemana <- plantoesSemana + qtdPlantoes[(indiceDia - 1) * capacidadeMaxima + posicaoEncontrada]
+                              fimpara
+
+                              escreval("")
+                              escreval("Profissional: ", nome[posicaoEncontrada])
+                              escreval("Especialidade cadastrada: ", especialidade[posicaoEncontrada])
+                              escreval("Plantões atuais no dia: ", qtdPlantoes[inicioDia + posicaoEncontrada])
+                              escreval("Plantões atuais na semana: ", plantoesSemana, "/", maximoPlantoesSemana)
+                              escreval("")
+                              escreval("Selecione o turno:")
+                              escreval("1 - Manhã")
+                              escreval("2 - Tarde")
+                              escreval("3 - Noite")
+                              escreval("")
+                              escreva("Informe o turno para escalação: ")
+                              leia(entrada)
+                              enquanto (entrada <> "1") e (entrada <> "2") e (entrada <> "3") faca
+                                 escreval("ERRO: Digite somente 1, 2 ou 3, sem letras, sinais ou casas decimais.")
+                                 escreva("Informe o turno para escalação: ")
+                                 leia(entrada)
+                              fimenquanto
+                              turnoEscolhido <- caracpnum(entrada)
+
+                              se (turnoEscolhido >= 1) e (turnoEscolhido <= 3) entao
+
+                                 escolha turnoEscolhido
+
+                                 caso 1
+                                    nomeTurno <- "Manhã"
+                                    disponivelNoTurno <- disponivelManha[posicaoEncontrada]
+                                    jaEscaladoNoTurno <- escaladoManha[inicioDia + posicaoEncontrada]
+
+                                 caso 2
+                                    nomeTurno <- "Tarde"
+                                    disponivelNoTurno <- disponivelTarde[posicaoEncontrada]
+                                    jaEscaladoNoTurno <- escaladoTarde[inicioDia + posicaoEncontrada]
+
+                                 caso 3
+                                    nomeTurno <- "Noite"
+                                    disponivelNoTurno <- disponivelNoite[posicaoEncontrada]
+                                    jaEscaladoNoTurno <- escaladoNoite[inicioDia + posicaoEncontrada]
+
+                                 fimescolha
+
+                                 // Mostra os IDs escalados e encontra a primeira posição livre
+                                 escreval("")
+                                 escreval("Profissionais no turno: ", nomeTurno)
+                                 escreval("------------------------------------------------------------")
+                                 qtdExibidos <- 0
+
+                                 para i de 1 ate capacidadeMaxima faca
+
+                                    escolha turnoEscolhido
+
+                                    caso 1
+                                       idNaVaga <- escalaManha[inicioDia + i]
+
+                                    caso 2
+                                       idNaVaga <- escalaTarde[inicioDia + i]
+
+                                    caso 3
+                                       idNaVaga <- escalaNoite[inicioDia + i]
+
+                                    fimescolha
+
+                                    se idNaVaga <> 0 entao
+                                       escreval("ID escalado: ", idNaVaga)
+                                       qtdExibidos <- qtdExibidos + 1
+                                    senao
+                                       se posicaoLivre = 0 entao
+                                          posicaoLivre <- i
+                                       fimse
+                                    fimse
+
+                                 fimpara
+
+                                 se qtdExibidos = 0 entao
+                                    escreval("Nenhum profissional escalado neste turno.")
+                                 senao
+                                    escreval("Total neste turno: ", qtdExibidos)
+                                 fimse
+
+                                 escreval("")
+
+                                 // A especialidade não determina uma quantidade máxima de vagas
+                                 escreval("Especialidade para esta escalação:")
+                                 escreval("1 - Clínico Geral")
+                                 escreval("2 - Pediatra")
+                                 escreval("3 - Cirurgião")
+                                 escreval("")
+                                 escreva("Informe a especialidade para escalação: ")
+                                 leia(entrada)
+                                 enquanto (entrada <> "1") e (entrada <> "2") e (entrada <> "3") faca
+                                    escreval("")
+                                    escreval("ERRO: Digite somente 1, 2 ou 3, sem letras, sinais ou casas decimais.")
+                                    escreva("Informe a especialidade para escalação: ")
+                                    leia(entrada)
+                                 fimenquanto
+                                 opcaoEspecialidadeEscala <- caracpnum(entrada)
+
+                                 se (opcaoEspecialidadeEscala >= 1) e (opcaoEspecialidadeEscala <= 3) entao
+
+                                    escolha opcaoEspecialidadeEscala
+
+                                    caso 1
+                                       especialidadePosto <- "Clínico Geral"
+
+                                    caso 2
+                                       especialidadePosto <- "Pediatra"
+
+                                    caso 3
+                                       especialidadePosto <- "Cirurgião"
+
+                                    fimescolha
+
+                                    escreval("")
+
+                                    // Valida antes de alterar os vetores e o contador
+                                    se especialidade[posicaoEncontrada] <> especialidadePosto entao
+                                       escalacaoValida <- falso
+                                       escreval("")
+                                       escreval("ERRO: Especialidade incompatível com o cadastro.")
+                                    fimse
+
+                                    se jaEscaladoNoTurno = verdadeiro entao
+                                       escalacaoValida <- falso
+                                       escreval("")
+                                       escreval("ERRO: Profissional já escalado neste turno.")
+                                    fimse
+
+                                    se disponivelNoTurno = falso entao
+                                       escalacaoValida <- falso
+                                       escreval("")
+                                       escreval("ERRO: Profissional indisponível para este turno.")
+                                    fimse
+
+                                    se qtdPlantoes[inicioDia + posicaoEncontrada] >= maximoPlantoesDia entao
+                                       escalacaoValida <- falso
+                                       escreval("")
+                                       escreval("ERRO: Limite de ", maximoPlantoesDia, " plantões no dia atingido.")
+                                    fimse
+
+                                    // R8 - Recusa o sétimo plantão antes de alterar a escala.
+                                    se plantoesSemana >= maximoPlantoesSemana entao
+                                       escalacaoValida <- falso
+                                       escreval("")
+                                       escreval("ERRO: Limite semanal de ", maximoPlantoesSemana, " plantões atingido (R8).")
+                                    fimse
+
+                                    // US17 - Descanso entre a noite e a manhã seguinte.
+                                    // Confere os limites dos dias antes de acessar os vetores.
+                                    se turnoEscolhido = 1 entao
+                                       se diaEscolhido > 1 entao
+                                          se escaladoNoite[inicioDia - capacidadeMaxima + posicaoEncontrada] = verdadeiro entao
+                                             escalacaoValida <- falso
+                                             escreval("")
+                                             escreval("ERRO: Descanso obrigatório. Profissional escalado na noite de ", diasSemana[diaEscolhido - 1], ".")
+                                             escreval("Não é permitido escalá-lo na manhã seguinte.")
+                                          fimse
+                                       fimse
+                                    fimse
+
+                                    // Protege o descanso também na montagem fora de ordem.
+                                    se turnoEscolhido = 3 entao
+                                       se diaEscolhido < quantidadeDias entao
+                                          se escaladoManha[inicioDia + capacidadeMaxima + posicaoEncontrada] = verdadeiro entao
+                                             escalacaoValida <- falso
+                                             escreval("")
+                                             escreval("ERRO: Descanso obrigatório. Profissional já escalado na manhã de ", diasSemana[diaEscolhido + 1], ".")
+                                             escreval("Não é permitido escalá-lo na noite anterior.")
+                                          fimse
+                                       fimse
+                                    fimse
+
+                                    se posicaoLivre = 0 entao
+                                       escalacaoValida <- falso
+                                       escreval("")
+                                       escreval("ERRO: Capacidade do turno atingida.")
+                                    fimse
+
+                                    se escalacaoValida = verdadeiro entao
+
+                                       escolha turnoEscolhido
+
+                                       caso 1
+                                          escalaManha[inicioDia + posicaoLivre] <- id[posicaoEncontrada]
+                                          escaladoManha[inicioDia + posicaoEncontrada] <- verdadeiro
+
+                                       caso 2
+                                          escalaTarde[inicioDia + posicaoLivre] <- id[posicaoEncontrada]
+                                          escaladoTarde[inicioDia + posicaoEncontrada] <- verdadeiro
+
+                                       caso 3
+                                          escalaNoite[inicioDia + posicaoLivre] <- id[posicaoEncontrada]
+                                          escaladoNoite[inicioDia + posicaoEncontrada] <- verdadeiro
+
+                                       fimescolha
+
+                                       qtdPlantoes[inicioDia + posicaoEncontrada] <- qtdPlantoes[inicioDia + posicaoEncontrada] + 1
+
+                                       escreval("")
+                                       escreval("            = ESCALAÇÃO REALIZADA COM SUCESSO! =")
+                                       escreval("")
+                                       escreval("Profissional: ", nome[posicaoEncontrada])
+                                       escreval("Turno: ", nomeTurno)
+                                       escreval("Plantões no dia: ", qtdPlantoes[inicioDia + posicaoEncontrada])
+
+                                    fimse
+
+                                 senao
+
+                                    escalacaoValida <- falso
+                                    escreval("")
+                                    escreval("ERRO: Especialidade inválida. Escolha 1, 2 ou 3.")
+
+                                 fimse
+
+                              senao
+
+                                 escalacaoValida <- falso
+                                 escreval("")
+                                 escreval("ERRO: Turno inválido. Escolha 1, 2 ou 3.")
+
+                              fimse
+
+                           senao
+
+                              escalacaoValida <- falso
+                              escreval("")
+                              escreval("ERRO: Profissional não encontrado. ID informado: ", idBusca)
+
+                           fimse
+
+                           se escalacaoValida = falso entao
+                              escreval("")
+                              escreval("Escalação recusada. Nenhum dado da escala foi alterado.")
+                           fimse
+
+                           escreval("")
+                           escreva("Deseja realizar outra tentativa (S/N)? ")
+                           leia(desejaEscalar)
+
+                           enquanto (desejaEscalar <> "S") e (desejaEscalar <> "s") e (desejaEscalar <> "N") e (desejaEscalar <> "n") faca
+                              escreval("")
+                              escreval("ERRO: Resposta inválida. Informe S ou N.")
+                              escreva("Deseja realizar outra tentativa (S/N)? ")
+                              leia(desejaEscalar)
+                           fimenquanto
+
+                        ate (desejaEscalar = "N") ou (desejaEscalar = "n")
+
+                     fimse
+
+                     // US14 - Quantidade de plantões por profissional
+
+                     totalPlantoes <- 0
+
+                     limpatela
+                     escreval("Dia selecionado: ", diasSemana[diaEscolhido])
+                     escreval("")
+                     escreval("==============================================")
+                     escreval("    RELATÓRIO DE PLANTÕES POR PROFISSIONAL")
+                     escreval("==============================================")
+
+                     para i de 1 ate qtdProfissionais faca
+
+                        quantidadePlantoes <- qtdPlantoes[inicioDia + i]
+
+                        // Soma os plantões da equipe
+                        totalPlantoes <- totalPlantoes + quantidadePlantoes
+
+                        // Exibe os dados do profissional
+                        escreval("")
+                        escreval("----------------------------------------------")
+                        escreval("ID: ", id[i])
+                        escreval("Nome: ", nome[i])
+                        escreval("Especialidade: ", especialidade[i])
+                        escreval("Quantidade de plantões: ", quantidadePlantoes)
+
+                        // Verifica o limite diário de plantões
+                        se quantidadePlantoes > maximoPlantoesDia entao
+                           escreval("ALERTA: Limite diário excedido!")
+                        senao
+                           se quantidadePlantoes = maximoPlantoesDia entao
+                              escreval("Status: Limite diário atingido.")
+                           senao
+                              se quantidadePlantoes = 1 entao
+                                 escreval("Status: 1 plantão atribuído.")
+                              senao
+                                 escreval("Status: Nenhum plantão atribuído.")
+                              fimse
+                           fimse
+                        fimse
+
+                     fimpara
+
+                     // Exibe o total geral de plantões
+                     escreval("")
+                     escreval("==============================================")
+                     escreval("          = RESUMO GERAL DA EQUIPE =")
+                     escreval("==============================================")
+                     escreval("Total de profissionais: ", qtdProfissionais)
+                     escreval("Total de plantões atribuídos: ", totalPlantoes)
+                     escreval("Limite por profissional: ", maximoPlantoesDia)
+                     escreval("==============================================")
+
+                     // Verifica os mínimos somente depois da montagem da escala
+                     // Os mínimos são exigidos em CADA turno, não apenas no cadastro
+                     escalaDiaValida <- verdadeiro
+
+                     para turnoEscolhido de 1 ate 3 faca
+
+                        clinicosTurno <- 0
+                        pediatrasTurno <- 0
+                        cirurgioesTurno <- 0
+
+                        escolha turnoEscolhido
+
+                        caso 1
+                           nomeTurno <- "Manhã"
+
+                        caso 2
+                           nomeTurno <- "Tarde"
+
+                        caso 3
+                           nomeTurno <- "Noite"
+
+                        fimescolha
+
+                        para i de 1 ate qtdProfissionais faca
+
+                           escolha turnoEscolhido
+
+                           caso 1
+                              jaEscaladoNoTurno <- escaladoManha[inicioDia + i]
+
+                           caso 2
+                              jaEscaladoNoTurno <- escaladoTarde[inicioDia + i]
+
+                           caso 3
+                              jaEscaladoNoTurno <- escaladoNoite[inicioDia + i]
+
+                           fimescolha
+
+                           se jaEscaladoNoTurno = verdadeiro entao
+
+                              se especialidade[i] = "Clínico Geral" entao
+                                 clinicosTurno <- clinicosTurno + 1
+                              senao
+                                 se especialidade[i] = "Pediatra" entao
+                                    pediatrasTurno <- pediatrasTurno + 1
+                                 senao
+                                    se especialidade[i] = "Cirurgião" entao
+                                       cirurgioesTurno <- cirurgioesTurno + 1
+                                    fimse
+                                 fimse
+                              fimse
+
+                           fimse
+
+                        fimpara
+
+                        escreval("")
+                        escreval("============================================================")
+                        escreval("             VALIDAÇÃO DO TURNO: ", nomeTurno)
+                        escreval("============================================================")
+                        escreval("")
+                        escreval("Clínicos Gerais: ", clinicosTurno, " | Mínimo: ", minimoClinicos)
+                        escreval("Pediatras: ", pediatrasTurno, " | Mínimo: ", minimoPediatras)
+                        escreval("Cirurgiões: ", cirurgioesTurno, " | Mínimo: ", minimoCirurgioes)
+                        escreval("")
+
+                        se (clinicosTurno >= minimoClinicos) e (pediatrasTurno >= minimoPediatras) e (cirurgioesTurno >= minimoCirurgioes) entao
+
+                           escreval("TURNO VALIDADO: ", nomeTurno)
+
+                        senao
+
+                           escalaDiaValida <- falso
+                           escreval("TURNO NÃO VALIDADO: ", nomeTurno)
+                           escreval("Profissionais necessários para completar o turno:")
+
+                           se clinicosTurno < minimoClinicos entao
+                              escreval("")
+                              escreval("Clínicos gerais em falta: ", minimoClinicos - clinicosTurno)
+                           fimse
+
+                           se pediatrasTurno < minimoPediatras entao
+                              escreval("")
+                              escreval("Pediatras em falta: ", minimoPediatras - pediatrasTurno)
+                           fimse
+
+                           se cirurgioesTurno < minimoCirurgioes entao
+                              escreval("")
+                              escreval("Cirurgiões em falta: ", minimoCirurgioes - cirurgioesTurno)
+                           fimse
+
+                        fimse
+
+                     fimpara
+
+                     escreval("")
+                     escreval("============================================================")
+                     escreval("                RESULTADO DA ESCALA DO DIA")
+                     escreval("============================================================")
+                     escreval("")
+
+                     se escalaDiaValida = verdadeiro entao
+                        escreval("")
+                        escreval("Escala do dia validada. A escala pode ser publicada.")
+                     senao
+                        escreval("")
+                        escreval("Escala do dia NÃO validada. A escala NÃO pode ser publicada.")
+                     fimse
+
+                     // Permite continuar a escalação se estiver incompleta
+                     se escalaDiaValida = verdadeiro entao
+                        desejaCorrigirEscala <- "N"
+                        // Mantém o relatório completo na tela até pressionar ENTER.
+                        retornarDiretoMenu <- falso
+                     senao
+
+                        repita
+
+                           escreval("")
+                           escreva("Deseja continuar a escalação (S/N)? ")
+                           leia(desejaCorrigirEscala)
+
+                           se (desejaCorrigirEscala <> "S") e (desejaCorrigirEscala <> "s") e (desejaCorrigirEscala <> "N") e (desejaCorrigirEscala <> "n") entao
+                              escreval("ERRO: Informe S ou N.")
+                           fimse
+
+                        ate (desejaCorrigirEscala = "S") ou (desejaCorrigirEscala = "s") ou (desejaCorrigirEscala = "N") ou (desejaCorrigirEscala = "n")
+
+                     fimse
+
+                     // Repete a escalação ou encerra o processo
+                  ate (desejaCorrigirEscala = "N") ou (desejaCorrigirEscala = "n")
+
+               senao
+                  se (qtdProfissionais < capacidadeMinima) ou (qtdClinicos < minimoEquipeClinicos) ou (qtdPediatras < minimoEquipePediatras) ou (qtdCirurgioes < minimoEquipeCirurgioes) entao
+                     limpatela
+                     escreval("============================================================")
+                     escreval("         ERRO: EQUIPE INSUFICIENTE PARA PROSSEGUIR")
+                     escreval("")
+                     escreval("                 CONFIRA OS MOTIVOS ABAIXO:")
+                     escreval("============================================================")
+                     escreval("")
+
+                     se qtdProfissionais < capacidadeMinima entao
+                        escreval(" QUANTIDADE MÍNIMA DE MÉDICOS NÃO ATINGIDA (", capacidadeMinima, " )")
+                        escreval("")
+                     fimse
+
+                     se qtdClinicos < minimoEquipeClinicos entao
+                        escreval(" QUANTIDADE MÍNIMA DE CLÍNICOS NÃO ATINGIDA (", minimoEquipeClinicos, " )")
+                        escreval("")
+                     fimse
+
+                     se qtdPediatras < minimoEquipePediatras entao
+                        escreval(" QUANTIDADE MÍNIMA DE PEDIATRAS NÃO ATINGIDA (", minimoEquipePediatras, " )")
+                        escreval("")
+                     fimse
+
+                     se qtdCirurgioes < minimoEquipeCirurgioes entao
+                        escreval(" QUANTIDADE MÍNIMA DE CIRURGIÕES NÃO ATINGIDA (", minimoEquipeCirurgioes, " )")
+                        escreval("")
+                     fimse
+
+                     escreval("------------------------------------------------------------")
+                     escreval("Cadastre, pelo menos, ")
+                     escreval("")
+                     escreval("Clínicos gerais: ", minimoEquipeClinicos)
+                     escreval("Pediatras: ", minimoEquipePediatras)
+                     escreval("Cirurgiões: ", minimoEquipeCirurgioes)
+                     escreval("")
+                     escreval("para montar um dia de escala médica.")
+                     escreval("------------------------------------------------------------")
+                     escreval("")
+                  senao
+                     // O relatório acima detalha as especialidades em falta por turno.
+                     // A equipe atingiu os mínimos de cadastro; falta disponibilidade.
+                     escreval("============================================================")
+                     escreval("          ERRO: DISPONIBILIDADE INSUFICIENTE")
+                     escreval("============================================================")
+                     escreval("")
+                     escreval("A equipe atingiu as quantidades mínimas de cadastro.")
+                     escreval("A montagem da escala está bloqueada.")
+                     escreval("")
+                     escreval("Confira, na análise acima, os turnos e as especialidades")
+                     escreval("com disponibilidade abaixo do mínimo necessário.")
+                     escreval("Cadastre profissionais disponíveis nesses turnos para")
+                     escreval("completar a cobertura das especialidades indicadas.")
+                     escreval("============================================================")
+                     escreval("")
+                  fimse
+               fimse
+               // Pausa para ler bloqueios ou o relatório do dia completo.
+               se retornarDiretoMenu = falso entao
+                  escreval("")
+                  escreva("Pressione ENTER para voltar à seleção do dia: ")
+                  leia(entrada)
+               fimse
+            fimse
+         ate diaOperacao = 0
+         retornarDiretoMenu <- verdadeiro
+
+      caso 6
+         limpatela
+         escreval("==============================================")
+         escreval("    RELATÓRIO DE PLANTÕES POR PROFISSIONAL")
+         escreval("==============================================")
+         escreval("")
+         totalPlantoes <- 0
+         se qtdProfissionais = 0 entao
+            escreval("Nenhum profissional foi cadastrado. Utilize a opção 1.")
+         fimse
+         para i de 1 ate qtdProfissionais faca
+            plantoesSemana <- 0
+            para indiceDia de 1 ate quantidadeDias faca
+               plantoesSemana <- plantoesSemana + qtdPlantoes[(indiceDia - 1) * capacidadeMaxima + i]
+            fimpara
+            totalPlantoes <- totalPlantoes + plantoesSemana
+            escreval("----------------------------------------------")
+            escreval("ID: ", id[i])
+            escreval("Nome: ", nome[i])
+            escreval("Especialidade: ", especialidade[i])
+            escreva("Disponibilidade: ")
+            se disponivelManha[i] entao
+               escreva("manhã")
+            fimse
+            se disponivelTarde[i] entao
+               se disponivelManha[i] entao
+                  escreva("; ")
+               fimse
+               escreva("tarde")
+            fimse
+            se disponivelNoite[i] entao
+               se disponivelManha[i] ou disponivelTarde[i] entao
+                  escreva("; ")
+               fimse
+               escreva("noite")
+            fimse
+            escreval(".")
+            escreval("")
+            escreval("Total na semana - ", plantoesSemana, "/", maximoPlantoesSemana, " plantões")
+            escreval("")
+            se plantoesSemana = 0 entao
+               escreval("Nenhum plantão atribuído.")
+            fimse
+            para indiceDia de 1 ate quantidadeDias faca
+               inicioRelatorio <- (indiceDia - 1) * capacidadeMaxima
+               se escaladoManha[inicioRelatorio + i] ou escaladoTarde[inicioRelatorio + i] ou escaladoNoite[inicioRelatorio + i] entao
+                  escreva(diasSemana[indiceDia], ": ")
+                  se escaladoManha[inicioRelatorio + i] entao
+                     escreva("Manhã")
+                  fimse
+                  se escaladoTarde[inicioRelatorio + i] entao
+                     se escaladoManha[inicioRelatorio + i] entao
+                        escreva(" e ")
+                     fimse
+                     escreva("Tarde")
+                  fimse
+                  se escaladoNoite[inicioRelatorio + i] entao
+                     se escaladoManha[inicioRelatorio + i] ou escaladoTarde[inicioRelatorio + i] entao
+                        escreva(" e ")
+                     fimse
+                     escreva("Noite")
+                  fimse
+                  escreval("")
+               fimse
+            fimpara
+            escreval("")
+         fimpara
+         escreval("==============================================")
+         escreval("          RESUMO GERAL DA EQUIPE")
+         escreval("==============================================")
+         escreval("Total de profissionais: ", qtdProfissionais)
+         escreval("Total de plantões atribuídos: ", totalPlantoes)
+         escreval("Limite semanal por profissional: ", maximoPlantoesSemana)
+         escreval("==============================================")
+
+      caso 7
+         // A consulta possui sua própria pausa e retorna à seleção do dia.
+         retornarDiretoMenu <- verdadeiro
+         repita
+            limpatela
+            escreval("============================================================")
+            escreval("               VISUALIZAR ESCALA POR DIA")
+            escreval("============================================================")
+            para indiceDia de 1 ate quantidadeDias faca
+               escreval(indiceDia, " - ", diasSemana[indiceDia])
+            fimpara
+            escreval("6 - Ver todos os dias da semana")
+            escreval("0 - Voltar ao menu principal")
+            escreval("")
+            escreva("Selecione o dia (1 a 5), 6 para todos ou 0 para voltar: ")
+            leia(entrada)
+            enquanto (entrada <> "0") e (entrada <> "1") e (entrada <> "2") e (entrada <> "3") e (entrada <> "4") e (entrada <> "5") e (entrada <> "6") faca
+               escreval("ERRO: Digite somente uma opção de 0 a 6.")
+               escreva("Selecione o dia (1 a 5), 6 para todos ou 0 para voltar: ")
+               leia(entrada)
+            fimenquanto
+
+            diaConsulta <- 0
+            se entrada <> "0" entao
+               diaConsulta <- caracpnum(entrada)
+               primeiroDiaConsulta <- diaConsulta
+               ultimoDiaConsulta <- diaConsulta
+               se diaConsulta = 6 entao
+                  primeiroDiaConsulta <- 1
+                  ultimoDiaConsulta <- quantidadeDias
+               fimse
+               limpatela
+               para diaConsulta de primeiroDiaConsulta ate ultimoDiaConsulta faca
+                  inicioConsulta <- (diaConsulta - 1) * capacidadeMaxima
+                  temEscalaConsulta <- falso
+
+                  // Cadastro e disponibilidade nao significam que houve escalacao.
+                  para i de 1 ate capacidadeMaxima faca
+                     se (escalaManha[inicioConsulta + i] <> 0) ou (escalaTarde[inicioConsulta + i] <> 0) ou (escalaNoite[inicioConsulta + i] <> 0) entao
+                        temEscalaConsulta <- verdadeiro
+                     fimse
+                  fimpara
+
+                  escreval("============================================================")
+                  escreval("CONSULTA DA ESCALA: ", diasSemana[diaConsulta])
+                  escreval("============================================================")
+                  escreval("")
+
+                  se temEscalaConsulta = falso entao
+                     escreval("ERRO: Nenhum médico foi escalado para ", diasSemana[diaConsulta], ".")
+                     escreval("Para montar a escala desse dia, utilize a opção 5 e selecione o dia desejado.")
+                  fimse
+                  para turnoConsulta de 1 ate turnosPorDia faca
+                     quantidadeConsulta <- 0
+                     clinicosTurno <- 0
+                     pediatrasTurno <- 0
+                     cirurgioesTurno <- 0
+                     escolha turnoConsulta
+                     caso 1
+                        nomeTurnoConsulta <- "Manhã"
+                     caso 2
+                        nomeTurnoConsulta <- "Tarde"
+                     caso 3
+                        nomeTurnoConsulta <- "Noite"
+                     fimescolha
+                     escreval("------------------------------------------------------------")
+                     escreval("TURNO: ", nomeTurnoConsulta)
+                     escreval("------------------------------------------------------------")
+
+                     para i de 1 ate capacidadeMaxima faca
+                        escolha turnoConsulta
+                        caso 1
+                           idConsulta <- escalaManha[inicioConsulta + i]
+                        caso 2
+                           idConsulta <- escalaTarde[inicioConsulta + i]
+                        caso 3
+                           idConsulta <- escalaNoite[inicioConsulta + i]
+                        fimescolha
+                        se idConsulta <> 0 entao
+                           quantidadeConsulta <- quantidadeConsulta + 1
+                           se especialidade[idConsulta] = "Clínico Geral" entao
+                              clinicosTurno <- clinicosTurno + 1
+                           fimse
+                           se especialidade[idConsulta] = "Pediatra" entao
+                              pediatrasTurno <- pediatrasTurno + 1
+                           fimse
+                           se especialidade[idConsulta] = "Cirurgião" entao
+                              cirurgioesTurno <- cirurgioesTurno + 1
+                           fimse
+                           escreval("ID: ", idConsulta)
+                           escreval("Nome: ", nome[idConsulta])
+                           escreval("Especialidade: ", especialidade[idConsulta])
+                           escreval("")
+                        fimse
+                     fimpara
+
+                     se quantidadeConsulta = 0 entao
+                        escreval("Nenhum médico escalado neste turno.")
+                     senao
+                        escreval("Total de médicos neste turno: ", quantidadeConsulta)
+                     fimse
+                     escreval("Clínicos gerais: ", clinicosTurno, "/", minimoClinicos)
+                     escreval("Pediatras: ", pediatrasTurno, "/", minimoPediatras)
+                     escreval("Cirurgiões: ", cirurgioesTurno, "/", minimoCirurgioes)
+                     se (clinicosTurno >= minimoClinicos) e (pediatrasTurno >= minimoPediatras) e (cirurgioesTurno >= minimoCirurgioes) entao
+                        escreval("SITUAÇÃO: COBERTO")
+                     senao
+                        escreval("SITUAÇÃO: INSUFICIENTE")
+                     fimse
+                     escreval("")
+                  fimpara
+               fimpara
+               escreval("")
+               escreva("Pressione ENTER para voltar à seleção do dia: ")
+               leia(entrada)
+            senao
+               escreval("Consulta cancelada.")
+            fimse
+         ate diaConsulta = 0
+
+      caso 0
+         escreval("")
+      fimescolha
+
+      // Mantém a pausa nas consultas, nos avisos e no relatório do dia completo.
+      se (menu <> 0) e (retornarDiretoMenu = falso) entao
+         escreval("")
+         escreva("Pressione ENTER para voltar ao menu: ")
+         leia(entrada)
+      fimse
+   ate menu = 0
+
+   escreval("============================================================")
+   escreval("                 ENCERRAMENTO DO MEDSHIFT")
+   escreval("============================================================")
+fimalgoritmo
+
