@@ -54,6 +54,29 @@ var
    quantidadePlantoes : inteiro
    totalPlantoes : inteiro
 
+   // US21 - Indicadores de distribuição semanal de plantões
+   mediaPlantoesSemana : real
+   maiorPlantoesSemana : inteiro
+   menorPlantoesSemana : inteiro
+   temProfissionalSobrecarregado : logico
+
+   // US22 - Indicadores de cobertura semanal
+   turnosCobertosSemana : inteiro
+   turnosNaoCobertosSemana : inteiro
+   percentualCoberturaSemana : real
+
+   // US23 - Falhas de cobertura por especialidade
+   falhasClinicosSemana : inteiro
+   falhasPediatrasSemana : inteiro
+   falhasCirurgioesSemana : inteiro
+   turnosFalhaClinicos : inteiro
+   turnosFalhaPediatras : inteiro
+   turnosFalhaCirurgioes : inteiro
+
+   // Índices utilizados no relatório gerencial semanal
+   indiceRelatorioDia : inteiro
+   turnoRelatorio : inteiro
+
    // Mínimos necessários no cadastro para cobrir o dia
    minimoEquipeClinicos : inteiro
    minimoEquipePediatras : inteiro
@@ -200,12 +223,13 @@ inicio
       escreval("5. Montar ou continuar a escala médica")
       escreval("6. Visualizar plantões por médico")
       escreval("7. Visualizar escala por dia e turno")
+      escreval("8. Relatório gerencial semanal")
       escreval("0. Sair")
       escreval("")
       escreva("Escolha uma opção: ")
       leia(entrada)
-      enquanto (entrada <> "0") e (entrada <> "1") e (entrada <> "2") e (entrada <> "3") e (entrada <> "4") e (entrada <> "5") e (entrada <> "6") e (entrada <> "7") faca
-         escreval("ERRO: Opção inválida! Selecione 0, 1, 2, 3, 4, 5, 6 ou 8.")
+      enquanto (entrada <> "0") e (entrada <> "1") e (entrada <> "2") e (entrada <> "3") e (entrada <> "4") e (entrada <> "5") e (entrada <> "6") e (entrada <> "7") e (entrada <> "8") faca
+         escreval("ERRO: Opção inválida! Selecione uma opção de 0 a 8.")
          escreva("Escolha uma opção: ")
          leia(entrada)
       fimenquanto
@@ -293,7 +317,7 @@ inicio
                   faltamCirurgioes <- minimoCirurgioes - cirurgioesTurno
                   coberturaTurno <- falso
                fimse
-
+               
                escreval("= COBERTURA DE DISPONIBILIDADE: ", tituloTurno," =")
                escreval("")
                escreval("Clínicos gerais: ", clinicosTurno, "/", minimoClinicos)
@@ -316,7 +340,12 @@ inicio
                   escreval("RESULTADO: DISPONIBILIDADE DA ", nomeTurno, " INSUFICIENTE.")
                   escalaCompleta <- falso
                fimse
+               
+               se (nomeTurno<>"NOITE") entao
                escreval("")
+               escreval("------------------------------------------------------------")
+               escreval("")
+               fimse
 
             fimpara
 
@@ -350,8 +379,7 @@ inicio
 
                limpatela
                escreval("============================================================")
-               escreval("                          MEDSHIFT")
-               escreval("                 CADASTRO DA EQUIPE MÉDICA")
+               escreval("                 CADASTRO DE PROFISSIONAIS")
                escreval("============================================================")
                escreval("")
 
@@ -362,10 +390,8 @@ inicio
                id[qtdProfissionais] <- qtdProfissionais
 
                escreval("------------------------------------------------------------")
-               escreval("Cadastro do profissional ",id[qtdProfissionais])
+               escreval("Cadastro do profissional: ",id[qtdProfissionais])
                escreval("------------------------------------------------------------")
-
-
 
                escreval("")
                escreva("Nome do profissional: ")
@@ -658,7 +684,7 @@ inicio
             para indiceDia de 1 ate quantidadeDias faca
                escreval(indiceDia, " - ", diasSemana[indiceDia])
             fimpara
-            escreval("0 - Voltar ao menu principal")
+            escreval(" 0 - Voltar ao menu principal")
             escreval("")
             escreva("Selecione o dia (1 a 5) ou 0 para voltar: ")
             leia(entrada)
@@ -1412,7 +1438,9 @@ inicio
          escreval("")
          totalPlantoes <- 0
          se qtdProfissionais = 0 entao
+            escreval("")
             escreval("Nenhum profissional foi cadastrado. Utilize a opção 1.")
+            escreval("")
          fimse
          para i de 1 ate qtdProfissionais faca
             plantoesSemana <- 0
@@ -1490,8 +1518,8 @@ inicio
             para indiceDia de 1 ate quantidadeDias faca
                escreval(indiceDia, " - ", diasSemana[indiceDia])
             fimpara
-            escreval("6 - Ver todos os dias da semana")
-            escreval("0 - Voltar ao menu principal")
+            escreval(" 6 - Ver todos os dias da semana")
+            escreval(" 0 - Voltar ao menu principal")
             escreval("")
             escreva("Selecione o dia (1 a 5), 6 para todos ou 0 para voltar: ")
             leia(entrada)
@@ -1530,6 +1558,7 @@ inicio
                   se temEscalaConsulta = falso entao
                      escreval("ERRO: Nenhum médico foi escalado para ", diasSemana[diaConsulta], ".")
                      escreval("Para montar a escala desse dia, utilize a opção 5 e selecione o dia desejado.")
+                     escreval("")
                   fimse
                   para turnoConsulta de 1 ate turnosPorDia faca
                      quantidadeConsulta <- 0
@@ -1599,6 +1628,242 @@ inicio
             fimse
          ate diaConsulta = 0
 
+      caso 8
+         limpatela
+         escreval("============================================================")
+         escreval("                RELATÓRIO GERENCIAL SEMANAL")
+         escreval("============================================================")
+         escreval("")
+
+         // ============================================================
+         // US21 - MAIOR, MENOR E MÉDIA DE PLANTÕES DA EQUIPE
+         // ============================================================
+         escreval("       = DISTRIBUIÇÃO DE PLANTÕES POR PROFISSIONAL =")
+         escreval("")
+
+         se qtdProfissionais = 0 entao
+            escreval("Nenhum profissional cadastrado.")
+            escreval("Não existem dados para calcular os indicadores da equipe.")
+         senao
+            totalPlantoes <- 0
+            maiorPlantoesSemana <- 0
+            menorPlantoesSemana <- 0
+
+            // Calcula a quantidade semanal de cada profissional
+            para i de 1 ate qtdProfissionais faca
+               plantoesSemana <- 0
+               para indiceDia de 1 ate quantidadeDias faca
+                  plantoesSemana <- plantoesSemana + qtdPlantoes[(indiceDia - 1) * capacidadeMaxima + i]
+               fimpara
+
+               totalPlantoes <- totalPlantoes + plantoesSemana
+
+               // Inicializa os extremos com o primeiro profissional
+               se i = 1 entao
+                  maiorPlantoesSemana <- plantoesSemana
+                  menorPlantoesSemana <- plantoesSemana
+               senao
+                  se plantoesSemana > maiorPlantoesSemana entao
+                     maiorPlantoesSemana <- plantoesSemana
+                  fimse
+                  se plantoesSemana < menorPlantoesSemana entao
+                     menorPlantoesSemana <- plantoesSemana
+                  fimse
+               fimse
+            fimpara
+
+            // Calcula a média semanal da equipe
+            mediaPlantoesSemana <- totalPlantoes / qtdProfissionais
+
+            escreval("Total de profissionais: ", qtdProfissionais)
+            escreval("Total de plantões atribuídos: ", totalPlantoes)
+            escreval("")
+            escreval("Maior quantidade de plantões: ", maiorPlantoesSemana)
+            escreval("Profissional(is):")
+
+            // Identifica quem possui a maior quantidade
+            para i de 1 ate qtdProfissionais faca
+               plantoesSemana <- 0
+               para indiceDia de 1 ate quantidadeDias faca
+                  plantoesSemana <- plantoesSemana + qtdPlantoes[(indiceDia - 1) * capacidadeMaxima + i]
+               fimpara
+               se plantoesSemana = maiorPlantoesSemana entao
+                  escreval("ID: ", id[i], " | ", nome[i])
+               fimse
+            fimpara
+
+            escreval("")
+            escreval("Menor quantidade de plantões: ", menorPlantoesSemana)
+            escreval("Profissional(is):")
+
+            // Identifica quem possui a menor quantidade
+            para i de 1 ate qtdProfissionais faca
+               plantoesSemana <- 0
+               para indiceDia de 1 ate quantidadeDias faca
+                  plantoesSemana <- plantoesSemana + qtdPlantoes[(indiceDia - 1) * capacidadeMaxima + i]
+               fimpara
+               se plantoesSemana = menorPlantoesSemana entao
+                  escreval("ID: ", id[i], " | ", nome[i])
+               fimse
+            fimpara
+
+            escreval("")
+            escreval("Média de plantões por profissional: ", mediaPlantoesSemana)
+            escreval("")
+            escreval("PROFISSIONAIS COM ALERTA DE CARGA:")
+            escreval("(Acima da média da equipe ou com o limite semanal atingido)")
+            escreval("")
+
+            // Primeiro verifica se existe algum profissional que exige atenção.
+            temProfissionalSobrecarregado <- falso
+            para i de 1 ate qtdProfissionais faca
+               plantoesSemana <- 0
+               para indiceDia de 1 ate quantidadeDias faca
+                  plantoesSemana <- plantoesSemana + qtdPlantoes[(indiceDia - 1) * capacidadeMaxima + i]
+               fimpara
+
+               se (plantoesSemana > mediaPlantoesSemana) ou (plantoesSemana >= maximoPlantoesSemana) entao
+                  temProfissionalSobrecarregado <- verdadeiro
+               fimse
+            fimpara
+
+            // Exibe todos os profissionais acima da média ou no limite semanal.
+            se temProfissionalSobrecarregado = verdadeiro entao
+               para i de 1 ate qtdProfissionais faca
+                  plantoesSemana <- 0
+                  para indiceDia de 1 ate quantidadeDias faca
+                     plantoesSemana <- plantoesSemana + qtdPlantoes[(indiceDia - 1) * capacidadeMaxima + i]
+                  fimpara
+
+                  se (plantoesSemana > mediaPlantoesSemana) ou (plantoesSemana >= maximoPlantoesSemana) entao
+                     escreval("ID: ", id[i])
+                     escreval("Nome: ", nome[i])
+                     escreval("Plantões na semana: ", plantoesSemana)
+
+                     se plantoesSemana >= maximoPlantoesSemana entao
+                        escreval("ALERTA: Limite semanal de plantões atingido!")
+                     senao
+                        escreval("ALERTA: Quantidade acima da média da equipe.")
+                     fimse
+
+                     escreval("")
+                  fimse
+               fimpara
+            senao
+               escreval("Nenhum profissional acima da média ou no limite semanal.")
+            fimse
+         fimse
+
+         // ============================================================
+         // US22 E US23 - ANÁLISE DA COBERTURA REAL DA SEMANA
+         // ============================================================
+         
+         escreval("")
+         escreval("------------------------------------------------------------")
+         escreval("")
+         escreval("            = COBERTURA DOS TURNOS DA SEMANA =")
+
+         // Reinicializa todos os indicadores da consulta
+         turnosCobertosSemana <- 0
+         turnosNaoCobertosSemana <- 0
+         falhasClinicosSemana <- 0
+         falhasPediatrasSemana <- 0
+         falhasCirurgioesSemana <- 0
+         turnosFalhaClinicos <- 0
+         turnosFalhaPediatras <- 0
+         turnosFalhaCirurgioes <- 0
+
+         // Analisa os cinco dias e os três turnos de cada dia
+         para indiceRelatorioDia de 1 ate quantidadeDias faca
+            inicioRelatorio <- (indiceRelatorioDia - 1) * capacidadeMaxima
+
+            para turnoRelatorio de 1 ate turnosPorDia faca
+               clinicosTurno <- 0
+               pediatrasTurno <- 0
+               cirurgioesTurno <- 0
+
+               // Conta os profissionais efetivamente escalados
+               para i de 1 ate qtdProfissionais faca
+                  jaEscaladoNoTurno <- falso
+                  escolha turnoRelatorio
+                  caso 1
+                     jaEscaladoNoTurno <- escaladoManha[inicioRelatorio + i]
+                  caso 2
+                     jaEscaladoNoTurno <- escaladoTarde[inicioRelatorio + i]
+                  caso 3
+                     jaEscaladoNoTurno <- escaladoNoite[inicioRelatorio + i]
+                  fimescolha
+
+                  se jaEscaladoNoTurno = verdadeiro entao
+                     se especialidade[i] = "Clínico Geral" entao
+                        clinicosTurno <- clinicosTurno + 1
+                     fimse
+                     se especialidade[i] = "Pediatra" entao
+                        pediatrasTurno <- pediatrasTurno + 1
+                     fimse
+                     se especialidade[i] = "Cirurgião" entao
+                        cirurgioesTurno <- cirurgioesTurno + 1
+                     fimse
+                  fimse
+               fimpara
+
+               // US22 - Verifica se o turno está plenamente coberto
+               se (clinicosTurno >= minimoClinicos) e (pediatrasTurno >= minimoPediatras) e (cirurgioesTurno >= minimoCirurgioes) entao
+                  turnosCobertosSemana <- turnosCobertosSemana + 1
+               senao
+                  turnosNaoCobertosSemana <- turnosNaoCobertosSemana + 1
+
+                  // US23 - Acumula as falhas de cada especialidade
+                  se clinicosTurno < minimoClinicos entao
+                     falhasClinicosSemana <- falhasClinicosSemana + (minimoClinicos - clinicosTurno)
+                     turnosFalhaClinicos <- turnosFalhaClinicos + 1
+                  fimse
+                  se pediatrasTurno < minimoPediatras entao
+                     falhasPediatrasSemana <- falhasPediatrasSemana + (minimoPediatras - pediatrasTurno)
+                     turnosFalhaPediatras <- turnosFalhaPediatras + 1
+                  fimse
+                  se cirurgioesTurno < minimoCirurgioes entao
+                     falhasCirurgioesSemana <- falhasCirurgioesSemana + (minimoCirurgioes - cirurgioesTurno)
+                     turnosFalhaCirurgioes <- turnosFalhaCirurgioes + 1
+                  fimse
+               fimse
+            fimpara
+         fimpara
+
+         // US22 - Resultado geral da cobertura semanal
+         percentualCoberturaSemana <- 0
+         se totalTurnosSemana > 0 entao
+            percentualCoberturaSemana <- (turnosCobertosSemana * 100.0) / totalTurnosSemana
+         fimse
+
+         escreval("")
+         escreval("Turnos analisados: ", totalTurnosSemana)
+         escreval("Turnos plenamente cobertos: ", turnosCobertosSemana)
+         escreval("Turnos com falha de cobertura: ", turnosNaoCobertosSemana)
+         escreval("Percentual de cobertura semanal: ", percentualCoberturaSemana, "%")
+
+         // US23 - Resultado das falhas por especialidade
+         escreval("")
+         escreval("------------------------------------------------------------")
+         escreval("")
+         escreval("        = FALHAS DE COBERTURA POR ESPECIALIDADE =")
+         escreval("")
+         escreval("CLÍNICOS GERAIS:")
+         escreval("Profissionais faltantes: ", falhasClinicosSemana)
+         escreval("Turnos afetados: ", turnosFalhaClinicos)
+         escreval("")
+         escreval("PEDIATRAS:")
+         escreval("Profissionais faltantes: ", falhasPediatrasSemana)
+         escreval("Turnos afetados: ", turnosFalhaPediatras)
+         escreval("")
+         escreval("CIRURGIÕES:")
+         escreval("Profissionais faltantes: ", falhasCirurgioesSemana)
+         escreval("Turnos afetados: ", turnosFalhaCirurgioes)
+         escreval("")
+         escreval("============================================================")
+         escreval("                 FIM DO RELATÓRIO SEMANAL")
+         escreval("============================================================")
+
       caso 0
          escreval("")
       fimescolha
@@ -1615,4 +1880,3 @@ inicio
    escreval("                 ENCERRAMENTO DO MEDSHIFT")
    escreval("============================================================")
 fimalgoritmo
-
